@@ -10,7 +10,7 @@ export function HeroVideo({
   src: string;
   poster?: string;
 }) {
-  const [allowMotion, setAllowMotion] = useState(false);
+  const [allowMotion, setAllowMotion] = useState(true);
   const youtubeId = youtubeIdFromInput(src);
 
   useEffect(() => {
