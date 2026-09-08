@@ -7,7 +7,7 @@ import {
   MenuIcon,
   StarIcon,
   UsersIcon,
-} from "@sanity/icons";
+} from "./studioIcons";
 import type { StructureResolver } from "sanity/structure";
 
 export const structure: StructureResolver = (S) =>

@@ -7,7 +7,7 @@ import {
   MenuIcon,
   StarIcon,
   UsersIcon,
-} from "@sanity/icons";
+} from "../studioIcons";
 import { defineArrayMember, defineField, defineType } from "sanity";
 import { pageBuilderField } from "./sections";
 

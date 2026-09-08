@@ -11,7 +11,7 @@ import {
   NumberIcon,
   StarIcon,
   UsersIcon,
-} from "@sanity/icons";
+} from "../studioIcons";
 import type { ComponentType } from "react";
 import { defineArrayMember, defineField, defineType } from "sanity";
 
