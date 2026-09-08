@@ -16,11 +16,12 @@ Open [http://localhost:3000](http://localhost:3000). The site renders SwingSmart
 
 ## Connect Sanity (when you are ready)
 
-1. Create a project at [sanity.io/manage](https://www.sanity.io/manage).
-2. Put the project ID and dataset in `.env.local` (see `.env.example`).
+1. The Sanity project is `3sbwydux` (organisation `oemaxe8vm`).
+2. Put the project ID and dataset in `.env.local` (see `.env.example`; the project ID is already filled in).
 3. Create a viewer token (`SANITY_API_READ_TOKEN`) for live preview.
 4. Create an editor token (`SANITY_API_WRITE_TOKEN`) so the contact form can save enquiries.
 5. In Sanity → API → CORS origins, add `http://localhost:3000` with **Allow credentials**.
+   Open [project API settings](https://www.sanity.io/manage/project/3sbwydux/api).
 6. Restart `npm run dev` and open `/studio`.
 7. Optional: `npm run seed` copies starter pages, packages and settings into the Studio.
 

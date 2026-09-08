@@ -12,7 +12,7 @@ const singletonTypes = new Set(["siteSettings", "navigation"]);
 export default defineConfig({
   name: "swingsmart",
   title: "SwingSmart UK",
-  projectId: projectId || "placeholder",
+  projectId,
   dataset,
   basePath: "/studio",
   plugins: [

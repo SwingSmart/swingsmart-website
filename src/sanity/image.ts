@@ -3,7 +3,7 @@ import { dataset, projectId } from "./env";
 import type { CmsImage } from "@/lib/types";
 
 const builder = createImageUrlBuilder({
-  projectId: projectId || "placeholder",
+  projectId,
   dataset,
 });
 
