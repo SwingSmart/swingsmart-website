@@ -39,7 +39,8 @@ async function fetchQuery<T>(
       stega: options?.stega ?? isEnabled,
     });
     return (data as T) ?? null;
-  } catch {
+  } catch (error) {
+    console.error("Sanity query failed", error);
     return null;
   }
 }

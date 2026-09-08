@@ -9,6 +9,8 @@ import { draftMode } from "next/headers";
 import { isSanityConfigured } from "@/sanity/env";
 import { SanityLive } from "@/sanity/live";
 
+export const dynamic = "force-dynamic";
+
 export default async function SiteLayout({
   children,
 }: {
