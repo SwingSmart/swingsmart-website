@@ -44,15 +44,23 @@ These choices keep editing simple (Sanity Studio in the browser), keep hosting s
 
 ## Visual identity
 
-- Premium, modern, golf/event focused
-- Predominantly dark/black backgrounds
-- SwingSmart green accents
-- White/light typography
-- Strong event photography
-- Clean type — premium, not gimmicky
-- Mobile-first, generous spacing, clear calls to action
+### Audit of swingsmart.co.uk
+The live site is a Squarespace template: black ground, white type, Roboto Slab, a long nav, and original event photography darkened by overlays. The **logo green is forest turf** (`#067011`), not lime. Strengths are the photography, package names and founder voice. Weaknesses are template layout, too many nav items, weak hierarchy, and a generic “Book today” CTA.
 
-Typography: Fraunces for display headings, Manrope for body and UI.
+Full audit and tokens: `DESIGN_SYSTEM.md`.
+
+### Decisions (material)
+
+- **Keep the logo.** Do not replace it with a typeset wordmark.
+- **Green follows the logo**, then a slightly brighter mid-green for hover and a sage for eyebrows/focus so links remain readable on black.
+- **Cream type, not pure white** — hospitality, not SaaS.
+- **Cormorant Garamond + Source Sans 3** instead of Roboto Slab / Inter / Fraunces.
+- **Photography is first.** Use SwingSmart’s own images; overlays are a flat 40% black only where type sits on a photo. No stacked gradients or glass.
+- **Header is sticky and solid black**, logo left, short nav, phone, “Plan an event”. Home is the logo, not a nav item.
+- **Buttons are slightly squared** (2px radius), not pills.
+- **Content on the homepage is kept short** while the design system settles: hero, audiences, one photo story, enquire.
+
+Tokens live in `src/app/globals.css` (`bg`, `bg-raised`, `surface`, `green`, `green-mid`, `green-soft`, `cream`, `muted`, `rule`, `on-green`).
 
 ## What the owner can edit in Sanity
 

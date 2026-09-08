@@ -38,7 +38,7 @@ export function GalleryGrid({
       ) : null}
       <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {filtered.map((item) => (
-          <li key={item._id || item.title} className="overflow-hidden rounded-2xl">
+          <li key={item._id || item.title} className="overflow-hidden rounded-card">
             <CmsPhoto
               image={item.image}
               className="aspect-[4/3] w-full object-cover"
@@ -65,8 +65,8 @@ function FilterChip({
     <button
       type="button"
       onClick={onClick}
-      className={`rounded-full px-4 py-2 text-sm ${
-        active ? "bg-green text-ink" : "border border-line text-muted hover:text-mist"
+      className={`rounded-tight px-4 py-2 text-sm ${
+        active ? "bg-green text-on-green" : "border border-rule text-muted hover:text-cream"
       }`}
     >
       {label}

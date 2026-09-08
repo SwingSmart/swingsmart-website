@@ -9,9 +9,9 @@ export const dynamic = "force-static";
 export default function StudioPage() {
   if (!isSanityConfigured) {
     return (
-      <div className="min-h-screen bg-ink py-24">
+      <div className="min-h-screen bg-bg py-24">
         <Container className="max-w-xl">
-          <h1 className="font-display text-4xl text-mist">Connect Sanity</h1>
+          <h1 className="font-display text-4xl text-cream">Connect Sanity</h1>
           <p className="mt-4 text-muted">
             Create a Sanity project, copy the project ID into{" "}
             <code className="text-green">NEXT_PUBLIC_SANITY_PROJECT_ID</code>, and

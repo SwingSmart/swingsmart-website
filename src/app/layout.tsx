@@ -1,20 +1,21 @@
 import type { Metadata } from "next";
-import { Fraunces, Manrope } from "next/font/google";
+import { Cormorant_Garamond, Source_Sans_3 } from "next/font/google";
 import { LivePreview } from "@/components/sanity/LivePreview";
 import { getSettings } from "@/lib/content";
 import { siteUrl } from "@/sanity/env";
 import "./globals.css";
 
-const manrope = Manrope({
+const sourceSans = Source_Sans_3({
   subsets: ["latin"],
-  variable: "--font-manrope",
+  variable: "--font-source-sans",
   display: "swap",
 });
 
-const fraunces = Fraunces({
+const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
-  variable: "--font-fraunces",
+  variable: "--font-cormorant",
   display: "swap",
+  weight: ["500", "600", "700"],
 });
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -37,9 +38,9 @@ export default function RootLayout({
   return (
     <html
       lang="en-GB"
-      className={`${manrope.variable} ${fraunces.variable} h-full antialiased`}
+      className={`${sourceSans.variable} ${cormorant.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col bg-ink font-sans text-mist">
+      <body className="flex min-h-full flex-col bg-bg font-sans text-cream">
         {children}
         <LivePreview />
       </body>

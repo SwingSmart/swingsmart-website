@@ -15,22 +15,65 @@ export function block(
   };
 }
 
-export function photo(id: string, alt: string) {
+const SS =
+  "https://images.squarespace-cdn.com/content/v1/67b7166d30a09e47db03f71f";
+
+export function ssPhoto(id: string, file: string, alt: string) {
   return {
-    url: `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1800&q=80`,
+    url: `${SS}/${id}/${file}?format=2500w`,
     alt,
   };
 }
 
 export const photos = {
-  hero: photo("photo-1535131749006-b7f58c99034b", "Golfer swinging at dusk"),
-  indoor: photo("photo-1587174486073-ae95e7d3421b", "Golf course fairway"),
-  event: photo("photo-1535131749006-b7f58c99034b", "Golf event atmosphere"),
-  night: photo("photo-1459865264687-595d652de67e", "Stadium lights over sport"),
-  green: photo("photo-1587174486073-ae95e7d3421b", "Putting green"),
-  range: photo("photo-1593111774240-d529f12a0c1c", "Driving range bays"),
-  wedding: photo("photo-1519741497674-611481863552", "Wedding celebration"),
-  junior: photo("photo-1593111774240-d529f12a0c1c", "Young golfer practising"),
-  corporate: photo("photo-1556761175-5973dc0f32e7", "Corporate gathering"),
-  club: photo("photo-1535131749006-b7f58c99034b", "Golf club setting"),
+  hero: ssPhoto(
+    "6d4af154-3f33-415c-92fd-d78c16a479bc",
+    "SwingSmart-Hero-Photos--49.jpg",
+    "SwingSmart golf simulator at an event",
+  ),
+  indoor: ssPhoto(
+    "1780065476959-B9PVAG9ELV4UVBNNCMGX",
+    "image-asset.jpeg",
+    "Golf simulator bay",
+  ),
+  event: ssPhoto(
+    "1777647225589-NFF7YSF43IG1HULWCNUS",
+    "image-asset.jpeg",
+    "Guests using a SwingSmart bay",
+  ),
+  night: ssPhoto(
+    "1777294528041-KESQJ93RSHA1VEJO1JFS",
+    "image-asset.jpeg",
+    "Evening golf event",
+  ),
+  green: ssPhoto(
+    "1776351130415-5PJ46RRHYQY7HCIWMPDO",
+    "image-asset.jpeg",
+    "SwingSmart setup",
+  ),
+  range: ssPhoto(
+    "1774026888837-CZ5VLMBXK230T0HHHX45",
+    "image-asset.jpeg",
+    "Simulator enclosure",
+  ),
+  wedding: ssPhoto(
+    "1772794659729-1ZZ1KJS1L5L1BX062XFL",
+    "image-asset.jpeg",
+    "Wedding golf entertainment",
+  ),
+  junior: ssPhoto(
+    "1772205463014-0UF32Y9YVDLODANF1NZ0",
+    "image-asset.jpeg",
+    "Junior golfers on the simulator",
+  ),
+  corporate: ssPhoto(
+    "1768908911050-ASSUDXEAT4WGE1HD06S7",
+    "image-asset.jpeg",
+    "Corporate golf event",
+  ),
+  club: ssPhoto(
+    "1768834344504-XYO295AM0J83DEVJ5A3V",
+    "image-asset.jpeg",
+    "Club and venue hire",
+  ),
 };

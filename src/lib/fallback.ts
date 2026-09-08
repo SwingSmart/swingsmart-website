@@ -46,7 +46,7 @@ const navigation: SiteContent["navigation"] = {
     { label: "About", href: "/about" },
     { label: "Contact", href: "/contact" },
   ],
-  ctaLabel: "Book today",
+  ctaLabel: "Plan an event",
   ctaHref: "/contact",
 };
 
@@ -303,11 +303,11 @@ const pages: Record<string, PageDoc> = {
         _type: "hero",
         _key: "home-hero",
         eyebrow: "Beyond Golf",
-        heading: "Experience golf simulation like never before",
+        heading: "We bring the course to you",
         subheading:
-          "Set the tee time and we’ll be there. We bring the course to you — with everything you need for a top-class experience.",
+          "Professional golf simulation for corporate days, weddings, hotels, exhibitions and private events. Set the tee time — we’ll be there.",
         image: photos.hero,
-        primaryCta: { label: "Book today", href: "/contact", style: "primary" },
+        primaryCta: { label: "Plan an event", href: "/contact", style: "primary" },
         secondaryCta: {
           label: "View packages",
           href: "/packages",
@@ -315,92 +315,63 @@ const pages: Record<string, PageDoc> = {
         },
       },
       {
-        _type: "statistics",
-        _key: "home-stats",
-        items: [
-          { _key: "s1", value: "Anytime", label: "Tee off. We don’t close for rain — or Mondays." },
-          { _key: "s2", value: "Anywhere", label: "Homes, venues, clubs, weddings and events." },
-          { _key: "s3", value: "4m × 3m × 3m", label: "Typical space needed for a bay." },
-        ],
-      },
-      {
         _type: "featureGrid",
         _key: "home-offer",
-        heading: "What we offer",
+        heading: "Built for the occasion",
         items: [
           {
             _key: "f1",
             title: "Corporate events",
-            text: "Team-building, client entertainment and company retreats with a premium simulator experience.",
+            text: "Client entertainment and team days with a clubhouse feel, wherever you host.",
           },
           {
             _key: "f2",
             title: "Weddings",
-            text: "Get everyone on the tee on the same day — an elegant, interactive extra for your celebration.",
+            text: "Get everyone on the tee on the same day — guests, wedding party, bride and groom.",
           },
           {
             _key: "f3",
-            title: "Golf clubs",
-            text: "All-weather practise, virtual tournaments and a new reason for members to stay.",
+            title: "Hotels & holiday parks",
+            text: "A managed bay that earns its keep, without a permanent install.",
           },
           {
             _key: "f4",
-            title: "Short and long-term hire",
-            text: "A fully managed simulator without a large upfront investment or a permanent install.",
+            title: "Exhibitions",
+            text: "A stand people stop at, stay at, and talk about after the show.",
           },
           {
             _key: "f5",
-            title: "Competitions",
-            text: "Friendly matches to high-stakes challenges, year-round, on world-class courses.",
+            title: "Private events",
+            text: "Birthdays, clubs and competitions. Rain or Mondays — we still turn up.",
           },
           {
             _key: "f6",
-            title: "Sports bars & pubs",
-            text: "A change from pool and darts. We really are bringing golf to anyone, anywhere.",
+            title: "Long-term hire",
+            text: "Venues and clubs who want year-round golf without buying the kit outright.",
           },
         ],
-      },
-      {
-        _type: "packageGrid",
-        _key: "home-packages",
-        heading: "Packages",
-        intro: "From a private four-hour session to a full tournament bay. Choose a starting point — or build your own.",
       },
       {
         _type: "textAndImage",
         _key: "home-mission",
-        heading: "Bring golf to everyone",
+        heading: "Photography first. Equipment included.",
         imagePosition: "right",
         image: photos.indoor,
         body: [
           block(
-            "At SwingSmart UK, we make golf accessible to anyone, no matter your experience, location, or skill.",
+            "We bring the enclosure, the launch monitor, the clubs and the staff. You bring the people.",
           ),
           block(
-            "Whether you want to play the Postage Stamp at Royal Troon, or hold a long-drive contest with friends, we bring everything you need.",
-          ),
-          block(
-            "Special occasions, team building or a friendly competition — we bring the ultimate golf experience to you. Anytime, anywhere.",
+            "Based in Cornwall. Available across the UK.",
           ),
         ],
       },
       {
-        _type: "testimonials",
-        _key: "home-quotes",
-        heading: "From the bay",
-      },
-      {
-        _type: "partnerGrid",
-        _key: "home-partners",
-        heading: "Partners",
-        intro: "Schools, racecourses, exhibitors and venues who have teed it up with us.",
-      },
-      {
         _type: "cta",
         _key: "home-cta",
-        heading: "Your tee time",
-        text: "Tell us when and where. We’ll bring the course.",
-        button: { label: "Enquire now", href: "/contact", style: "primary" },
+        heading: "Tell us the date and the room",
+        text: "We’ll recommend a package and arrive with everything you need.",
+        button: { label: "Get in touch", href: "/contact", style: "primary" },
       },
     ],
   },
@@ -485,7 +456,7 @@ const pages: Record<string, PageDoc> = {
         _key: "gal-hero",
         eyebrow: "The course, wherever you are",
         heading: "Gallery",
-        subheading: "Bays, events and faces from the fairway — replace these images with your own in Sanity.",
+        subheading: "From the bay — SwingSmart events, venues and hire.",
         image: photos.event,
       },
       {

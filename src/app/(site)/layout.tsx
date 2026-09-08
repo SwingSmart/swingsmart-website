@@ -18,7 +18,7 @@ export default async function SiteLayout({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd(settings)) }}
       />
       <SkipLink />
-      <Header navigation={navigation} siteName={settings.siteName} />
+      <Header navigation={navigation} settings={settings} />
       <main id="main" className="flex-1">
         {children}
       </main>
