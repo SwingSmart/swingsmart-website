@@ -2,9 +2,10 @@ import { ButtonLink } from "@/components/ui/ButtonLink";
 import { CmsPhoto } from "@/components/ui/CmsPhoto";
 import { Container, DisplayHeading, Eyebrow } from "@/components/ui/Layout";
 import { Reveal } from "@/components/ui/Reveal";
+import { HeroVideo } from "@/components/sections/HeroVideo";
 import { photos } from "@/lib/content-helpers";
 import type { HeroSection } from "@/lib/types";
-import { hasCmsImage } from "@/sanity/image";
+import { hasCmsImage, imageSrc } from "@/sanity/image";
 
 export function Hero({
   section,
@@ -14,6 +15,8 @@ export function Hero({
   priority?: boolean;
 }) {
   const image = hasCmsImage(section.image) ? section.image : photos.hero;
+  const poster = imageSrc(image, 2400);
+  const videoSrc = section.videoUrl;
   const overlayClass =
     section.overlay === "light"
       ? "from-bg/75 via-bg/30 to-bg/15"
@@ -30,8 +33,9 @@ export function Hero({
           sizes="100vw"
           priority={priority}
           width={2400}
-          className="hero-media"
+          className={videoSrc ? "" : "hero-media"}
         />
+        {videoSrc ? <HeroVideo src={videoSrc} poster={poster} /> : null}
         <div className={`absolute inset-0 bg-gradient-to-t ${overlayClass}`} />
         <div className="absolute inset-0 bg-gradient-to-r from-bg/55 via-bg/15 to-transparent" />
       </div>

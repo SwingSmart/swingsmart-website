@@ -132,6 +132,13 @@ const docs = [
         },
       },
       {
+        _type: "packageGrid",
+        _key: "home-packages",
+        heading: "Packages",
+        intro:
+          "From a private four-hour session to a full tournament bay. Choose a starting point — or build your own.",
+      },
+      {
         _type: "richText",
         _key: "home-intro",
         heading: "Brought to you",

@@ -27,6 +27,7 @@ const sectionProjection = groq`{
   showForm,
   showDetails,
   "categorySlug": coalesce(category->slug.current, categorySlug),
+  "videoUrl": coalesce(video.asset->url, videoUrl),
   image ${imageProjection},
   primaryCta,
   secondaryCta,

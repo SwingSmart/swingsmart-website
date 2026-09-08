@@ -6,6 +6,7 @@ import type {
   GalleryItem,
   Navigation,
   PageDoc,
+  PageSection,
   Partner,
   SiteSettings,
   Testimonial,
@@ -98,9 +99,31 @@ export async function getNavigation() {
 export async function getPage(slug: string): Promise<PageDoc | undefined> {
   const data = await fetchQuery<PageDoc>(pageBySlugQuery, { slug });
   if (data?._id) {
-    return { ...data, sections: data.sections || [] };
+    const page = { ...data, sections: data.sections || [] };
+    if (page.slug === "home") return restoreHomeLayout(page);
+    return page;
   }
   return fallbackContent.pages[slug];
+}
+
+function restoreHomeLayout(page: PageDoc): PageDoc {
+  const fallbackSections = fallbackContent.pages.home.sections;
+  const current = page.sections || [];
+  const types = new Set(current.map((section) => section._type));
+  const next: PageSection[] = [...current];
+
+  for (const section of fallbackSections) {
+    if (section._type === "hero" || types.has(section._type)) continue;
+    if (section._type === "packageGrid") {
+      const heroIndex = next.findIndex((item) => item._type === "hero");
+      next.splice(heroIndex >= 0 ? heroIndex + 1 : 0, 0, section);
+    } else {
+      next.push(section);
+    }
+    types.add(section._type);
+  }
+
+  return { ...page, sections: next };
 }
 
 export async function getPackages(): Promise<EventPackage[]> {

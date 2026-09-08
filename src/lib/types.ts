@@ -98,6 +98,7 @@ export type HeroSection = {
   subheading?: string;
   overlay?: "light" | "medium" | "dark";
   image?: CmsImage;
+  videoUrl?: string;
   primaryCta?: CtaButton;
   secondaryCta?: CtaButton;
 };

@@ -325,6 +325,13 @@ const pages: Record<string, PageDoc> = {
         },
       },
       {
+        _type: "packageGrid",
+        _key: "home-packages",
+        heading: "Packages",
+        intro:
+          "From a private four-hour session to a full tournament bay. Choose a starting point — or build your own.",
+      },
+      {
         _type: "featureGrid",
         _key: "home-offer",
         heading: "Built for the occasion",
@@ -402,6 +409,12 @@ const pages: Record<string, PageDoc> = {
         _type: "testimonials",
         _key: "home-quotes",
         heading: "What they said after the last putt",
+      },
+      {
+        _type: "partnerGrid",
+        _key: "home-partners",
+        heading: "Partners",
+        intro: "Schools, racecourses, exhibitors and venues who have teed it up with us.",
       },
       {
         _type: "cta",
