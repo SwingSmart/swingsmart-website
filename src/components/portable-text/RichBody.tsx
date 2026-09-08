@@ -4,10 +4,10 @@ import type { PortableBlock } from "@/lib/types";
 const components: PortableTextComponents = {
   block: {
     h2: ({ children }) => (
-      <h2 className="font-display mt-10 mb-4 text-3xl text-mist">{children}</h2>
+      <h2 className="font-display mt-10 mb-4 text-3xl text-cream">{children}</h2>
     ),
     h3: ({ children }) => (
-      <h3 className="mt-8 mb-3 text-xl font-semibold text-mist">{children}</h3>
+      <h3 className="mt-8 mb-3 text-xl font-semibold text-cream">{children}</h3>
     ),
     normal: ({ children }) => (
       <p className="mb-4 text-base leading-7 text-muted last:mb-0">{children}</p>
@@ -15,7 +15,7 @@ const components: PortableTextComponents = {
   },
   marks: {
     strong: ({ children }) => (
-      <strong className="font-semibold text-mist">{children}</strong>
+      <strong className="font-semibold text-cream">{children}</strong>
     ),
     em: ({ children }) => <em>{children}</em>,
     link: ({ children, value }) => (

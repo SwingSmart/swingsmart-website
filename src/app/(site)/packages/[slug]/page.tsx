@@ -1,5 +1,6 @@
 import { PageSections } from "@/components/sections/PageSections";
 import { PackageCards } from "@/components/packages/PackageCards";
+import { PackageView } from "@/components/packages/PackageView";
 import { Container, DisplayHeading, Section } from "@/components/ui/Layout";
 import {
   getGallery,
@@ -48,8 +49,12 @@ export default async function PackageDetailPage({ params }: Props) {
 
   if (!pkg && !page) notFound();
 
-  const extra = pkg?.sections?.length ? pkg.sections : [];
-  const sections = page?.sections?.length ? page.sections : extra;
+  const fromCms = Boolean(pkg?._id);
+  const extraSections = fromCms ? pkg?.sections || [] : [];
+  const fallbackSections = !fromCms && page?.sections?.length ? page.sections : [];
+  const sections = extraSections.length ? extraSections : fallbackSections;
+  const sectionDocumentId = extraSections.length ? pkg?._id : page?._id;
+  const sectionDocumentType = extraSections.length ? pkg?._type || "eventPackage" : "page";
 
   return (
     <>
@@ -59,8 +64,11 @@ export default async function PackageDetailPage({ params }: Props) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(packageJsonLd(pkg)) }}
         />
       ) : null}
+      {fromCms && pkg ? <PackageView pkg={pkg} /> : null}
       {sections.length ? (
         <PageSections
+          documentId={sectionDocumentId}
+          documentType={sectionDocumentType}
           sections={sections}
           settings={settings}
           packages={packages}

@@ -8,7 +8,7 @@ export default function NotFound() {
         <p className="text-xs font-semibold uppercase tracking-[0.22em] text-green">
           404
         </p>
-        <h1 className="font-display mt-4 text-5xl text-mist">That hole doesn’t exist.</h1>
+        <h1 className="font-display mt-4 text-5xl text-cream">That hole doesn’t exist.</h1>
         <p className="mt-4 max-w-md text-muted">
           The page you’re looking for has been moved or never made the cut.
         </p>

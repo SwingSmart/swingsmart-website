@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Button } from "@/components/ui/ButtonLink";
 import type { EventPackage } from "@/lib/types";
 
 export function ContactForm({ packages }: { packages: EventPackage[] }) {
@@ -30,10 +31,10 @@ export function ContactForm({ packages }: { packages: EventPackage[] }) {
   }
 
   const field =
-    "w-full rounded-xl border border-line bg-ink px-4 py-3 text-sm text-mist placeholder:text-muted/70";
+    "w-full rounded-card border border-rule bg-bg px-4 py-3 text-sm text-cream placeholder:text-muted/70";
 
   return (
-    <form onSubmit={onSubmit} className="space-y-4 rounded-2xl border border-line bg-panel p-6 sm:p-8">
+    <form onSubmit={onSubmit} className="space-y-4 rounded-card border border-rule bg-surface p-6 sm:p-8">
       <div>
         <label htmlFor="name" className="mb-1 block text-sm">
           Name
@@ -84,13 +85,9 @@ export function ContactForm({ packages }: { packages: EventPackage[] }) {
         </label>
         <textarea id="message" name="message" required rows={5} className={field} />
       </div>
-      <button
-        type="submit"
-        disabled={status === "sending"}
-        className="rounded-full bg-green px-6 py-3 text-sm font-semibold text-ink hover:bg-green-bright disabled:opacity-60"
-      >
+      <Button type="submit" disabled={status === "sending"}>
         {status === "sending" ? "Sending…" : "Send enquiry"}
-      </button>
+      </Button>
       {message ? (
         <p className={status === "error" ? "text-sm text-red-300" : "text-sm text-green"} role="status">
           {message}

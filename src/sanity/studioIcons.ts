@@ -1,0 +1,17 @@
+export { BlockElementIcon } from "@sanity/icons/BlockElement";
+export { BoltIcon } from "@sanity/icons/Bolt";
+export { CaseIcon } from "@sanity/icons/Case";
+export { CogIcon } from "@sanity/icons/Cog";
+export { CommentIcon } from "@sanity/icons/Comment";
+export { DocumentsIcon } from "@sanity/icons/Documents";
+export { DocumentTextIcon } from "@sanity/icons/DocumentText";
+export { EarthGlobeIcon } from "@sanity/icons/EarthGlobe";
+export { EnvelopeIcon } from "@sanity/icons/Envelope";
+export { HelpCircleIcon } from "@sanity/icons/HelpCircle";
+export { ImageIcon } from "@sanity/icons/Image";
+export { ImagesIcon } from "@sanity/icons/Images";
+export { InlineElementIcon } from "@sanity/icons/InlineElement";
+export { MenuIcon } from "@sanity/icons/Menu";
+export { NumberIcon } from "@sanity/icons/Number";
+export { StarIcon } from "@sanity/icons/Star";
+export { UsersIcon } from "@sanity/icons/Users";

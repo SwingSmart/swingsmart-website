@@ -3,12 +3,16 @@ import type { ReactNode } from "react";
 export function Container({
   children,
   className = "",
+  narrow = false,
 }: {
   children: ReactNode;
   className?: string;
+  narrow?: boolean;
 }) {
   return (
-    <div className={`mx-auto w-full max-w-6xl px-5 sm:px-8 ${className}`}>
+    <div
+      className={`mx-auto w-full px-5 sm:px-8 ${narrow ? "max-w-copy" : "max-w-shell"} ${className}`}
+    >
       {children}
     </div>
   );
@@ -32,7 +36,7 @@ export function Section({
 
 export function Eyebrow({ children }: { children: ReactNode }) {
   return (
-    <p className="mb-3 text-xs font-semibold uppercase tracking-[0.22em] text-green">
+    <p className="mb-3 text-[0.7rem] font-medium uppercase tracking-[0.22em] text-green-soft">
       {children}
     </p>
   );
@@ -49,7 +53,7 @@ export function DisplayHeading({
 }) {
   return (
     <Tag
-      className={`font-display text-4xl leading-[1.1] tracking-tight text-mist sm:text-5xl ${className}`}
+      className={`font-display text-4xl leading-[1.08] tracking-tight text-cream sm:text-5xl ${className}`}
     >
       {children}
     </Tag>

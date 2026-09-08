@@ -4,9 +4,10 @@ import type {
   EventPackage,
   GalleryCategory,
   GalleryItem,
+  Navigation,
   PageDoc,
   Partner,
-  SiteContent,
+  SiteSettings,
   Testimonial,
 } from "@/lib/types";
 import { isSanityConfigured } from "@/sanity/env";
@@ -23,46 +24,92 @@ import {
   testimonialsQuery,
 } from "@/sanity/queries";
 
-async function fetchQuery<T>(query: string, params?: Record<string, string>): Promise<T | null> {
+async function fetchQuery<T>(
+  query: string,
+  params?: Record<string, string>,
+  options?: { stega?: boolean },
+): Promise<T | null> {
   if (!isSanityConfigured) return null;
   try {
-    const { isEnabled } = await draftMode();
+    let isEnabled = false;
+    try {
+      const draft = await draftMode();
+      isEnabled = draft.isEnabled;
+    } catch {
+      isEnabled = false;
+    }
     const { data } = await sanityFetch({
       query,
       params,
       perspective: isEnabled ? "drafts" : "published",
-      stega: isEnabled,
+      stega: options?.stega ?? isEnabled,
     });
     return (data as T) ?? null;
-  } catch {
+  } catch (error) {
+    console.error("Sanity query failed", error);
     return null;
   }
 }
 
+function withSettingsDefaults(data: Partial<SiteSettings> | null): SiteSettings {
+  const fallback = fallbackContent.settings;
+  if (!data?.siteName && !data?.contact?.email) return fallback;
+  return {
+    siteName: data.siteName || fallback.siteName,
+    tagline: data.tagline || fallback.tagline,
+    footerNote: data.footerNote || fallback.footerNote,
+    contact: {
+      email: data.contact?.email || fallback.contact.email,
+      phones: data.contact?.phones?.length ? data.contact.phones : fallback.contact.phones,
+      location: data.contact?.location || fallback.contact.location,
+    },
+    socials: data.socials?.length ? data.socials : fallback.socials,
+    defaultSeo: {
+      title: data.defaultSeo?.title || fallback.defaultSeo.title,
+      description: data.defaultSeo?.description || fallback.defaultSeo.description,
+      ogImage: data.defaultSeo?.ogImage || fallback.defaultSeo.ogImage,
+    },
+    primaryCta: data.primaryCta || fallback.primaryCta,
+    secondaryCta: data.secondaryCta || fallback.secondaryCta,
+  };
+}
+
+function withNavigationDefaults(data: Navigation | null): Navigation {
+  const fallback = fallbackContent.navigation;
+  if (!data?.items?.length) return fallback;
+  return {
+    items: data.items,
+    ctaLabel: data.ctaLabel || data.cta?.label || fallback.ctaLabel,
+    ctaHref: data.ctaHref || data.cta?.href || fallback.ctaHref,
+  };
+}
+
 export async function getSettings() {
-  const data = await fetchQuery<SiteContent["settings"]>(siteSettingsQuery);
-  return data?.siteName ? data : fallbackContent.settings;
+  const data = await fetchQuery<SiteSettings>(siteSettingsQuery, undefined, { stega: false });
+  return withSettingsDefaults(data);
 }
 
 export async function getNavigation() {
-  const data = await fetchQuery<SiteContent["navigation"]>(navigationQuery);
-  return data?.items?.length ? data : fallbackContent.navigation;
+  const data = await fetchQuery<Navigation>(navigationQuery);
+  return withNavigationDefaults(data);
 }
 
 export async function getPage(slug: string): Promise<PageDoc | undefined> {
   const data = await fetchQuery<PageDoc>(pageBySlugQuery, { slug });
-  if (data?.sections?.length) return data;
+  if (data?._id) {
+    return { ...data, sections: data.sections || [] };
+  }
   return fallbackContent.pages[slug];
 }
 
 export async function getPackages(): Promise<EventPackage[]> {
-  const data = await fetchQuery<EventPackage[]>(packagesQuery);
+  const data = await fetchQuery<EventPackage[]>(packagesQuery, undefined, { stega: false });
   return data?.length ? data : fallbackContent.packages;
 }
 
 export async function getPackage(slug: string): Promise<EventPackage | undefined> {
   const data = await fetchQuery<EventPackage>(packageBySlugQuery, { slug });
-  if (data?.slug) return data;
+  if (data?._id || data?.slug) return data;
   return fallbackContent.packages.find((item) => item.slug === slug);
 }
 

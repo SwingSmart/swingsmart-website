@@ -48,8 +48,15 @@ export function TextAndImageView({ section }: { section: TextAndImageSection }) 
             <DisplayHeading className="mb-6">{section.heading}</DisplayHeading>
           ) : null}
           <RichBody value={section.body} />
+          {section.cta?.href ? (
+            <div className="mt-8">
+              <ButtonLink href={section.cta.href} style={section.cta.style}>
+                {section.cta.label}
+              </ButtonLink>
+            </div>
+          ) : null}
         </div>
-        <div className={`overflow-hidden rounded-2xl ${imageLeft ? "lg:order-1" : ""}`}>
+        <div className={`overflow-hidden rounded-card ${imageLeft ? "lg:order-1" : ""}`}>
           <CmsPhoto
             image={section.image}
             className="h-full w-full object-cover"
@@ -66,7 +73,7 @@ export function ImageBlockView({ section }: { section: ImageSection }) {
     <Section className="py-8 sm:py-12">
       <Container>
         <figure>
-          <div className="overflow-hidden rounded-2xl">
+          <div className="overflow-hidden rounded-card">
             <CmsPhoto image={section.image} className="w-full object-cover" />
           </div>
           {section.caption ? (
@@ -87,17 +94,22 @@ export function GallerySectionView({
   items: GalleryItem[];
   categories: { title: string; slug: string }[];
 }) {
-  const filtered = section.categorySlug
-    ? items.filter((item) => item.categories.includes(section.categorySlug!))
-    : items;
+  const filtered = items.filter((item) => {
+    if (section.featuredOnly && !item.featured) return false;
+    if (section.categorySlug && !item.categories.includes(section.categorySlug)) return false;
+    return true;
+  });
   const limited = section.limit ? filtered.slice(0, section.limit) : filtered;
 
   return (
     <Section>
       <Container>
         {section.heading ? (
-          <DisplayHeading className="mb-10">{section.heading}</DisplayHeading>
+          <DisplayHeading className={section.intro ? "mb-4" : "mb-10"}>
+            {section.heading}
+          </DisplayHeading>
         ) : null}
+        {section.intro ? <p className="mb-10 max-w-2xl text-muted">{section.intro}</p> : null}
         <GalleryGrid
           items={limited}
           categories={section.categorySlug ? undefined : categories}
@@ -114,31 +126,45 @@ export function PartnerGridView({
   section: PartnerGridSection;
   partners: Partner[];
 }) {
+  const list = section.featuredOnly
+    ? partners.filter((partner) => partner.featured)
+    : partners;
+
   return (
-    <Section className="bg-ink-soft">
+    <Section className="bg-bg-raised">
       <Container>
         {section.heading ? (
           <DisplayHeading className="mb-4">{section.heading}</DisplayHeading>
         ) : null}
         {section.intro ? <p className="mb-10 max-w-2xl text-muted">{section.intro}</p> : null}
         <ul className="grid gap-4 sm:grid-cols-2">
-          {partners.map((partner) => (
+          {list.map((partner) => (
             <li
               key={partner._id || partner.name}
-              className="rounded-2xl border border-line bg-panel p-6"
+              className="rounded-card border border-rule bg-surface p-6"
             >
-              <h3 className="text-lg font-semibold text-mist">{partner.name}</h3>
+              <h3 className="text-lg font-semibold text-cream">{partner.name}</h3>
               {partner.summary ? (
                 <p className="mt-2 text-sm leading-6 text-muted">{partner.summary}</p>
               ) : null}
               {partner.url ? (
                 <a
                   href={partner.url}
-                  className="mt-4 inline-block text-sm text-green hover:underline"
+                  className="mt-4 inline-block text-sm text-green-soft hover:underline"
                   rel="noreferrer"
                   target="_blank"
                 >
-                  Visit
+                  Visit website
+                </a>
+              ) : null}
+              {partner.caseStudyUrl ? (
+                <a
+                  href={partner.caseStudyUrl}
+                  className="mt-2 block text-sm text-muted hover:text-cream"
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  Read the story
                 </a>
               ) : null}
             </li>
@@ -174,15 +200,18 @@ export function PackageGridView({
 
 export function FeatureGridView({ section }: { section: FeatureGridSection }) {
   return (
-    <Section className="bg-ink-soft">
+    <Section className="bg-bg-raised">
       <Container>
         {section.heading ? (
-          <DisplayHeading className="mb-10">{section.heading}</DisplayHeading>
+          <DisplayHeading className={section.intro ? "mb-4" : "mb-10"}>
+            {section.heading}
+          </DisplayHeading>
         ) : null}
+        {section.intro ? <p className="mb-10 max-w-2xl text-muted">{section.intro}</p> : null}
         <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {section.items.map((item) => (
-            <li key={item._key} className="rounded-2xl border border-line p-6">
-              <h3 className="text-lg font-semibold text-mist">{item.title}</h3>
+          {(section.items ?? []).map((item) => (
+            <li key={item._key} className="rounded-card border border-rule p-6">
+              <h3 className="text-lg font-semibold text-cream">{item.title}</h3>
               <p className="mt-3 text-sm leading-6 text-muted">{item.text}</p>
             </li>
           ))}
@@ -199,24 +228,33 @@ export function TestimonialsView({
   section: TestimonialsSection;
   testimonials: Testimonial[];
 }) {
+  const list = (section.featuredOnly
+    ? testimonials.filter((item) => item.featured)
+    : testimonials
+  ).slice(0, section.limit || testimonials.length);
+
   return (
     <Section>
       <Container>
         {section.heading ? (
-          <DisplayHeading className="mb-10">{section.heading}</DisplayHeading>
+          <DisplayHeading className={section.intro ? "mb-4" : "mb-10"}>
+            {section.heading}
+          </DisplayHeading>
         ) : null}
+        {section.intro ? <p className="mb-10 max-w-2xl text-muted">{section.intro}</p> : null}
         <ul className="grid gap-6 lg:grid-cols-3">
-          {testimonials.map((item) => (
+          {list.map((item) => (
             <li
               key={item._id || item.quote}
-              className="flex flex-col justify-between rounded-2xl border border-line bg-panel p-6"
+              className="flex flex-col justify-between rounded-card border border-rule bg-surface p-6"
             >
-              <blockquote className="font-display text-xl leading-8 text-mist">
+              <blockquote className="font-display text-xl leading-8 text-cream">
                 “{item.quote}”
               </blockquote>
               <p className="mt-6 text-sm text-muted">
-                {item.attribution}
-                {item.role ? ` · ${item.role}` : ""}
+                {[item.attribution, item.organisation, item.role]
+                  .filter((value, index, all) => value && all.indexOf(value) === index)
+                  .join(" · ")}
               </p>
             </li>
           ))}
@@ -230,8 +268,14 @@ export function StatisticsView({ section }: { section: StatisticsSection }) {
   return (
     <Section className="py-12 sm:py-16">
       <Container>
-        <ul className="grid gap-8 border-y border-line py-10 sm:grid-cols-3">
-          {section.items.map((item) => (
+        {section.heading ? (
+          <DisplayHeading className={section.intro ? "mb-4" : "mb-10"}>
+            {section.heading}
+          </DisplayHeading>
+        ) : null}
+        {section.intro ? <p className="mb-10 max-w-2xl text-muted">{section.intro}</p> : null}
+        <ul className="grid gap-8 border-y border-rule py-10 sm:grid-cols-3">
+          {(section.items ?? []).map((item) => (
             <li key={item._key}>
               <p className="font-display text-3xl text-green sm:text-4xl">{item.value}</p>
               <p className="mt-2 text-sm leading-6 text-muted">{item.label}</p>
@@ -251,9 +295,9 @@ export function FaqView({ section }: { section: FaqSection }) {
           <DisplayHeading className="mb-10">{section.heading}</DisplayHeading>
         ) : null}
         <dl className="space-y-6">
-          {section.items.map((item) => (
-            <div key={item._key} className="border-b border-line pb-6">
-              <dt className="text-lg font-semibold text-mist">{item.question}</dt>
+          {(section.items ?? []).map((item) => (
+            <div key={item._key} className="border-b border-rule pb-6">
+              <dt className="text-lg font-semibold text-cream">{item.question}</dt>
               <dd className="mt-2 text-sm leading-6 text-muted">{item.answer}</dd>
             </div>
           ))}
@@ -267,18 +311,13 @@ export function CtaView({ section }: { section: CtaSection }) {
   return (
     <Section>
       <Container>
-        <div className="rounded-3xl bg-green px-8 py-12 text-ink sm:px-14 sm:py-16">
-          <Eyebrow>
-            <span className="text-ink">Book</span>
-          </Eyebrow>
-          <h2 className="font-display text-4xl sm:text-5xl">{section.heading}</h2>
-          {section.text ? <p className="mt-4 max-w-xl text-ink/80">{section.text}</p> : null}
+        <div className="border border-rule bg-surface px-8 py-12 sm:px-14 sm:py-16">
+          <Eyebrow>Enquire</Eyebrow>
+          <h2 className="font-display text-4xl text-cream sm:text-5xl">{section.heading}</h2>
+          {section.text ? <p className="mt-4 max-w-xl text-muted">{section.text}</p> : null}
           {section.button?.href ? (
             <div className="mt-8">
-              <ButtonLink
-                href={section.button.href}
-                className="bg-ink text-mist hover:bg-ink-soft hover:text-mist"
-              >
+              <ButtonLink href={section.button.href}>
                 {section.button.label}
               </ButtonLink>
             </div>
@@ -306,25 +345,32 @@ export function ContactBlockView({
             <DisplayHeading className="mb-4">{section.heading}</DisplayHeading>
           ) : null}
           {section.text ? <p className="text-muted">{section.text}</p> : null}
-          <ul className="mt-8 space-y-3 text-sm">
-            <li>
-              <a className="text-green hover:underline" href={`mailto:${settings.contact.email}`}>
-                {settings.contact.email}
-              </a>
-            </li>
-            {settings.contact.phones.map((phone) => (
-              <li key={phone}>
-                <a className="hover:text-green" href={`tel:${phone.replace(/\s/g, "")}`}>
-                  {phone}
-                </a>
-              </li>
-            ))}
-            {settings.contact.location ? (
-              <li className="text-muted">{settings.contact.location}</li>
-            ) : null}
-          </ul>
+          {section.showDetails === false ? null : (
+            <ul className="mt-8 space-y-3 text-sm">
+              {settings.contact.email ? (
+                <li>
+                  <a
+                    className="text-green-soft hover:underline"
+                    href={`mailto:${settings.contact.email}`}
+                  >
+                    {settings.contact.email}
+                  </a>
+                </li>
+              ) : null}
+              {(settings.contact.phones || []).map((phone) => (
+                <li key={phone}>
+                  <a className="hover:text-green" href={`tel:${phone.replace(/\s/g, "")}`}>
+                    {phone}
+                  </a>
+                </li>
+              ))}
+              {settings.contact.location ? (
+                <li className="text-muted">{settings.contact.location}</li>
+              ) : null}
+            </ul>
+          )}
         </div>
-        <ContactForm packages={packages} />
+        {section.showForm === false ? null : <ContactForm packages={packages} />}
       </Container>
     </Section>
   );
