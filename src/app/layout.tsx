@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Source_Sans_3 } from "next/font/google";
-import { LivePreview } from "@/components/sanity/LivePreview";
 import { getSettings } from "@/lib/content";
 import { siteUrl } from "@/sanity/env";
 import "./globals.css";
@@ -42,7 +41,6 @@ export default function RootLayout({
     >
       <body className="flex min-h-full flex-col bg-bg font-sans text-cream">
         {children}
-        <LivePreview />
       </body>
     </html>
   );

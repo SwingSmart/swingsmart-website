@@ -21,6 +21,7 @@ export type Navigation = {
   items: NavItem[];
   ctaLabel?: string;
   ctaHref?: string;
+  cta?: CtaButton;
 };
 
 export type ContactDetails = {
@@ -41,6 +42,8 @@ export type SiteSettings = {
   contact: ContactDetails;
   socials: SocialLink[];
   defaultSeo: SeoFields;
+  primaryCta?: CtaButton;
+  secondaryCta?: CtaButton;
 };
 
 export type PortableSpan = {
@@ -89,6 +92,7 @@ export type HeroSection = {
   eyebrow?: string;
   heading: string;
   subheading?: string;
+  overlay?: "light" | "medium" | "dark";
   image?: CmsImage;
   primaryCta?: CtaButton;
   secondaryCta?: CtaButton;
@@ -108,6 +112,7 @@ export type TextAndImageSection = {
   body: PortableBlock[];
   image?: CmsImage;
   imagePosition?: "left" | "right";
+  cta?: CtaButton;
 };
 
 export type ImageSection = {
@@ -121,7 +126,9 @@ export type GallerySection = {
   _type: "gallery";
   _key: string;
   heading?: string;
+  intro?: string;
   categorySlug?: string;
+  featuredOnly?: boolean;
   limit?: number;
 };
 
@@ -130,6 +137,7 @@ export type PartnerGridSection = {
   _key: string;
   heading?: string;
   intro?: string;
+  featuredOnly?: boolean;
 };
 
 export type PackageGridSection = {
@@ -144,6 +152,7 @@ export type FeatureGridSection = {
   _type: "featureGrid";
   _key: string;
   heading?: string;
+  intro?: string;
   items: FeatureItem[];
 };
 
@@ -151,11 +160,16 @@ export type TestimonialsSection = {
   _type: "testimonials";
   _key: string;
   heading?: string;
+  intro?: string;
+  featuredOnly?: boolean;
+  limit?: number;
 };
 
 export type StatisticsSection = {
   _type: "statistics";
   _key: string;
+  heading?: string;
+  intro?: string;
   items: StatItem[];
 };
 
@@ -179,6 +193,8 @@ export type ContactBlockSection = {
   _key: string;
   heading?: string;
   text?: string;
+  showForm?: boolean;
+  showDetails?: boolean;
 };
 
 export type PageSection =
@@ -198,6 +214,7 @@ export type PageSection =
 
 export type PageDoc = {
   _id?: string;
+  _type?: string;
   title: string;
   slug: string;
   seo?: SeoFields;
@@ -206,16 +223,21 @@ export type PageDoc = {
 
 export type EventPackage = {
   _id?: string;
+  _type?: string;
   title: string;
   shortName: string;
   slug: string;
   subtitle?: string;
   summary: string;
+  description?: PortableBlock[];
   priceLabel: string;
   durationLabel?: string;
   includes: string[];
   extras?: string[];
   featured?: boolean;
+  heroImage?: CmsImage;
+  gallery?: CmsImage[];
+  cta?: CtaButton;
   seo?: SeoFields;
   sections?: PageSection[];
 };
@@ -228,6 +250,11 @@ export type GalleryCategory = {
 export type GalleryItem = {
   _id?: string;
   title: string;
+  alt?: string;
+  caption?: string;
+  venue?: string;
+  date?: string;
+  featured?: boolean;
   image: CmsImage;
   categories: string[];
 };
@@ -237,6 +264,9 @@ export type Partner = {
   name: string;
   summary?: string;
   url?: string;
+  featured?: boolean;
+  sortOrder?: number;
+  caseStudyUrl?: string;
   logo?: CmsImage;
 };
 
@@ -244,7 +274,11 @@ export type Testimonial = {
   _id?: string;
   quote: string;
   attribution: string;
+  person?: string;
+  organisation?: string;
   role?: string;
+  featured?: boolean;
+  image?: CmsImage;
 };
 
 export type SiteContent = {

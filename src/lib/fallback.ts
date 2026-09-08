@@ -22,6 +22,8 @@ const settings: SiteContent["settings"] = {
     description:
       "We bring a professional golf simulator to you — anytime, anywhere. Packages for individuals, corporates, weddings, clubs and junior golfers.",
   },
+  primaryCta: { label: "Plan an event", href: "/contact", style: "primary" },
+  secondaryCta: { label: "View packages", href: "/packages", style: "secondary" },
 };
 
 const navigation: SiteContent["navigation"] = {

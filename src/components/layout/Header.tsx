@@ -20,6 +20,8 @@ export function Header({
   const [packagesOpen, setPackagesOpen] = useState(false);
   const [deskMenu, setDeskMenu] = useState<string | null>(null);
   const phone = settings.contact.phones[0];
+  const ctaHref = settings.primaryCta?.href || navigation.ctaHref;
+  const ctaLabel = settings.primaryCta?.label || navigation.ctaLabel || "Enquire";
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -94,10 +96,8 @@ export function Header({
               {phone}
             </a>
           ) : null}
-          {navigation.ctaHref ? (
-            <ButtonLink href={navigation.ctaHref}>
-              {navigation.ctaLabel || "Enquire"}
-            </ButtonLink>
+          {ctaHref ? (
+            <ButtonLink href={ctaHref}>{ctaLabel}</ButtonLink>
           ) : null}
         </div>
         <button
@@ -167,9 +167,9 @@ export function Header({
               <a href={`mailto:${settings.contact.email}`} className="text-sm text-muted">
                 {settings.contact.email}
               </a>
-              {navigation.ctaHref ? (
-                <ButtonLink href={navigation.ctaHref} className="w-fit">
-                  {navigation.ctaLabel || "Enquire"}
+              {ctaHref ? (
+                <ButtonLink href={ctaHref} className="w-fit">
+                  {ctaLabel}
                 </ButtonLink>
               ) : null}
             </div>

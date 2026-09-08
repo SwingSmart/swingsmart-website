@@ -4,7 +4,7 @@ import { StudioApp } from "./studio-app";
 
 export { metadata, viewport } from "next-sanity/studio";
 
-export const dynamic = "force-static";
+export const dynamic = "force-dynamic";
 
 export default function StudioPage() {
   if (!isSanityConfigured) {

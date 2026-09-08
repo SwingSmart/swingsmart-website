@@ -4,5 +4,11 @@ import { NextResponse } from "next/server";
 export async function GET(request: Request) {
   const draft = await draftMode();
   draft.disable();
-  return NextResponse.redirect(new URL("/", request.url));
+  const url = new URL(request.url);
+  const redirectTo = url.searchParams.get("redirect") || "/";
+  const destination = new URL(redirectTo, url.origin);
+  if (destination.origin !== url.origin) {
+    return NextResponse.redirect(new URL("/", url.origin));
+  }
+  return NextResponse.redirect(destination);
 }

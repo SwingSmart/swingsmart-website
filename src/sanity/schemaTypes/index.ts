@@ -9,7 +9,7 @@ import {
   siteSettings,
   testimonial,
 } from "./documents";
-import { ctaButton, portableBody, seo } from "./objects";
+import { ctaButton, navItem, portableBody, seo, socialLink } from "./objects";
 import {
   contactBlock,
   cta,
@@ -39,6 +39,8 @@ export const schemaTypes = [
   seo,
   ctaButton,
   portableBody,
+  navItem,
+  socialLink,
   hero,
   richText,
   textAndImage,

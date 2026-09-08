@@ -13,7 +13,15 @@ export function Hero({ section }: { section: HeroSection }) {
           className="h-full w-full object-cover"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-bg/40" />
+        <div
+          className={`absolute inset-0 ${
+            section.overlay === "light"
+              ? "bg-bg/25"
+              : section.overlay === "dark"
+                ? "bg-bg/60"
+                : "bg-bg/40"
+          }`}
+        />
       </div>
       <Container className="relative flex min-h-[78vh] flex-col justify-end pb-16 pt-12 sm:pb-20">
         {section.eyebrow ? <Eyebrow>{section.eyebrow}</Eyebrow> : null}

@@ -44,7 +44,13 @@ export function GalleryGrid({
               className="aspect-[4/3] w-full object-cover"
               sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
             />
-            <p className="sr-only">{item.title}</p>
+            {item.caption || item.venue ? (
+              <p className="mt-2 text-sm text-muted">
+                {item.caption || item.venue}
+              </p>
+            ) : (
+              <p className="sr-only">{item.title}</p>
+            )}
           </li>
         ))}
       </ul>

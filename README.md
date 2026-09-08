@@ -20,7 +20,9 @@ Open [http://localhost:3000](http://localhost:3000). The site renders SwingSmart
 2. Put the project ID and dataset in `.env.local` (see `.env.example`).
 3. Create a viewer token (`SANITY_API_READ_TOKEN`) for live preview.
 4. Create an editor token (`SANITY_API_WRITE_TOKEN`) so the contact form can save enquiries.
-5. Restart `npm run dev` and open `/studio`.
+5. In Sanity → API → CORS origins, add `http://localhost:3000` with **Allow credentials**.
+6. Restart `npm run dev` and open `/studio`.
+7. Optional: `npm run seed` copies starter pages, packages and settings into the Studio.
 
 Until those values are set, `/studio` shows a short setup message and the public site still works.
 
@@ -33,6 +35,7 @@ Until those values are set, `/studio` shows a short setup message and the public
 | `npm run start` | Serve the production build |
 | `npm run lint` | ESLint |
 | `npm run typecheck` | TypeScript |
+| `npm run seed` | Copy starter content into a connected Sanity project |
 
 ## Deploy
 

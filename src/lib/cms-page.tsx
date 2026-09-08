@@ -30,6 +30,8 @@ export async function CmsPage({ slug }: { slug: string }) {
   if (!page) notFound();
   return (
     <PageSections
+      documentId={page._id}
+      documentType={page._type || "page"}
       sections={page.sections}
       settings={settings}
       packages={packages}

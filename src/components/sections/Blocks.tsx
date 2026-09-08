@@ -48,6 +48,13 @@ export function TextAndImageView({ section }: { section: TextAndImageSection }) 
             <DisplayHeading className="mb-6">{section.heading}</DisplayHeading>
           ) : null}
           <RichBody value={section.body} />
+          {section.cta?.href ? (
+            <div className="mt-8">
+              <ButtonLink href={section.cta.href} style={section.cta.style}>
+                {section.cta.label}
+              </ButtonLink>
+            </div>
+          ) : null}
         </div>
         <div className={`overflow-hidden rounded-card ${imageLeft ? "lg:order-1" : ""}`}>
           <CmsPhoto
@@ -87,17 +94,22 @@ export function GallerySectionView({
   items: GalleryItem[];
   categories: { title: string; slug: string }[];
 }) {
-  const filtered = section.categorySlug
-    ? items.filter((item) => item.categories.includes(section.categorySlug!))
-    : items;
+  const filtered = items.filter((item) => {
+    if (section.featuredOnly && !item.featured) return false;
+    if (section.categorySlug && !item.categories.includes(section.categorySlug)) return false;
+    return true;
+  });
   const limited = section.limit ? filtered.slice(0, section.limit) : filtered;
 
   return (
     <Section>
       <Container>
         {section.heading ? (
-          <DisplayHeading className="mb-10">{section.heading}</DisplayHeading>
+          <DisplayHeading className={section.intro ? "mb-4" : "mb-10"}>
+            {section.heading}
+          </DisplayHeading>
         ) : null}
+        {section.intro ? <p className="mb-10 max-w-2xl text-muted">{section.intro}</p> : null}
         <GalleryGrid
           items={limited}
           categories={section.categorySlug ? undefined : categories}
@@ -114,6 +126,10 @@ export function PartnerGridView({
   section: PartnerGridSection;
   partners: Partner[];
 }) {
+  const list = section.featuredOnly
+    ? partners.filter((partner) => partner.featured)
+    : partners;
+
   return (
     <Section className="bg-bg-raised">
       <Container>
@@ -122,7 +138,7 @@ export function PartnerGridView({
         ) : null}
         {section.intro ? <p className="mb-10 max-w-2xl text-muted">{section.intro}</p> : null}
         <ul className="grid gap-4 sm:grid-cols-2">
-          {partners.map((partner) => (
+          {list.map((partner) => (
             <li
               key={partner._id || partner.name}
               className="rounded-card border border-rule bg-surface p-6"
@@ -138,7 +154,17 @@ export function PartnerGridView({
                   rel="noreferrer"
                   target="_blank"
                 >
-                  Visit
+                  Visit website
+                </a>
+              ) : null}
+              {partner.caseStudyUrl ? (
+                <a
+                  href={partner.caseStudyUrl}
+                  className="mt-2 block text-sm text-muted hover:text-cream"
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  Read the story
                 </a>
               ) : null}
             </li>
@@ -177,10 +203,13 @@ export function FeatureGridView({ section }: { section: FeatureGridSection }) {
     <Section className="bg-bg-raised">
       <Container>
         {section.heading ? (
-          <DisplayHeading className="mb-10">{section.heading}</DisplayHeading>
+          <DisplayHeading className={section.intro ? "mb-4" : "mb-10"}>
+            {section.heading}
+          </DisplayHeading>
         ) : null}
+        {section.intro ? <p className="mb-10 max-w-2xl text-muted">{section.intro}</p> : null}
         <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {section.items.map((item) => (
+          {(section.items ?? []).map((item) => (
             <li key={item._key} className="rounded-card border border-rule p-6">
               <h3 className="text-lg font-semibold text-cream">{item.title}</h3>
               <p className="mt-3 text-sm leading-6 text-muted">{item.text}</p>
@@ -199,14 +228,22 @@ export function TestimonialsView({
   section: TestimonialsSection;
   testimonials: Testimonial[];
 }) {
+  const list = (section.featuredOnly
+    ? testimonials.filter((item) => item.featured)
+    : testimonials
+  ).slice(0, section.limit || testimonials.length);
+
   return (
     <Section>
       <Container>
         {section.heading ? (
-          <DisplayHeading className="mb-10">{section.heading}</DisplayHeading>
+          <DisplayHeading className={section.intro ? "mb-4" : "mb-10"}>
+            {section.heading}
+          </DisplayHeading>
         ) : null}
+        {section.intro ? <p className="mb-10 max-w-2xl text-muted">{section.intro}</p> : null}
         <ul className="grid gap-6 lg:grid-cols-3">
-          {testimonials.map((item) => (
+          {list.map((item) => (
             <li
               key={item._id || item.quote}
               className="flex flex-col justify-between rounded-card border border-rule bg-surface p-6"
@@ -215,8 +252,9 @@ export function TestimonialsView({
                 “{item.quote}”
               </blockquote>
               <p className="mt-6 text-sm text-muted">
-                {item.attribution}
-                {item.role ? ` · ${item.role}` : ""}
+                {[item.attribution, item.organisation, item.role]
+                  .filter((value, index, all) => value && all.indexOf(value) === index)
+                  .join(" · ")}
               </p>
             </li>
           ))}
@@ -230,8 +268,14 @@ export function StatisticsView({ section }: { section: StatisticsSection }) {
   return (
     <Section className="py-12 sm:py-16">
       <Container>
+        {section.heading ? (
+          <DisplayHeading className={section.intro ? "mb-4" : "mb-10"}>
+            {section.heading}
+          </DisplayHeading>
+        ) : null}
+        {section.intro ? <p className="mb-10 max-w-2xl text-muted">{section.intro}</p> : null}
         <ul className="grid gap-8 border-y border-rule py-10 sm:grid-cols-3">
-          {section.items.map((item) => (
+          {(section.items ?? []).map((item) => (
             <li key={item._key}>
               <p className="font-display text-3xl text-green sm:text-4xl">{item.value}</p>
               <p className="mt-2 text-sm leading-6 text-muted">{item.label}</p>
@@ -251,7 +295,7 @@ export function FaqView({ section }: { section: FaqSection }) {
           <DisplayHeading className="mb-10">{section.heading}</DisplayHeading>
         ) : null}
         <dl className="space-y-6">
-          {section.items.map((item) => (
+          {(section.items ?? []).map((item) => (
             <div key={item._key} className="border-b border-rule pb-6">
               <dt className="text-lg font-semibold text-cream">{item.question}</dt>
               <dd className="mt-2 text-sm leading-6 text-muted">{item.answer}</dd>
@@ -301,25 +345,32 @@ export function ContactBlockView({
             <DisplayHeading className="mb-4">{section.heading}</DisplayHeading>
           ) : null}
           {section.text ? <p className="text-muted">{section.text}</p> : null}
-          <ul className="mt-8 space-y-3 text-sm">
-            <li>
-              <a className="text-green-soft hover:underline" href={`mailto:${settings.contact.email}`}>
-                {settings.contact.email}
-              </a>
-            </li>
-            {settings.contact.phones.map((phone) => (
-              <li key={phone}>
-                <a className="hover:text-green" href={`tel:${phone.replace(/\s/g, "")}`}>
-                  {phone}
-                </a>
-              </li>
-            ))}
-            {settings.contact.location ? (
-              <li className="text-muted">{settings.contact.location}</li>
-            ) : null}
-          </ul>
+          {section.showDetails === false ? null : (
+            <ul className="mt-8 space-y-3 text-sm">
+              {settings.contact.email ? (
+                <li>
+                  <a
+                    className="text-green-soft hover:underline"
+                    href={`mailto:${settings.contact.email}`}
+                  >
+                    {settings.contact.email}
+                  </a>
+                </li>
+              ) : null}
+              {(settings.contact.phones || []).map((phone) => (
+                <li key={phone}>
+                  <a className="hover:text-green" href={`tel:${phone.replace(/\s/g, "")}`}>
+                    {phone}
+                  </a>
+                </li>
+              ))}
+              {settings.contact.location ? (
+                <li className="text-muted">{settings.contact.location}</li>
+              ) : null}
+            </ul>
+          )}
         </div>
-        <ContactForm packages={packages} />
+        {section.showForm === false ? null : <ContactForm packages={packages} />}
       </Container>
     </Section>
   );
