@@ -31,7 +31,13 @@ async function fetchQuery<T>(
 ): Promise<T | null> {
   if (!isSanityConfigured) return null;
   try {
-    const { isEnabled } = await draftMode();
+    let isEnabled = false;
+    try {
+      const draft = await draftMode();
+      isEnabled = draft.isEnabled;
+    } catch {
+      isEnabled = false;
+    }
     const { data } = await sanityFetch({
       query,
       params,
