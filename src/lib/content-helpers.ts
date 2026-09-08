@@ -18,9 +18,6 @@ export function block(
 const SS =
   "https://images.squarespace-cdn.com/content/v1/67b7166d30a09e47db03f71f";
 
-export const homeHeroVideoUrl =
-  "https://www.youtube.com/embed/oesFNRnicNw";
-
 export function ssPhoto(id: string, file: string, alt: string) {
   return {
     url: `${SS}/${id}/${file}?format=2500w`,
@@ -29,6 +26,13 @@ export function ssPhoto(id: string, file: string, alt: string) {
 }
 
 export const photos = {
+  homeHero: {
+    url: "/brand/hero.jpg",
+    alt: "SwingSmart event on the course — golf cart, guests, and BEYOND GOLF branding",
+    width: 3864,
+    height: 4830,
+    hotspot: { x: 0.5, y: 0.46 },
+  },
   hero: ssPhoto(
     "6d4af154-3f33-415c-92fd-d78c16a479bc",
     "SwingSmart-Hero-Photos--49.jpg",

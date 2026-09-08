@@ -14,15 +14,20 @@ export function Hero({
   section: HeroSection;
   priority?: boolean;
 }) {
-  const image = hasCmsImage(section.image) ? section.image : photos.hero;
+  const image = hasCmsImage(section.image) ? section.image : photos.homeHero;
   const poster = imageSrc(image, 2400);
   const videoSrc = section.videoUrl;
-  const overlayClass =
-    section.overlay === "light"
+  const overlayClass = videoSrc
+    ? section.overlay === "light"
       ? "from-bg/75 via-bg/30 to-bg/15"
       : section.overlay === "dark"
         ? "from-bg via-bg/70 to-bg/35"
-        : "from-bg/90 via-bg/45 to-bg/20";
+        : "from-bg/90 via-bg/45 to-bg/20"
+    : section.overlay === "light"
+      ? "from-bg/80 via-bg/20 to-transparent"
+      : section.overlay === "dark"
+        ? "from-bg via-bg/45 to-bg/10"
+        : "from-bg via-bg/25 to-transparent";
 
   return (
     <section className="relative isolate min-h-[100svh] overflow-hidden bg-bg">
@@ -37,7 +42,11 @@ export function Hero({
         />
         {videoSrc ? <HeroVideo src={videoSrc} poster={poster} /> : null}
         <div className={`absolute inset-0 bg-gradient-to-t ${overlayClass}`} />
-        <div className="absolute inset-0 bg-gradient-to-r from-bg/55 via-bg/15 to-transparent" />
+        {videoSrc ? (
+          <div className="absolute inset-0 bg-gradient-to-r from-bg/55 via-bg/15 to-transparent" />
+        ) : (
+          <div className="absolute inset-0 bg-gradient-to-b from-bg/45 via-transparent to-transparent" />
+        )}
       </div>
 
       <Container className="relative flex min-h-[100svh] flex-col justify-end pb-16 pt-28 sm:pb-24">

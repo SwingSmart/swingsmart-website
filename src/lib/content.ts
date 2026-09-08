@@ -1,5 +1,7 @@
 import { draftMode } from "next/headers";
+import { photos } from "@/lib/content-helpers";
 import { fallbackContent } from "@/lib/fallback";
+import { hasCmsImage } from "@/sanity/image";
 import type {
   EventPackage,
   GalleryCategory,
@@ -111,16 +113,15 @@ function restoreHomeLayout(page: PageDoc): PageDoc {
   const fallbackHero = fallbackSections.find((section) => section._type === "hero");
   const current = page.sections || [];
   const types = new Set(current.map((section) => section._type));
+  const fallbackHeroImage =
+    fallbackHero?._type === "hero" ? fallbackHero.image : photos.homeHero;
   const next: PageSection[] = current.map((section) => {
-    if (
-      section._type === "hero" &&
-      !section.videoUrl &&
-      fallbackHero?._type === "hero" &&
-      fallbackHero.videoUrl
-    ) {
-      return { ...section, videoUrl: fallbackHero.videoUrl };
-    }
-    return section;
+    if (section._type !== "hero") return section;
+    return {
+      ...section,
+      videoUrl: undefined,
+      image: hasCmsImage(section.image) ? section.image : fallbackHeroImage,
+    };
   });
 
   for (const section of fallbackSections) {

@@ -55,7 +55,7 @@ export const hero = defineType({
       title: "Background photo",
       type: "image",
       options: { hotspot: true },
-      description: "Used as the poster and on devices that cannot play the video.",
+      description: "Full-bleed background for the hero. Optional video fields below can sit on top of it.",
       fields: [
         defineField({
           name: "alt",
