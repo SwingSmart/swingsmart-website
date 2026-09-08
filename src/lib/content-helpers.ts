@@ -28,10 +28,10 @@ export function ssPhoto(id: string, file: string, alt: string) {
 export const photos = {
   homeHero: {
     url: "/brand/hero.jpg",
-    alt: "SwingSmart event on the course — golf cart, guests, and BEYOND GOLF branding",
-    width: 3864,
-    height: 4830,
-    hotspot: { x: 0.5, y: 0.46 },
+    alt: "Guests celebrating around a SwingSmart golf cart on the course",
+    width: 5120,
+    height: 3413,
+    hotspot: { x: 0.5, y: 0.44 },
   },
   hero: ssPhoto(
     "6d4af154-3f33-415c-92fd-d78c16a479bc",
