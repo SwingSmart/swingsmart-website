@@ -79,7 +79,7 @@ export default async function PackageDetailPage({ params }: Props) {
         />
       ) : null}
       {pkg ? (
-        <Section>
+        <Section className="bg-bg-raised">
           <Container>
             <DisplayHeading className="mb-8 text-3xl">Other packages</DisplayHeading>
             <PackageCards packages={packages.filter((item) => item.slug !== slug)} />

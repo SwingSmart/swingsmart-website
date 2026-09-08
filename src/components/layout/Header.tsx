@@ -16,12 +16,21 @@ export function Header({
   settings: SiteSettings;
 }) {
   const pathname = usePathname();
+  const [route, setRoute] = useState(pathname);
   const [open, setOpen] = useState(false);
-  const [packagesOpen, setPackagesOpen] = useState(false);
+  const [openChild, setOpenChild] = useState<string | null>(null);
   const [deskMenu, setDeskMenu] = useState<string | null>(null);
+  const [scrolled, setScrolled] = useState(false);
+  if (route !== pathname) {
+    setRoute(pathname);
+    setOpen(false);
+    setOpenChild(null);
+    setDeskMenu(null);
+  }
   const phone = settings.contact.phones[0];
   const ctaHref = settings.primaryCta?.href || navigation.ctaHref;
   const ctaLabel = settings.primaryCta?.label || navigation.ctaLabel || "Enquire";
+  const items = navigation.items.filter((item) => item.href !== "/");
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -30,10 +39,32 @@ export function Header({
     };
   }, [open]);
 
-  const items = navigation.items.filter((item) => item.href !== "/");
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 16);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setOpen(false);
+        setDeskMenu(null);
+        setOpenChild(null);
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
 
   return (
-    <header className="sticky top-0 z-50 overflow-visible border-b border-rule bg-bg-raised">
+    <header
+      className={`sticky top-0 z-50 overflow-visible border-b transition-colors duration-300 ${
+        scrolled || open
+          ? "border-rule bg-bg-raised/95 backdrop-blur-md"
+          : "border-transparent bg-gradient-to-b from-bg/85 to-transparent"
+      }`}
+    >
       <Container className="flex h-[4.25rem] items-stretch justify-between gap-6 sm:h-[4.75rem]">
         <div className="flex items-center">
           <Logo priority />
@@ -42,11 +73,17 @@ export function Header({
           {items.map((item) =>
             item.children?.length ? (
               <div
-                  key={item.href}
-                  className="relative flex"
-                  onMouseEnter={() => setDeskMenu(item.href)}
-                  onMouseLeave={() => setDeskMenu(null)}
-                >
+                key={item.href}
+                className="relative flex"
+                onMouseEnter={() => setDeskMenu(item.href)}
+                onMouseLeave={() => setDeskMenu(null)}
+                onFocus={() => setDeskMenu(item.href)}
+                onBlur={(event) => {
+                  if (!event.currentTarget.contains(event.relatedTarget as Node)) {
+                    setDeskMenu(null);
+                  }
+                }}
+              >
                 <Link
                   href={item.href}
                   className={`flex items-center text-sm ${
@@ -60,18 +97,20 @@ export function Header({
                   {item.label}
                 </Link>
                 {deskMenu === item.href ? (
-                <ul className="absolute left-0 top-full z-50 min-w-56 border border-rule bg-surface py-2">
-                  {item.children.map((child) => (
-                    <li key={child.href}>
-                      <Link
-                        href={child.href}
-                        className="block px-4 py-2 text-sm text-muted hover:bg-bg hover:text-cream"
-                      >
-                        {child.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
+                  <ul className="absolute left-0 top-full z-50 min-w-56 border border-rule bg-surface py-2 shadow-lg shadow-black/40">
+                    {item.children.map((child) => (
+                      <li key={child.href}>
+                        <Link
+                          href={child.href}
+                          className={`block px-4 py-2 text-sm hover:bg-bg hover:text-cream ${
+                            pathname === child.href ? "text-cream" : "text-muted"
+                          }`}
+                        >
+                          {child.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
                 ) : null}
               </div>
             ) : (
@@ -96,9 +135,7 @@ export function Header({
               {phone}
             </a>
           ) : null}
-          {ctaHref ? (
-            <ButtonLink href={ctaHref}>{ctaLabel}</ButtonLink>
-          ) : null}
+          {ctaHref ? <ButtonLink href={ctaHref}>{ctaLabel}</ButtonLink> : null}
         </div>
         <button
           type="button"
@@ -109,9 +146,13 @@ export function Header({
         >
           <span className="sr-only">{open ? "Close menu" : "Open menu"}</span>
           <span className="flex h-3.5 w-5 flex-col justify-between">
-            <span className={`h-px w-full bg-cream transition ${open ? "translate-y-1.5 rotate-45" : ""}`} />
+            <span
+              className={`h-px w-full bg-cream transition ${open ? "translate-y-1.5 rotate-45" : ""}`}
+            />
             <span className={`h-px w-full bg-cream transition ${open ? "opacity-0" : ""}`} />
-            <span className={`h-px w-full bg-cream transition ${open ? "-translate-y-1.5 -rotate-45" : ""}`} />
+            <span
+              className={`h-px w-full bg-cream transition ${open ? "-translate-y-1.5 -rotate-45" : ""}`}
+            />
           </span>
         </button>
       </Container>
@@ -135,11 +176,13 @@ export function Header({
                     <button
                       type="button"
                       className="text-xs uppercase tracking-[0.16em] text-muted"
-                      onClick={() => setPackagesOpen((value) => !value)}
+                      onClick={() =>
+                        setOpenChild((value) => (value === item.href ? null : item.href))
+                      }
                     >
-                      {packagesOpen ? "Hide packages" : "All packages"}
+                      {openChild === item.href ? "Hide packages" : "All packages"}
                     </button>
-                    {packagesOpen ? (
+                    {openChild === item.href ? (
                       <ul className="mt-3 space-y-2">
                         {item.children.map((child) => (
                           <li key={child.href}>
@@ -158,15 +201,17 @@ export function Header({
                 ) : null}
               </div>
             ))}
-            <div className="mt-8 flex flex-col gap-4">
+            <div className="mt-8 flex flex-col gap-4 pb-8">
               {phone ? (
                 <a href={`tel:${phone.replace(/\s/g, "")}`} className="text-sm text-cream">
                   {phone}
                 </a>
               ) : null}
-              <a href={`mailto:${settings.contact.email}`} className="text-sm text-muted">
-                {settings.contact.email}
-              </a>
+              {settings.contact.email ? (
+                <a href={`mailto:${settings.contact.email}`} className="text-sm text-muted">
+                  {settings.contact.email}
+                </a>
+              ) : null}
               {ctaHref ? (
                 <ButtonLink href={ctaHref} className="w-fit">
                   {ctaLabel}

@@ -19,6 +19,7 @@ import {
   packageBySlugQuery,
   packagesQuery,
   pageBySlugQuery,
+  pagesQuery,
   partnersQuery,
   siteSettingsQuery,
   testimonialsQuery,
@@ -133,15 +134,23 @@ export async function getTestimonials(): Promise<Testimonial[]> {
   return data?.length ? data : fallbackContent.testimonials;
 }
 
+export async function getPageSlugs() {
+  const data = await fetchQuery<{ slug: string }[]>(pagesQuery, undefined, { stega: false });
+  const fromCms = (data || []).map((item) => item.slug).filter(Boolean);
+  return [...new Set([...fromCms, ...Object.keys(fallbackContent.pages)])];
+}
+
 export async function getSiteUrlMap() {
-  const packages = await getPackages();
+  const [packages, slugs] = await Promise.all([getPackages(), getPageSlugs()]);
+  const reserved = new Set(["home", "packages"]);
+  const pagePaths = slugs
+    .filter((slug) => !reserved.has(slug) && !slug.startsWith("packages/"))
+    .map((slug) => `/${slug}`);
+
   return [
     "",
     "/packages",
     ...packages.map((item) => `/packages/${item.slug}`),
-    "/gallery",
-    "/partnerships",
-    "/about",
-    "/contact",
+    ...pagePaths,
   ];
 }

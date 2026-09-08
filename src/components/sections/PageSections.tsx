@@ -3,20 +3,18 @@
 import { createDataAttribute } from "next-sanity";
 import { useOptimistic } from "next-sanity/hooks";
 import { Hero } from "@/components/sections/Hero";
-import {
-  ContactBlockView,
-  CtaView,
-  FaqView,
-  FeatureGridView,
-  GallerySectionView,
-  ImageBlockView,
-  PackageGridView,
-  PartnerGridView,
-  RichTextSectionView,
-  StatisticsView,
-  TestimonialsView,
-  TextAndImageView,
-} from "@/components/sections/Blocks";
+import { ContactBlockView } from "@/components/sections/ContactBlock";
+import { CtaView } from "@/components/sections/Cta";
+import { FaqView } from "@/components/sections/Faq";
+import { FeatureGridView } from "@/components/sections/FeatureGrid";
+import { GallerySectionView } from "@/components/sections/GallerySection";
+import { ImageBlockView } from "@/components/sections/ImageBlock";
+import { PackageGridView } from "@/components/sections/PackageGrid";
+import { PartnerGridView } from "@/components/sections/PartnerGrid";
+import { RichTextSectionView } from "@/components/sections/RichText";
+import { StatisticsView } from "@/components/sections/Statistics";
+import { TestimonialsView } from "@/components/sections/Testimonials";
+import { TextAndImageView } from "@/components/sections/TextAndImage";
 import type {
   EventPackage,
   GalleryCategory,
@@ -72,6 +70,17 @@ export function PageSections({
       }).toString()
     : undefined;
 
+  if (!liveSections.length) {
+    return (
+      <div className="mx-auto max-w-shell px-5 py-24 sm:px-8">
+        <p className="font-display text-3xl text-cream">This page is still being built.</p>
+        <p className="mt-3 max-w-md text-sm leading-6 text-muted">
+          Add sections in the Studio and they will appear here, in the order you arrange them.
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div data-sanity={parentAttr}>
       {faqSection && faqSection._type === "faq" ? (
@@ -80,7 +89,7 @@ export function PageSections({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd(faqSection.items || [])) }}
         />
       ) : null}
-      {liveSections.map((section) => {
+      {liveSections.map((section, index) => {
         const attr = documentId
           ? createDataAttribute({
               id: documentId,
@@ -98,6 +107,7 @@ export function PageSections({
               galleryCategories,
               partners,
               testimonials,
+              heroPriority: index === 0,
             })}
           </div>
         );
@@ -115,11 +125,12 @@ function renderSection(
     galleryCategories: GalleryCategory[];
     partners: Partner[];
     testimonials: Testimonial[];
+    heroPriority: boolean;
   },
 ) {
   switch (section._type) {
     case "hero":
-      return <Hero section={section} />;
+      return <Hero section={section} priority={context.heroPriority} />;
     case "richText":
       return <RichTextSectionView section={section} />;
     case "textAndImage":

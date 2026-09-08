@@ -19,7 +19,7 @@ export function Logo({
         alt="SwingSmart — Beyond Golf"
         width={180}
         height={180}
-        className="h-14 w-14 object-contain sm:h-16 sm:w-16"
+        className="h-[3.7rem] w-[3.7rem] object-contain object-left sm:h-[4.4rem] sm:w-[4.4rem]"
         priority={priority}
       />
     </Link>

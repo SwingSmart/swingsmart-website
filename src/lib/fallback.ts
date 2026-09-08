@@ -58,6 +58,7 @@ const packages: EventPackage[] = [
     shortName: "Individual",
     slug: "golfer",
     subtitle: "Individual package",
+    heroImage: photos.hero,
     summary:
       "Perfect for solo players or small groups. Fine-tune your swing, play world-famous courses from home, or host a private golf night.",
     priceLabel: "From £395",
@@ -78,6 +79,7 @@ const packages: EventPackage[] = [
     shortName: "Classic",
     slug: "country-club",
     subtitle: "Our classic package",
+    heroImage: photos.indoor,
     summary:
       "Ideal for casual events and intimate gatherings. An immersive, enjoyable environment on world-class courses for every skill level.",
     priceLabel: "From £595",
@@ -99,6 +101,7 @@ const packages: EventPackage[] = [
     shortName: "Corporate",
     slug: "ryder-cup",
     subtitle: "Corporate package",
+    heroImage: photos.corporate,
     summary:
       "For businesses looking to make a lasting impression. Team-building, client entertainment and corporate functions with a clubhouse feel.",
     priceLabel: "From £695",
@@ -127,6 +130,7 @@ const packages: EventPackage[] = [
     shortName: "Short / long term",
     slug: "championship",
     subtitle: "Short and long-term hire",
+    heroImage: photos.club,
     summary:
       "A flexible, cost-effective simulator for clubs, venues, businesses and private users who want world-class virtual golf without a permanent install.",
     priceLabel: "POA",
@@ -149,6 +153,7 @@ const packages: EventPackage[] = [
     shortName: "The Ultimate",
     slug: "st-andrews",
     subtitle: "The ultimate competition package",
+    heroImage: photos.night,
     summary:
       "Tournament-style golf with two bays, advanced shot tracking and leaderboards. Match play, closest to the pin, or a full virtual tournament.",
     priceLabel: "From £1,195",
@@ -177,6 +182,7 @@ const packages: EventPackage[] = [
     shortName: "Weddings",
     slug: "phoenix-open",
     subtitle: "The wedding experience",
+    heroImage: photos.wedding,
     summary:
       "A unique entertainment feature for your big day. Luxury simulator setup, wedding-themed challenges, and settings to match your venue.",
     priceLabel: "From £795",
@@ -205,6 +211,7 @@ const packages: EventPackage[] = [
     shortName: "Ages 6–14",
     slug: "junior-open",
     subtitle: "Where it all begins",
+    heroImage: photos.junior,
     summary:
       "Tailored for young golfers aged 6–14. Junior-sized equipment, age-appropriate courses and interactive challenges — fun first, skills second.",
     priceLabel: "From £395",
@@ -227,6 +234,7 @@ const packages: EventPackage[] = [
     shortName: "Dream golf",
     slug: "build-your-own",
     subtitle: "A custom simulator",
+    heroImage: photos.range,
     summary:
       "A personalised setup for your home, office or venue. We design around your space, style and budget — and stay with you every step of the way.",
     priceLabel: "Price on application",
@@ -367,6 +375,33 @@ const pages: Record<string, PageDoc> = {
             "Based in Cornwall. Available across the UK.",
           ),
         ],
+      },
+      {
+        _type: "statistics",
+        _key: "home-stats",
+        heading: "Built around the booking",
+        items: [
+          {
+            _key: "s1",
+            value: "4 hours",
+            label: "Typical minimum hire — long enough for a proper round of laughs.",
+          },
+          {
+            _key: "s2",
+            value: "4m × 3m × 3m",
+            label: "The bay most packages need. Tell us if the room is tighter.",
+          },
+          {
+            _key: "s3",
+            value: "UK-wide",
+            label: "Based in Cornwall. We turn up wherever the event is.",
+          },
+        ],
+      },
+      {
+        _type: "testimonials",
+        _key: "home-quotes",
+        heading: "What they said after the last putt",
       },
       {
         _type: "cta",
@@ -613,9 +648,9 @@ export const fallbackContent: SiteContent = {
     { title: "Clubs", slug: "clubs" },
   ],
   gallery: [
-    { title: "Dusk tee shot", image: photos.hero, categories: ["events"] },
+    { title: "Dusk tee shot", image: photos.hero, categories: ["events"], featured: true },
     { title: "Fairway light", image: photos.indoor, categories: ["clubs"] },
-    { title: "Night competition", image: photos.night, categories: ["events", "corporate"] },
+    { title: "Night competition", image: photos.night, categories: ["events", "corporate"], featured: true },
     { title: "Wedding bay", image: photos.wedding, categories: ["weddings"] },
     { title: "Range bays", image: photos.range, categories: ["clubs"] },
     { title: "Team day", image: photos.corporate, categories: ["corporate"] },
@@ -647,18 +682,21 @@ export const fallbackContent: SiteContent = {
         "Everyone ended up on the tee — including people who had never held a club. It was the unexpected highlight of the day.",
       attribution: "Wedding hire",
       role: "Cornwall",
+      featured: true,
     },
     {
       quote:
         "Setup was slick, the bay looked the part, and our clients actually talked to each other instead of staring at their phones.",
       attribution: "Corporate event",
       role: "Team day",
+      featured: true,
     },
     {
       quote:
         "An all-weather option our members have been asking for, without turning the clubhouse into a building site.",
       attribution: "Golf club",
       role: "Long-term hire",
+      featured: true,
     },
   ],
 };
