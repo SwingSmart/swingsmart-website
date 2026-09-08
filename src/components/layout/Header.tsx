@@ -58,11 +58,14 @@ export function Header({
   }, []);
 
   return (
+    <>
     <header
       className={`sticky top-0 z-50 overflow-visible border-b transition-colors duration-300 ${
-        scrolled || open
-          ? "border-rule bg-bg-raised/95 backdrop-blur-md"
-          : "border-transparent bg-gradient-to-b from-bg/85 to-transparent"
+        open
+          ? "border-rule bg-bg-raised"
+          : scrolled
+            ? "border-rule bg-bg-raised/95 backdrop-blur-md"
+            : "border-transparent bg-gradient-to-b from-bg/85 to-transparent"
       }`}
     >
       <Container className="flex h-[4.25rem] items-stretch justify-between gap-6 sm:h-[4.75rem]">
@@ -156,6 +159,7 @@ export function Header({
           </span>
         </button>
       </Container>
+    </header>
       {open ? (
         <div
           id="mobile-nav"
@@ -221,6 +225,6 @@ export function Header({
           </Container>
         </div>
       ) : null}
-    </header>
+    </>
   );
 }

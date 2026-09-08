@@ -2,6 +2,7 @@ import { ButtonLink } from "@/components/ui/ButtonLink";
 import { CmsPhoto } from "@/components/ui/CmsPhoto";
 import { Container, DisplayHeading, Eyebrow } from "@/components/ui/Layout";
 import { Reveal } from "@/components/ui/Reveal";
+import { photos } from "@/lib/content-helpers";
 import type { HeroSection } from "@/lib/types";
 import { hasCmsImage } from "@/sanity/image";
 
@@ -12,6 +13,7 @@ export function Hero({
   section: HeroSection;
   priority?: boolean;
 }) {
+  const image = hasCmsImage(section.image) ? section.image : photos.hero;
   const overlayClass =
     section.overlay === "light"
       ? "from-bg/75 via-bg/30 to-bg/15"
@@ -21,22 +23,18 @@ export function Hero({
 
   return (
     <section className="relative isolate min-h-[100svh] overflow-hidden bg-bg">
-      {hasCmsImage(section.image) ? (
-        <div className="absolute inset-0">
-          <CmsPhoto
-            image={section.image}
-            fill
-            sizes="100vw"
-            priority={priority}
-            width={2400}
-            className="hero-media"
-          />
-          <div className={`absolute inset-0 bg-gradient-to-t ${overlayClass}`} />
-          <div className="absolute inset-0 bg-gradient-to-r from-bg/55 via-bg/15 to-transparent" />
-        </div>
-      ) : (
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_rgba(11,110,22,0.28),_transparent_55%)]" />
-      )}
+      <div className="absolute inset-0">
+        <CmsPhoto
+          image={image}
+          fill
+          sizes="100vw"
+          priority={priority}
+          width={2400}
+          className="hero-media"
+        />
+        <div className={`absolute inset-0 bg-gradient-to-t ${overlayClass}`} />
+        <div className="absolute inset-0 bg-gradient-to-r from-bg/55 via-bg/15 to-transparent" />
+      </div>
 
       <Container className="relative flex min-h-[100svh] flex-col justify-end pb-16 pt-28 sm:pb-24">
         <Reveal>

@@ -2,20 +2,22 @@ import { ButtonLink } from "@/components/ui/ButtonLink";
 import { CmsPhoto, PhotoFrame } from "@/components/ui/CmsPhoto";
 import { Container, DisplayHeading, Eyebrow, Section } from "@/components/ui/Layout";
 import { RichBody } from "@/components/portable-text/RichBody";
+import { photos } from "@/lib/content-helpers";
 import type { EventPackage } from "@/lib/types";
 import { hasCmsImage } from "@/sanity/image";
 
 export function PackageView({ pkg }: { pkg: EventPackage }) {
   const ctaHref = pkg.cta?.href || "/contact";
   const ctaLabel = pkg.cta?.label || "Enquire";
+  const heroImage = hasCmsImage(pkg.heroImage) ? pkg.heroImage : photos.hero;
 
   return (
     <>
       <section className="relative min-h-[88svh] overflow-hidden bg-bg">
-        {hasCmsImage(pkg.heroImage) ? (
+        {hasCmsImage(heroImage) ? (
           <div className="absolute inset-0">
             <CmsPhoto
-              image={pkg.heroImage}
+              image={heroImage}
               fill
               priority
               className="hero-media"
