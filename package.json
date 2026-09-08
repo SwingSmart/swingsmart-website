@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "seed": "node scripts/seed-sanity.mjs"
+    "seed": "node scripts/seed-sanity.mjs",
+    "sanity:setup": "node scripts/setup-sanity.mjs"
   },
   "dependencies": {
     "@portabletext/react": "^8.0.1",

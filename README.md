@@ -37,6 +37,7 @@ Until those values are set, `/studio` shows a short setup message and the public
 | `npm run lint` | ESLint |
 | `npm run typecheck` | TypeScript |
 | `npm run seed` | Copy starter content into a connected Sanity project |
+| `npm run sanity:setup` | Add CORS and create preview/editor tokens (needs `SANITY_AUTH_TOKEN`) |
 
 ## Deploy
 
