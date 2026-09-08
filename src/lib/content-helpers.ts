@@ -18,6 +18,9 @@ export function block(
 const SS =
   "https://images.squarespace-cdn.com/content/v1/67b7166d30a09e47db03f71f";
 
+export const homeHeroVideoUrl =
+  "https://www.youtube.com/embed/oesFNRnicNw";
+
 export function ssPhoto(id: string, file: string, alt: string) {
   return {
     url: `${SS}/${id}/${file}?format=2500w`,

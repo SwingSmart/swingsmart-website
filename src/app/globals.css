@@ -63,6 +63,19 @@ body {
   transform: scale(1.045);
 }
 
+.hero-youtube iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100vw;
+  height: 56.25vw;
+  min-height: 100%;
+  min-width: 177.78vh;
+  border: 0;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
 .logo-well {
   display: flex;
   align-items: center;

@@ -75,9 +75,10 @@ export const hero = defineType({
     defineField({
       name: "videoUrl",
       title: "Or paste a video link",
-      type: "url",
+      type: "text",
+      rows: 3,
       description:
-        "Optional. A direct .mp4 or .webm link if the file is hosted elsewhere. Leave empty if you uploaded a video above.",
+        "Optional. A YouTube link, a YouTube embed, or a direct .mp4 / .webm file. Leave empty if you uploaded a video above.",
       hidden: ({ parent }) => Boolean(parent?.video),
     }),
     defineField({

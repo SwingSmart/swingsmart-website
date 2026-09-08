@@ -1,4 +1,4 @@
-import { block, photos } from "./content-helpers";
+import { block, homeHeroVideoUrl, photos } from "./content-helpers";
 import type { EventPackage, PageDoc, SiteContent } from "./types";
 
 const settings: SiteContent["settings"] = {
@@ -317,6 +317,7 @@ const pages: Record<string, PageDoc> = {
         subheading:
           "Professional golf simulation for corporate days, weddings, hotels, exhibitions and private events. Set the tee time — we’ll be there.",
         image: photos.hero,
+        videoUrl: homeHeroVideoUrl,
         primaryCta: { label: "Plan an event", href: "/contact", style: "primary" },
         secondaryCta: {
           label: "View packages",

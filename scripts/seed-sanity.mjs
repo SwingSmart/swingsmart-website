@@ -123,6 +123,7 @@ const docs = [
         heading: "Golf, wherever you are.",
         subheading: "A professional simulator for homes, venues, weddings and events.",
         overlay: "medium",
+        videoUrl: "https://www.youtube.com/embed/oesFNRnicNw",
         primaryCta: { _type: "ctaButton", label: "Plan an event", href: "/contact", style: "primary" },
         secondaryCta: {
           _type: "ctaButton",

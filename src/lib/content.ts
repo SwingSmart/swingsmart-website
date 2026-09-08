@@ -108,9 +108,20 @@ export async function getPage(slug: string): Promise<PageDoc | undefined> {
 
 function restoreHomeLayout(page: PageDoc): PageDoc {
   const fallbackSections = fallbackContent.pages.home.sections;
+  const fallbackHero = fallbackSections.find((section) => section._type === "hero");
   const current = page.sections || [];
   const types = new Set(current.map((section) => section._type));
-  const next: PageSection[] = [...current];
+  const next: PageSection[] = current.map((section) => {
+    if (
+      section._type === "hero" &&
+      !section.videoUrl &&
+      fallbackHero?._type === "hero" &&
+      fallbackHero.videoUrl
+    ) {
+      return { ...section, videoUrl: fallbackHero.videoUrl };
+    }
+    return section;
+  });
 
   for (const section of fallbackSections) {
     if (section._type === "hero" || types.has(section._type)) continue;

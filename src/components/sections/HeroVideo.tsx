@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { youtubeBackgroundSrc, youtubeIdFromInput } from "@/lib/hero-video";
 
 export function HeroVideo({
   src,
@@ -10,6 +11,7 @@ export function HeroVideo({
   poster?: string;
 }) {
   const [allowMotion, setAllowMotion] = useState(false);
+  const youtubeId = youtubeIdFromInput(src);
 
   useEffect(() => {
     const media = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -20,6 +22,20 @@ export function HeroVideo({
   }, []);
 
   if (!allowMotion) return null;
+
+  if (youtubeId) {
+    return (
+      <div className="hero-youtube pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+        <iframe
+          src={youtubeBackgroundSrc(youtubeId)}
+          title="Hero video"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen={false}
+          tabIndex={-1}
+        />
+      </div>
+    );
+  }
 
   return (
     <video
