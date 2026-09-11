@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useId, useMemo, useRef, useState, type TouchEvent } from "react";
 import { CmsPhoto, PhotoFrame } from "@/components/ui/CmsPhoto";
 import { EmptyState } from "@/components/ui/EmptyState";
 import type { GalleryCategory, GalleryItem } from "@/lib/types";
@@ -19,6 +19,7 @@ export function GalleryGrid({
   const triggerRefs = useRef<Map<number, HTMLButtonElement>>(new Map());
   const filterRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const labelId = useId();
+  const statusId = useId();
 
   const filters = useMemo(
     () => [{ title: "All", slug: "all" }, ...(categories || [])],
@@ -31,6 +32,9 @@ export function GalleryGrid({
   }, [active, items]);
 
   const openItem = openIndex === null ? null : filtered[openIndex] || null;
+  const activeTitle = filters.find((filter) => filter.slug === active)?.title || "All";
+  const countLabel =
+    filtered.length === 1 ? "1 photograph" : `${filtered.length} photographs`;
 
   const closeLightbox = useCallback(() => {
     const index = openIndex;
@@ -63,7 +67,8 @@ export function GalleryGrid({
         <div
           role="toolbar"
           aria-label="Filter photographs"
-          className="mb-8 flex gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          aria-controls={statusId}
+          className="mb-4 flex gap-2 overflow-x-auto overscroll-x-contain pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           onKeyDown={(event) => {
             const keys = ["ArrowRight", "ArrowLeft", "Home", "End"];
             if (!keys.includes(event.key)) return;
@@ -89,9 +94,10 @@ export function GalleryGrid({
               ref={(node) => {
                 filterRefs.current[index] = node;
               }}
+              tabIndex={active === filter.slug ? 0 : -1}
               aria-pressed={active === filter.slug}
               onClick={() => setActive(filter.slug)}
-              className={`shrink-0 whitespace-nowrap rounded-tight px-4 py-2 text-sm transition-colors ${
+              className={`shrink-0 whitespace-nowrap rounded-tight px-4 py-2 text-sm transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green ${
                 active === filter.slug
                   ? "bg-green text-on-green"
                   : "border border-rule text-muted hover:text-cream"
@@ -102,6 +108,11 @@ export function GalleryGrid({
           ))}
         </div>
       ) : null}
+
+      <p id={statusId} className="mb-6 text-sm text-muted" aria-live="polite">
+        {countLabel}
+        {active === "all" ? "" : ` in ${activeTitle}`}
+      </p>
 
       {filtered.length ? (
         <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-12 lg:gap-4">
@@ -121,7 +132,7 @@ export function GalleryGrid({
                   type="button"
                   className="group block w-full text-left outline-offset-4"
                   aria-haspopup="dialog"
-                  aria-label={`View ${label}`}
+                  aria-label={caption ? `View ${label}. ${caption}` : `View ${label}`}
                   ref={(node) => {
                     if (node) triggerRefs.current.set(index, node);
                     else triggerRefs.current.delete(index);
@@ -153,7 +164,6 @@ export function GalleryGrid({
                       </span>
                     ) : null}
                   </div>
-                  {caption ? <span className="sr-only">{caption}</span> : null}
                 </button>
               </li>
             );
@@ -200,6 +210,7 @@ function Lightbox({
 }) {
   const dialogRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
+  const swipeStart = useRef<{ x: number; y: number } | null>(null);
   const label = item.image?.alt || item.alt || item.title;
   const caption = item.caption || item.venue || item.title;
 
@@ -250,6 +261,25 @@ function Lightbox({
     };
   }, [onClose, onNext, onPrev]);
 
+  const onTouchStart = (event: TouchEvent) => {
+    const touch = event.changedTouches[0];
+    swipeStart.current = { x: touch.clientX, y: touch.clientY };
+  };
+
+  const onTouchEnd = (event: TouchEvent) => {
+    if (!swipeStart.current || total < 2) {
+      swipeStart.current = null;
+      return;
+    }
+    const touch = event.changedTouches[0];
+    const dx = touch.clientX - swipeStart.current.x;
+    const dy = touch.clientY - swipeStart.current.y;
+    swipeStart.current = null;
+    if (Math.abs(dx) < 56 || Math.abs(dx) < Math.abs(dy)) return;
+    if (dx > 0) onPrev();
+    else onNext();
+  };
+
   return (
     <div
       ref={dialogRef}
@@ -262,6 +292,8 @@ function Lightbox({
       <figure
         className="relative flex max-h-[90vh] w-full max-w-6xl flex-col"
         onClick={(event) => event.stopPropagation()}
+        onTouchStart={onTouchStart}
+        onTouchEnd={onTouchEnd}
       >
         <div className="flex max-h-[78vh] min-h-[12rem] items-center justify-center overflow-hidden bg-bg">
           <CmsPhoto
@@ -269,6 +301,7 @@ function Lightbox({
             alt={label}
             mode="contain"
             width={2400}
+            priority
             className="max-h-[78vh] w-auto max-w-full object-contain"
             sizes="90vw"
           />
@@ -289,6 +322,7 @@ function Lightbox({
                   type="button"
                   className="min-h-11 border border-rule px-4 text-cream hover:text-green-soft"
                   onClick={onPrev}
+                  aria-label="Previous photograph"
                 >
                   Previous
                 </button>
@@ -296,6 +330,7 @@ function Lightbox({
                   type="button"
                   className="min-h-11 border border-rule px-4 text-cream hover:text-green-soft"
                   onClick={onNext}
+                  aria-label="Next photograph"
                 >
                   Next
                 </button>

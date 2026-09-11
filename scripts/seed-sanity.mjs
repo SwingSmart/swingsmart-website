@@ -325,6 +325,7 @@ const docs = [
       {
         _type: "cta",
         _key: "partners-cta",
+        eyebrow: "Partner with us",
         heading: "Want to partner with SwingSmart?",
         text: "Schools, venues, hotels, exhibitions and clubs — if you have the space, we’ll bring the course.",
         button: { _type: "ctaButton", label: "Become a partner", href: "/contact", style: "primary" },

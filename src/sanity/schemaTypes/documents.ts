@@ -315,6 +315,7 @@ export const galleryItem = defineType({
       title: "Categories",
       type: "array",
       of: [{ type: "reference", to: [{ type: "galleryCategory" }] }],
+      validation: (rule) => rule.unique(),
       description: "A photo can belong to more than one category. Add or rename categories under Gallery → Categories.",
     }),
     defineField({

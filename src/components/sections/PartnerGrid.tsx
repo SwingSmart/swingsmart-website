@@ -44,6 +44,34 @@ export function PartnerGridView({
   );
 }
 
+function PartnerLinks({ partner, className = "" }: { partner: Partner; className?: string }) {
+  if (!partner.url && !partner.caseStudyUrl) return null;
+  return (
+    <div className={`flex flex-wrap gap-x-4 gap-y-2 text-sm ${className}`}>
+      {partner.url ? (
+        <a
+          href={partner.url}
+          className="text-green-soft hover:text-cream"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          Visit {partner.name}
+        </a>
+      ) : null}
+      {partner.caseStudyUrl ? (
+        <a
+          href={partner.caseStudyUrl}
+          className="text-green-soft hover:text-cream"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          Read the story
+        </a>
+      ) : null}
+    </div>
+  );
+}
+
 function PartnerLogo({ partner, compact = false }: { partner: Partner; compact?: boolean }) {
   return (
     <div className={`logo-well rounded-card bg-cream ${compact ? "min-h-20" : ""}`}>
@@ -91,16 +119,7 @@ function FeaturedPartners({
                 <RichBody value={partner.description} />
               </div>
             ) : null}
-            {partner.url ? (
-              <a
-                href={partner.url}
-                className="mt-6 inline-flex text-sm text-green-soft hover:text-cream"
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                Visit {partner.name}
-              </a>
-            ) : null}
+            <PartnerLinks partner={partner} className="mt-6" />
           </Reveal>
         </li>
       ))}
@@ -129,6 +148,7 @@ function LogoGrid({ partners }: { partners: Partner[] }) {
                   className="flex h-full flex-col items-center outline-offset-4"
                   rel="noopener noreferrer"
                   target="_blank"
+                  aria-label={`Visit ${partner.name}`}
                 >
                   {inner}
                 </a>
@@ -153,38 +173,29 @@ function PartnerCards({
   return (
     <ul className="grid grid-cols-1 gap-px bg-rule sm:grid-cols-2 lg:grid-cols-4">
       {partners.map((partner, index) => {
-        const inner = (
-          <>
-            <PartnerLogo partner={partner} />
-            <div className="mt-6">
-              <h3 className="text-sm font-semibold text-cream">{partner.name}</h3>
-              {showDescriptions && partner.summary ? (
-                <p className="mt-2 text-sm leading-6 text-muted">{partner.summary}</p>
-              ) : null}
-              {partner.caseStudyUrl ? (
-                <span className="mt-4 inline-block text-sm text-green-soft">
-                  Read the story
-                </span>
-              ) : null}
-            </div>
-          </>
-        );
-
         return (
           <li key={partner._id || partner.name}>
-            <Reveal delay={index * 50} className="h-full bg-bg-raised p-7 sm:p-8">
+            <Reveal delay={index * 50} className="flex h-full flex-col bg-bg-raised p-7 sm:p-8">
               {partner.url ? (
                 <a
                   href={partner.url}
-                  className="flex h-full flex-col outline-offset-4"
+                  className="outline-offset-4"
                   rel="noopener noreferrer"
                   target="_blank"
+                  aria-label={`Visit ${partner.name}`}
                 >
-                  {inner}
+                  <PartnerLogo partner={partner} />
                 </a>
               ) : (
-                <div className="flex h-full flex-col">{inner}</div>
+                <PartnerLogo partner={partner} />
               )}
+              <div className="mt-6">
+                <h3 className="text-sm font-semibold text-cream">{partner.name}</h3>
+                {showDescriptions && partner.summary ? (
+                  <p className="mt-2 text-sm leading-6 text-muted">{partner.summary}</p>
+                ) : null}
+                <PartnerLinks partner={partner} className="mt-4" />
+              </div>
             </Reveal>
           </li>
         );

@@ -449,6 +449,12 @@ export const cta = defineType({
   icon: BoltIcon,
   fields: [
     defineField({
+      name: "eyebrow",
+      title: "Eyebrow",
+      type: "string",
+      description: "Small label above the heading. Leave empty to use “Enquire”.",
+    }),
+    defineField({
       name: "heading",
       title: "Heading",
       type: "string",

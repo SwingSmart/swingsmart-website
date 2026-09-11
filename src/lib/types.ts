@@ -193,6 +193,7 @@ export type FaqSection = {
 export type CtaSection = {
   _type: "cta";
   _key: string;
+  eyebrow?: string;
   heading: string;
   text?: string;
   button?: CtaButton;

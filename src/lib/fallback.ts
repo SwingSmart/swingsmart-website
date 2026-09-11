@@ -524,6 +524,7 @@ const pages: Record<string, PageDoc> = {
       {
         _type: "cta",
         _key: "pt-cta",
+        eyebrow: "Partner with us",
         heading: "Want to partner with SwingSmart?",
         text: "Schools, venues, hotels, exhibitions and clubs — if you have the space, we’ll bring the course. Chris and Ryan are ready to talk.",
         button: { label: "Become a partner", href: "/contact", style: "primary" },
