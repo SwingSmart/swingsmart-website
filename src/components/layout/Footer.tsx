@@ -71,6 +71,16 @@ export function Footer({
             {settings.contact.location ? (
               <li className="text-muted">{settings.contact.location}</li>
             ) : null}
+            {settings.primaryCta?.href ? (
+              <li className="pt-2">
+                <Link
+                  href={settings.primaryCta.href}
+                  className="text-green-soft hover:text-cream"
+                >
+                  {settings.primaryCta.label || "Plan an event"}
+                </Link>
+              </li>
+            ) : null}
             {settings.socials.map((social) => (
               <li key={social.url}>
                 <a

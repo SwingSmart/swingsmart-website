@@ -1,11 +1,14 @@
 import { draftMode } from "next/headers";
+import { photos } from "@/lib/content-helpers";
 import { fallbackContent } from "@/lib/fallback";
+import { hasCmsImage } from "@/sanity/image";
 import type {
   EventPackage,
   GalleryCategory,
   GalleryItem,
   Navigation,
   PageDoc,
+  PageSection,
   Partner,
   SiteSettings,
   Testimonial,
@@ -19,6 +22,7 @@ import {
   packageBySlugQuery,
   packagesQuery,
   pageBySlugQuery,
+  pagesQuery,
   partnersQuery,
   siteSettingsQuery,
   testimonialsQuery,
@@ -97,9 +101,62 @@ export async function getNavigation() {
 export async function getPage(slug: string): Promise<PageDoc | undefined> {
   const data = await fetchQuery<PageDoc>(pageBySlugQuery, { slug });
   if (data?._id) {
-    return { ...data, sections: data.sections || [] };
+    const page = { ...data, sections: data.sections || [] };
+    if (page.slug === "home") return restoreHomeLayout(page);
+    return page;
   }
   return fallbackContent.pages[slug];
+}
+
+function isPlaceholderHero(section: Extract<PageSection, { _type: "hero" }>) {
+  const blob = `${section.eyebrow || ""} ${section.heading || ""}`.toLowerCase();
+  return /cms preview|golf from the cms/.test(blob);
+}
+
+function restoreHomeLayout(page: PageDoc): PageDoc {
+  const fallbackSections = fallbackContent.pages.home.sections;
+  const fallbackHero = fallbackSections.find((section) => section._type === "hero");
+  const current = page.sections || [];
+  const types = new Set(current.map((section) => section._type));
+  const fallbackHeroImage =
+    fallbackHero?._type === "hero" ? fallbackHero.image : photos.homeHero;
+  const next: PageSection[] = current.map((section) => {
+    if (section._type !== "hero") return section;
+    const fromFallback =
+      isPlaceholderHero(section) && fallbackHero?._type === "hero" ? fallbackHero : null;
+    return {
+      ...section,
+      ...(fromFallback
+        ? {
+            eyebrow: fromFallback.eyebrow,
+            heading: fromFallback.heading,
+            subheading: fromFallback.subheading,
+            overlay: fromFallback.overlay,
+            primaryCta: fromFallback.primaryCta,
+            secondaryCta: fromFallback.secondaryCta,
+          }
+        : {}),
+      videoUrl: undefined,
+      image: hasCmsImage(section.image) ? section.image : fallbackHeroImage,
+    };
+  });
+
+  for (const section of fallbackSections) {
+    if (section._type === "hero" || types.has(section._type)) continue;
+    if (section._type === "packageGrid") {
+      const heroIndex = next.findIndex((item) => item._type === "hero");
+      next.splice(heroIndex >= 0 ? heroIndex + 1 : 0, 0, section);
+    } else {
+      next.push(section);
+    }
+    types.add(section._type);
+  }
+
+  return {
+    ...page,
+    seo: page.seo?.title ? page.seo : fallbackContent.pages.home.seo,
+    sections: next,
+  };
 }
 
 export async function getPackages(): Promise<EventPackage[]> {
@@ -133,15 +190,23 @@ export async function getTestimonials(): Promise<Testimonial[]> {
   return data?.length ? data : fallbackContent.testimonials;
 }
 
+export async function getPageSlugs() {
+  const data = await fetchQuery<{ slug: string }[]>(pagesQuery, undefined, { stega: false });
+  const fromCms = (data || []).map((item) => item.slug).filter(Boolean);
+  return [...new Set([...fromCms, ...Object.keys(fallbackContent.pages)])];
+}
+
 export async function getSiteUrlMap() {
-  const packages = await getPackages();
+  const [packages, slugs] = await Promise.all([getPackages(), getPageSlugs()]);
+  const reserved = new Set(["home", "packages"]);
+  const pagePaths = slugs
+    .filter((slug) => !reserved.has(slug) && !slug.startsWith("packages/"))
+    .map((slug) => `/${slug}`);
+
   return [
     "",
     "/packages",
     ...packages.map((item) => `/packages/${item.slug}`),
-    "/gallery",
-    "/partnerships",
-    "/about",
-    "/contact",
+    ...pagePaths,
   ];
 }

@@ -1,0 +1,228 @@
+[
+  {
+    "key": "about",
+    "url": "https://images.squarespace-cdn.com/content/v1/67b7166d30a09e47db03f71f/97f4b034-612f-41a0-bb35-12ae2bbd59e0/tempImagegU9NLD.jpg",
+    "alt": "Chris and Ryan, SwingSmart\u2019s founding duo, at a golf simulator bay",
+    "file": "about.jpg",
+    "local": "/migrated/about.webp",
+    "bytes": 925572,
+    "ext": ".webp"
+  },
+  {
+    "key": "offer",
+    "url": "https://images.squarespace-cdn.com/content/v1/67b7166d30a09e47db03f71f/1ff5a06e-4ea6-4b4b-9064-b3e7425c7568/DSC_1920.JPG",
+    "alt": "Guests using a SwingSmart golf simulator at an outdoor event",
+    "file": "what-we-offer.jpg",
+    "local": "/migrated/what-we-offer.webp",
+    "bytes": 510564,
+    "ext": ".webp"
+  },
+  {
+    "key": "mission",
+    "url": "https://images.squarespace-cdn.com/content/v1/67b7166d30a09e47db03f71f/060916ab-26e0-4f06-ab01-1e775e3b45b6/Untitled+%281%29+copy.png",
+    "alt": "SwingSmart Beyond Golf artwork",
+    "file": "beyond-golf.png",
+    "local": "/migrated/beyond-golf.webp",
+    "bytes": 1142646,
+    "ext": ".webp"
+  },
+  {
+    "key": "charity",
+    "url": "https://images.squarespace-cdn.com/content/v1/67b7166d30a09e47db03f71f/bb3b7e56-0e47-49c6-ab45-b56f082159f2/Charities+page.png",
+    "alt": "SwingSmart charity day artwork",
+    "file": "charity.png",
+    "local": "/migrated/charity.webp",
+    "bytes": 377384,
+    "ext": ".webp"
+  },
+  {
+    "key": "golfer",
+    "url": "https://images.squarespace-cdn.com/content/v1/67b7166d30a09e47db03f71f/472be456-7c7d-4190-8517-29309cd53ec9/tempImagePJZikO.jpg",
+    "alt": "Golfer using a SwingSmart simulator",
+    "file": "packages/golfer.jpg",
+    "local": "/migrated/packages/golfer.webp",
+    "bytes": 1451252,
+    "ext": ".webp"
+  },
+  {
+    "key": "countryClub",
+    "url": "https://images.squarespace-cdn.com/content/v1/67b7166d30a09e47db03f71f/6a36e019-73cd-496f-a475-e8739b2e2d58/Country+Club+Golf.jpeg",
+    "alt": "Country Club package golf simulator setup",
+    "file": "packages/country-club.jpg",
+    "local": "/migrated/packages/country-club.webp",
+    "bytes": 241300,
+    "ext": ".webp"
+  },
+  {
+    "key": "ryderCup",
+    "url": "https://images.squarespace-cdn.com/content/v1/67b7166d30a09e47db03f71f/e5fb5bb9-0e03-4bba-8525-d9d8a7bd8ca9/Corporate+Event+Image+2.jpeg",
+    "alt": "Corporate guests around a SwingSmart bay",
+    "file": "packages/ryder-cup.jpg",
+    "local": "/migrated/packages/ryder-cup.jpg",
+    "bytes": 1357652,
+    "ext": ".jpg"
+  },
+  {
+    "key": "phoenixOpen",
+    "url": "https://images.squarespace-cdn.com/content/v1/67b7166d30a09e47db03f71f/5d2a8e1c-213b-448c-93c7-d1db148be024/WEDDING+1.jpg",
+    "alt": "Wedding guests using a SwingSmart golf simulator",
+    "file": "packages/phoenix-open.jpg",
+    "local": "/migrated/packages/phoenix-open.webp",
+    "bytes": 189190,
+    "ext": ".webp"
+  },
+  {
+    "key": "championship",
+    "url": "https://images.squarespace-cdn.com/content/v1/67b7166d30a09e47db03f71f/6818e182-8eec-456d-be19-8514dd0ab792/Championship+Image.jpeg",
+    "alt": "Long-term SwingSmart simulator hire in a venue",
+    "file": "packages/championship.jpg",
+    "local": "/migrated/packages/championship.webp",
+    "bytes": 117134,
+    "ext": ".webp"
+  },
+  {
+    "key": "stAndrews",
+    "url": "https://images.squarespace-cdn.com/content/v1/67b7166d30a09e47db03f71f/0217ddd8-690f-4689-b372-e0f63e168353/St+Andrews+Image.jpeg",
+    "alt": "Two-bay SwingSmart competition setup",
+    "file": "packages/st-andrews.jpg",
+    "local": "/migrated/packages/st-andrews.webp",
+    "bytes": 210558,
+    "ext": ".webp"
+  },
+  {
+    "key": "juniorOpen",
+    "url": "https://images.squarespace-cdn.com/content/v1/67b7166d30a09e47db03f71f/9c650e5a-0176-4015-896a-46aa92bbf674/IMG_0411.jpg",
+    "alt": "Junior golfer on a SwingSmart simulator",
+    "file": "packages/junior-open.jpg",
+    "local": "/migrated/packages/junior-open.webp",
+    "bytes": 255694,
+    "ext": ".webp"
+  },
+  {
+    "key": "buildYourOwn",
+    "url": "https://images.squarespace-cdn.com/content/v1/67b7166d30a09e47db03f71f/af3e1c93-7873-43b0-aa09-b8f149f3259c/Golf+Dream.jpeg",
+    "alt": "Custom SwingSmart golf simulator concept",
+    "file": "packages/build-your-own.jpg",
+    "local": "/migrated/packages/build-your-own.webp",
+    "bytes": 226984,
+    "ext": ".webp"
+  },
+  {
+    "key": "packagesIndex",
+    "url": "https://images.squarespace-cdn.com/content/v1/67b7166d30a09e47db03f71f/4f8ab0b9-58d2-4429-af7a-45ef2e5970aa/IMG_9804+2+Large.jpeg",
+    "alt": "SwingSmart packages \u2014 outdoor simulator on the course",
+    "file": "packages/index.jpg",
+    "local": "/migrated/packages/index.webp",
+    "bytes": 231954,
+    "ext": ".webp"
+  },
+  {
+    "key": "gallery01",
+    "url": "https://images.squarespace-cdn.com/content/v1/67b7166d30a09e47db03f71f/0f38300a-e227-41a5-9364-ed24f3ea9857/SwingSmart+Hero+Photos+-35.jpg",
+    "alt": "SwingSmart event photography on the golf course",
+    "file": "gallery/course-35.jpg",
+    "local": "/migrated/gallery/course-35.webp",
+    "bytes": 872868,
+    "ext": ".webp"
+  },
+  {
+    "key": "gallery02",
+    "url": "https://images.squarespace-cdn.com/content/v1/67b7166d30a09e47db03f71f/076417a5-2a2f-4d13-8d80-fa73a526406c/b44dfb76-d3e8-4dfd-95e4-371f3f17",
+    "alt": "Guests at a SwingSmart golf simulator event",
+    "file": "gallery/event-bay.jpg",
+    "local": "/migrated/gallery/event-bay.webp",
+    "bytes": 424012,
+    "ext": ".webp"
+  },
+  {
+    "key": "gallery03",
+    "url": "https://images.squarespace-cdn.com/content/v1/67b7166d30a09e47db03f71f/96845974-b795-44c0-a26e-bb891ae1da12/1ecdabae-a92a-4072-aaac-b2c671c7",
+    "alt": "SwingSmart simulator enclosure at an event",
+    "file": "gallery/enclosure.jpg",
+    "local": "/migrated/gallery/enclosure.webp",
+    "bytes": 374174,
+    "ext": ".webp"
+  },
+  {
+    "key": "gallery04",
+    "url": "https://images.squarespace-cdn.com/content/v1/67b7166d30a09e47db03f71f/ba3cd22c-3d43-43be-9c91-f4eb7d2aed40/tempImageNQKNuZ.jpg",
+    "alt": "Players teeing off on a SwingSmart bay",
+    "file": "gallery/tee.jpg",
+    "local": "/migrated/gallery/tee.webp",
+    "bytes": 1028420,
+    "ext": ".webp"
+  },
+  {
+    "key": "gallery05",
+    "url": "https://images.squarespace-cdn.com/content/v1/67b7166d30a09e47db03f71f/f152b0a5-97ec-459b-aada-bfa49ad4b6ff/tempImage7v5fdN.jpg",
+    "alt": "Evening SwingSmart golf event",
+    "file": "gallery/evening.jpg",
+    "local": "/migrated/gallery/evening.webp",
+    "bytes": 1145662,
+    "ext": ".webp"
+  },
+  {
+    "key": "gallery06",
+    "url": "https://images.squarespace-cdn.com/content/v1/67b7166d30a09e47db03f71f/5bbb92a5-355a-4f29-a266-86b3a75d8a8a/PBN_Summer018.JPG",
+    "alt": "Summer event with a SwingSmart golf simulator",
+    "file": "gallery/summer.jpg",
+    "local": "/migrated/gallery/summer.webp",
+    "bytes": 116502,
+    "ext": ".webp"
+  },
+  {
+    "key": "gallery07",
+    "url": "https://images.squarespace-cdn.com/content/v1/67b7166d30a09e47db03f71f/666c5bd1-ff19-4c21-9d6f-7e6b6330b1e4/DSC_1914.JPG",
+    "alt": "Crowd around a SwingSmart outdoor bay",
+    "file": "gallery/crowd.jpg",
+    "local": "/migrated/gallery/crowd.webp",
+    "bytes": 497348,
+    "ext": ".webp"
+  },
+  {
+    "key": "galleryHero49",
+    "url": "https://images.squarespace-cdn.com/content/v1/67b7166d30a09e47db03f71f/5ae4d456-d445-4db6-9b6e-e2faf5980efb/SwingSmart-Hero-Photos--49.jpg",
+    "alt": "SwingSmart golf simulator on a course during an event",
+    "file": "gallery/hero-49.jpg",
+    "local": "/migrated/gallery/hero-49.webp",
+    "bytes": 650990,
+    "ext": ".webp"
+  },
+  {
+    "key": "galleryHero52",
+    "url": "https://images.squarespace-cdn.com/content/v1/67b7166d30a09e47db03f71f/c4219f2a-abca-4606-ade2-24c26c981ec4/SwingSmart+Hero+Photos+-52.jpg",
+    "alt": "Guests gathered around a SwingSmart outdoor bay",
+    "file": "gallery/hero-52.jpg",
+    "local": "/migrated/gallery/hero-52.webp",
+    "bytes": 864586,
+    "ext": ".webp"
+  },
+  {
+    "key": "galleryHero02",
+    "url": "https://images.squarespace-cdn.com/content/v1/67b7166d30a09e47db03f71f/8b81dc7e-d28d-46d3-8132-8cf02d795c99/SwingSmart+Hero+Photos+-02.jpg",
+    "alt": "SwingSmart simulator setup on the golf course",
+    "file": "gallery/hero-02.jpg",
+    "local": "/migrated/gallery/hero-02.webp",
+    "bytes": 1132302,
+    "ext": ".webp"
+  },
+  {
+    "key": "galleryCountryClub2",
+    "url": "https://images.squarespace-cdn.com/content/v1/67b7166d30a09e47db03f71f/30c846de-89d2-4b9d-b9f2-7273baebc0ff/Country+Club+Golf+2.jpeg",
+    "alt": "Country Club golf simulator at a venue",
+    "file": "gallery/country-club-2.jpg",
+    "local": "/migrated/gallery/country-club-2.webp",
+    "bytes": 285830,
+    "ext": ".webp"
+  },
+  {
+    "key": "gallery08",
+    "url": "https://images.squarespace-cdn.com/content/v1/67b7166d30a09e47db03f71f/77a64516-d5f0-48d6-89b0-b6370a12fd80/IMG_3603+Small.jpeg",
+    "alt": "SwingSmart team running a golf simulator session",
+    "file": "gallery/session.jpg",
+    "local": "",
+    "bytes": 23350,
+    "ext": ".jpeg",
+    "status": "skipped-too-small-320x240"
+  }
+]

@@ -34,43 +34,50 @@ export function ContactForm({ packages }: { packages: EventPackage[] }) {
     "w-full rounded-card border border-rule bg-bg px-4 py-3 text-sm text-cream placeholder:text-muted/70";
 
   return (
-    <form onSubmit={onSubmit} className="space-y-4 rounded-card border border-rule bg-surface p-6 sm:p-8">
-      <div>
-        <label htmlFor="name" className="mb-1 block text-sm">
-          Name
-        </label>
-        <input id="name" name="name" required className={field} autoComplete="name" />
+    <form
+      onSubmit={onSubmit}
+      className="space-y-5 border border-rule bg-surface p-6 sm:p-8"
+    >
+      <div className="grid gap-5 sm:grid-cols-2">
+        <div>
+          <label htmlFor="name" className="mb-1.5 block text-sm">
+            Name
+          </label>
+          <input id="name" name="name" required className={field} autoComplete="name" />
+        </div>
+        <div>
+          <label htmlFor="email" className="mb-1.5 block text-sm">
+            Email
+          </label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            required
+            className={field}
+            autoComplete="email"
+          />
+        </div>
+      </div>
+      <div className="grid gap-5 sm:grid-cols-2">
+        <div>
+          <label htmlFor="phone" className="mb-1.5 block text-sm">
+            Phone
+          </label>
+          <input id="phone" name="phone" type="tel" className={field} autoComplete="tel" />
+        </div>
+        <div>
+          <label htmlFor="eventDate" className="mb-1.5 block text-sm">
+            Preferred date
+          </label>
+          <input id="eventDate" name="eventDate" type="date" className={field} />
+        </div>
       </div>
       <div>
-        <label htmlFor="email" className="mb-1 block text-sm">
-          Email
-        </label>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          required
-          className={field}
-          autoComplete="email"
-        />
-      </div>
-      <div>
-        <label htmlFor="phone" className="mb-1 block text-sm">
-          Phone
-        </label>
-        <input id="phone" name="phone" type="tel" className={field} autoComplete="tel" />
-      </div>
-      <div>
-        <label htmlFor="eventDate" className="mb-1 block text-sm">
-          Preferred date
-        </label>
-        <input id="eventDate" name="eventDate" className={field} />
-      </div>
-      <div>
-        <label htmlFor="packageInterest" className="mb-1 block text-sm">
+        <label htmlFor="packageInterest" className="mb-1.5 block text-sm">
           Package
         </label>
-        <select id="packageInterest" name="packageInterest" className={field}>
+        <select id="packageInterest" name="packageInterest" className={`${field} appearance-none`}>
           <option value="">Not sure yet</option>
           {packages.map((item) => (
             <option key={item.slug} value={item.title}>
@@ -80,7 +87,7 @@ export function ContactForm({ packages }: { packages: EventPackage[] }) {
         </select>
       </div>
       <div>
-        <label htmlFor="message" className="mb-1 block text-sm">
+        <label htmlFor="message" className="mb-1.5 block text-sm">
           Message
         </label>
         <textarea id="message" name="message" required rows={5} className={field} />
@@ -89,7 +96,7 @@ export function ContactForm({ packages }: { packages: EventPackage[] }) {
         {status === "sending" ? "Sending…" : "Send enquiry"}
       </Button>
       {message ? (
-        <p className={status === "error" ? "text-sm text-red-300" : "text-sm text-green"} role="status">
+        <p className={status === "error" ? "text-sm text-red-300" : "text-sm text-green-soft"} role="status">
           {message}
         </p>
       ) : null}

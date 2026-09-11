@@ -5,7 +5,10 @@ const imageProjection = groq`{
   asset,
   hotspot,
   crop,
-  "url": asset->url
+  "url": asset->url,
+  "lqip": asset->metadata.lqip,
+  "width": asset->metadata.dimensions.width,
+  "height": asset->metadata.dimensions.height
 }`;
 
 const sectionProjection = groq`{
@@ -24,13 +27,8 @@ const sectionProjection = groq`{
   showForm,
   showDetails,
   "categorySlug": coalesce(category->slug.current, categorySlug),
-  image{
-    alt,
-    asset,
-    hotspot,
-    crop,
-    "url": asset->url
-  },
+  "videoUrl": coalesce(video.asset->url, videoUrl),
+  image ${imageProjection},
   primaryCta,
   secondaryCta,
   cta,
@@ -127,7 +125,10 @@ export const galleryQuery = groq`*[_type == "galleryItem"] | order(featured desc
     hotspot,
     crop,
     "alt": coalesce(^.alt, alt),
-    "url": asset->url
+    "url": asset->url,
+    "lqip": asset->metadata.lqip,
+    "width": asset->metadata.dimensions.width,
+    "height": asset->metadata.dimensions.height
   }
 }`;
 
@@ -147,6 +148,10 @@ export const partnersQuery = groq`*[_type == "partner"] | order(featured desc, s
   caseStudyUrl,
   "url": coalesce(website, url),
   logo ${imageProjection}
+}`;
+
+export const pagesQuery = groq`*[_type == "page" && defined(slug.current)]{
+  "slug": slug.current
 }`;
 
 export const testimonialsQuery = groq`*[_type == "testimonial"] | order(featured desc, _createdAt desc){

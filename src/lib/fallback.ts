@@ -1,4 +1,4 @@
-import { block, photos } from "./content-helpers";
+import { block, photos, publicFaqs } from "./content-helpers";
 import type { EventPackage, PageDoc, SiteContent } from "./types";
 
 const settings: SiteContent["settings"] = {
@@ -13,14 +13,18 @@ const settings: SiteContent["settings"] = {
   },
   socials: [
     {
+      label: "Instagram",
+      url: "https://www.instagram.com/swingsmartuk/",
+    },
+    {
       label: "LinkedIn",
       url: "https://www.linkedin.com/company/swingsmart-uk",
     },
   ],
   defaultSeo: {
-    title: "SwingSmart UK. Beyond Golf.",
+    title: "SwingSmart UK. Beyond Golf. | Experience Golf Convenience - Book Today",
     description:
-      "We bring a professional golf simulator to you — anytime, anywhere. Packages for individuals, corporates, weddings, clubs and junior golfers.",
+      "Explore SwingSmart UK for immersive golf simulation experiences, events, and packages. Convenient, flexible golf options for all skill levels and occasions.",
   },
   primaryCta: { label: "Plan an event", href: "/contact", style: "primary" },
   secondaryCta: { label: "View packages", href: "/packages", style: "secondary" },
@@ -45,6 +49,8 @@ const navigation: SiteContent["navigation"] = {
     },
     { label: "Gallery", href: "/gallery" },
     { label: "Partnerships", href: "/partnerships" },
+    { label: "Charity", href: "/charity" },
+    { label: "FAQs", href: "/faq" },
     { label: "About", href: "/about" },
     { label: "Contact", href: "/contact" },
   ],
@@ -58,19 +64,20 @@ const packages: EventPackage[] = [
     shortName: "Individual",
     slug: "golfer",
     subtitle: "Individual package",
+    heroImage: photos.golfer,
     summary:
-      "Perfect for solo players or small groups. Fine-tune your swing, play world-famous courses from home, or host a private golf night.",
+      "Perfect for solo players or small groups, this package lets you enjoy a top-tier golf experience on your terms. Whether you want to fine-tune your swing, play a round on world-famous courses from the comfort of your home, or host a private golf night, our high-quality simulator setup delivers a seamless and immersive game.",
     priceLabel: "From £395",
-    durationLabel: "Minimum 4 hours",
+    durationLabel: "Minimum duration 4 hours",
     featured: true,
     includes: [
-      "Launch monitor: 1× SkyTrak Plus & software",
-      "Clubs: 1× Cobra Fly XL 11-piece set (junior clubs on request)",
-      "Projector: 1× short throw with floor-mounted case and impact screen",
-      "Golf balls: Callaway (models vary by hire type)",
-      "Hitting mat: 1.5m × 1.5m, left and right-handed",
-      "Protective equipment: launch monitor casing and golf enclosure (4m × 3m × 3m)",
-      "Installation: setup and take-down of all equipment",
+      "Launch Monitor: 1x Skytrak Plus & Software",
+      "Clubs: 1x Cobra Fly XL 11 Piece Set (Junior clubs available - please request on booking)",
+      "Projector: 1x short throw with floor mounted case and impact screen",
+      "Golf balls: Callaway (Various different models depending on type of hire)",
+      "Hitting Mat: 1x 1.5m x 1.5m (Supporting left and right hand swings)",
+      "Protective equipment: 1x Launch monitor casing, golf enclosure (4m (L) x 3m (W) x 3m (H))",
+      "Installation: Setup and take down of all equipment",
     ],
   },
   {
@@ -78,20 +85,21 @@ const packages: EventPackage[] = [
     shortName: "Classic",
     slug: "country-club",
     subtitle: "Our classic package",
+    heroImage: photos.countryClub,
     summary:
-      "Ideal for casual events and intimate gatherings. An immersive, enjoyable environment on world-class courses for every skill level.",
+      "Ideal for casual events and intimate gatherings, this experience transports you to a variety of world-class golf courses, providing an immersive and enjoyable environment for all skill levels. Whether you're hosting a small get-together or simply looking to add something unique to your event, it promises an engaging and memorable experience for everyone involved.",
     priceLabel: "From £595",
-    durationLabel: "Minimum 4 hours",
+    durationLabel: "Minimum duration 4 hours",
     featured: true,
     includes: [
-      "Launch monitor: 1× SkyTrak Plus & software",
-      "Clubs: 1× Cobra Fly XL 11-piece set (junior clubs on request)",
-      "Projector: 1× short throw with floor-mounted case and impact screen",
-      "Golf balls: Callaway (models vary by hire type)",
-      "Hitting mat: 1.5m × 1.5m, left and right-handed",
-      "Protective equipment: launch monitor casing and golf enclosure (4m × 3m × 3m)",
-      "Installation: setup and take-down of all equipment",
-      "Member of staff: 1 or 2 depending on booking size",
+      "Launch Monitor: 1x Skytrak Plus & Software",
+      "Clubs: 1x Cobra Fly XL 11 Piece Set (Junior clubs available - please request on booking)",
+      "Projector: 1x short throw with floor mounted case and impact screen",
+      "Golf balls: Callaway (Various different models depending on type of hire)",
+      "Hitting Mat: 1x 1.5m x 1.5m (Supporting left and right hand swings)",
+      "Protective equipment: 1x Launch monitor casing, golf enclosure (4m (L) x 3m (W) x 3m (H))",
+      "Installation: Setup and take down of all equipment",
+      "Member of Staff: 1 or 2 depending on size of booking",
     ],
   },
   {
@@ -99,27 +107,28 @@ const packages: EventPackage[] = [
     shortName: "Corporate",
     slug: "ryder-cup",
     subtitle: "Corporate package",
+    heroImage: photos.ryderCup,
     summary:
-      "For businesses looking to make a lasting impression. Team-building, client entertainment and corporate functions with a clubhouse feel.",
+      "Perfect for businesses looking to make a lasting impression, this golf experience offers an engaging and interactive way to connect with clients or strengthen team dynamics. Whether you're aiming to drive engagement or build rapport off the course, our flexible setup—complete with multiple simulators and custom-branded features—sets the stage for a hole-in-one event. Ideal for corporate functions, team-building days, or client entertainment, it delivers a memorable atmosphere with all the feel of a top-tier clubhouse.",
     priceLabel: "From £695",
-    durationLabel: "Minimum 4 hours",
+    durationLabel: "Minimum duration 4 hours",
     featured: true,
     includes: [
-      "Launch monitor: 1× SkyTrak Plus & software",
-      "Gaming computer: Windows 11 desktop PC with large monitor",
-      "Clubs: 1× Cobra Fly XL 11-piece set (additional left/right sets if needed)",
-      "Projector: 1× short throw with floor-mounted case and impact screen",
-      "Golf balls: Callaway (models vary by hire type)",
-      "Hitting mat: 1.5m × 1.5m, left and right-handed",
-      "Protective equipment: launch monitor casing and golf enclosure (4m × 3m × 3m)",
-      "Installation: setup and take-down of all equipment",
-      "Member of staff: 1 or 2 depending on booking size",
+      "Launch Monitor: 1x Skytrak Plus & Software",
+      "Gaming computer: Windows 11 Desktop PC with large monitor",
+      "Clubs: 1x Cobra Fly XL 11 Piece Set (Additional sets included if needed, left and right handed)",
+      "Projector: 1x short throw with floor mounted case and impact screen",
+      "Golf balls: Callaway (Various different models depending on type of hire)",
+      "Hitting Mat: 1x 1.5m x 1.5m (Supporting left and right hand swings)",
+      "Protective equipment: 1x Launch monitor casing, golf enclosure (4m (L) x 3m (W) x 3m (H))",
+      "Installation: Setup and take down of all equipment",
+      "Member of Staff: 1 or 2 depending on size of booking",
     ],
     extras: [
-      "55\" TV for external viewing",
-      "Custom branding on marquee sheets",
+      "55” TV for external viewing",
+      "Custom branding on all golf marquee sheets",
       "Interactive leaderboard tracking",
-      "Prizes — or tell us what you need",
+      "Prizes (anything else, let us know)",
     ],
   },
   {
@@ -127,49 +136,51 @@ const packages: EventPackage[] = [
     shortName: "Short / long term",
     slug: "championship",
     subtitle: "Short and long-term hire",
+    heroImage: photos.championship,
     summary:
-      "A flexible, cost-effective simulator for clubs, venues, businesses and private users who want world-class virtual golf without a permanent install.",
+      "Perfect for golf clubs, venues, businesses, and private users looking to elevate their space with an immersive golf experience. Our long-term simulator rental offers a flexible and cost-effective solution for those who want to enjoy world-class virtual golf without the need for a permanent installation or large upfront investment. Whether you’re enhancing a hospitality venue, creating a unique staff amenity, or upgrading your personal entertainment space, this extended hire option delivers lasting engagement, entertainment, and year-round enjoyment.",
     priceLabel: "POA",
-    durationLabel: "Minimum 1 week",
+    durationLabel: "Minimum duration 1 week",
     featured: true,
     includes: [
-      "Launch monitor: 1× SkyTrak Plus & software",
-      "Gaming computer: Windows 11 desktop PC with large monitor (if needed)",
-      "Clubs: 1× Cobra Fly XL 13-piece set (if needed; junior clubs on request)",
-      "Projector: 1× short throw with floor-mounted case and impact screen",
-      "Golf balls: Callaway (if needed)",
-      "Hitting mat: 1.5m × 1.5m, left and right-handed",
-      "Protective equipment: launch monitor casing and golf enclosure (4m × 3m × 3m)",
-      "Installation: setup and take-down of all equipment",
-      "Ongoing maintenance and support when needed",
+      "Launch Monitor: 1x Skytrak Plus & Software",
+      "Gaming computer: 1x Windows 11 Desktop PC with large monitor (If needed)",
+      "Clubs: 1x Cobra Fly XL 13 Piece Set (Junior clubs available - please request on booking - If needed)",
+      "Projector: 1x short throw with floor mounted case and impact screen",
+      "Golf balls: Callaway (Various different models depending on type of hire) (If needed)",
+      "Hitting Mat: 1x 1.5m x 1.5m (Supporting left and right hand swings)",
+      "Protective equipment: 1x Launch monitor casing, golf enclosure (4m (L) x 3m (W) x 3m (H))",
+      "Installation: Setup and take down of all equipment",
     ],
+    extras: ["Ongoing maintenance and support when needed"],
   },
   {
     title: "St Andrews",
     shortName: "The Ultimate",
     slug: "st-andrews",
     subtitle: "The ultimate competition package",
+    heroImage: photos.stAndrews,
     summary:
-      "Tournament-style golf with two bays, advanced shot tracking and leaderboards. Match play, closest to the pin, or a full virtual tournament.",
+      "Built for those who thrive under pressure and love the thrill of competition, this package delivers a true tournament-style experience. Featuring advanced shot tracking, leaderboard integration, and fully customisable game formats, it brings out the competitive spirit in every player. Whether it’s match play, closest to the pin, or a full-blown virtual tournament, this setup turns any event into a high-stakes, high-energy golf showdown.",
     priceLabel: "From £1,195",
-    durationLabel: "Minimum 4 hours",
+    durationLabel: "Minimum duration 4 hours",
     featured: true,
     includes: [
-      "Launch monitor: 2× SkyTrak Plus & software",
-      "Gaming computer: Windows 11 desktop PC with large monitor",
-      "Clubs: 2× Cobra Fly XL 11-piece sets (junior and left/right on request)",
-      "Projector: 2× short throw with floor-mounted case and impact screen",
-      "Golf balls: Callaway (models vary by hire type)",
-      "Hitting mats: 2× 1.5m × 1.5m, left and right-handed",
-      "Protective equipment: 2× launch monitor casings and enclosures (4m × 3m × 3m)",
-      "Installation: setup and take-down of all equipment",
-      "Members of staff: 2 or more depending on booking size",
+      "Launch Monitor: 2x Skytrak Plus & Software",
+      "Gaming computer: Windows 11 Desktop PC with large monitor",
+      "Clubs: 2x Cobra Fly XL 11 Piece Set (Junior clubs, left/right handed available - request on booking)",
+      "Projector: 2x short throw with floor mounted case and impact screen",
+      "Golf balls: Callaway (Various different models depending on type of hire)",
+      "Hitting Mat: 2x 1.5m x 1.5m (Supporting left and right hand swings)",
+      "Protective equipment: 2x Launch monitor casing, golf enclosure (4m (L) x 3m (W) x 3m (H))",
+      "Installation: Setup and take down of all equipment",
+      "Member of Staff: 2 or more depending on size of booking",
     ],
     extras: [
-      "55\" TV for external viewing",
-      "Custom branding on marquee sheets",
+      "55” TV for external viewing",
+      "Custom branding on all golf marquee sheets",
       "Interactive leaderboard tracking",
-      "Competitions and prizes",
+      "Competitions and prizes (anything else, let us know)",
     ],
   },
   {
@@ -177,27 +188,28 @@ const packages: EventPackage[] = [
     shortName: "Weddings",
     slug: "phoenix-open",
     subtitle: "The wedding experience",
+    heroImage: photos.phoenixOpen,
     summary:
-      "A unique entertainment feature for your big day. Luxury simulator setup, wedding-themed challenges, and settings to match your venue.",
+      "A unique entertainment feature for your big day. Includes a luxury golf simulator setup, wedding-themed challenges, and customised settings to match your venue and style. Time to get all your loved ones on the tee at the same time!",
     priceLabel: "From £795",
-    durationLabel: "From 4 hours",
+    durationLabel: "Duration starts from 4 hours",
     featured: true,
     includes: [
-      "Launch monitor: 1× SkyTrak Plus & software",
-      "Gaming computer: Windows 11 desktop PC with large monitor",
-      "Clubs: 1× Cobra Fly XL 11-piece set (additional left/right sets if needed)",
-      "Projector: 1× short throw with floor-mounted case and impact screen",
-      "Golf balls: Callaway (models vary by hire type)",
-      "Hitting mat: 1.5m × 1.5m, left and right-handed",
-      "Protective equipment: launch monitor casing and golf enclosure (4m × 3m × 3m)",
-      "Installation: setup and take-down of all equipment",
-      "Member of staff: 1 or 2 depending on booking size",
+      "Launch Monitor: 1x Skytrak Plus & Software",
+      "Gaming computer: Windows 11 Desktop PC with large monitor",
+      "Clubs: 1x Cobra Fly XL 11 Piece Set (Additional sets included if needed, left and right handed)",
+      "Projector: 1x short throw with floor mounted case and impact screen",
+      "Golf balls: Callaway (Various different models depending on type of hire)",
+      "Hitting Mat: 1x 1.5m x 1.5m (Supporting left and right hand swings)",
+      "Protective equipment: 1x Launch monitor casing, golf enclosure (4m (L) x 3m (W) x 3m (H))",
+      "Installation: Setup and take down of all equipment",
+      "Member of Staff: 1 or 2 depending on size of booking",
     ],
     extras: [
-      "55\" TV for external viewing",
-      "Custom branding on marquee sheets",
+      "55” TV for external viewing",
+      "Custom branding on all golf marquee sheets",
       "Interactive leaderboard tracking",
-      "Competitions and prizes",
+      "Competitions and prizes (anything else, let us know)",
     ],
   },
   {
@@ -205,21 +217,22 @@ const packages: EventPackage[] = [
     shortName: "Ages 6–14",
     slug: "junior-open",
     subtitle: "Where it all begins",
+    heroImage: photos.juniorOpen,
     summary:
-      "Tailored for young golfers aged 6–14. Junior-sized equipment, age-appropriate courses and interactive challenges — fun first, skills second.",
+      "Tailored for young golfers ages 6-14, The Junior Golfer package offers a fun and engaging golf simulator experience. With junior-sized equipment, age-appropriate courses, and interactive challenges, it’s the perfect way for kids to develop their skills while having fun.",
     priceLabel: "From £395",
-    durationLabel: "From 4 hours",
+    durationLabel: "Duration starts from 4 hours",
     featured: true,
     includes: [
-      "Launch monitor: 1× SkyTrak Plus & software",
-      "Games: over 7 playing modes",
-      "Clubs: Cobra Fly XL set plus junior clubs on request",
-      "Projector: Optoma short throw with floor-mounted case and impact screen",
-      "Golf balls: Callaway (models vary by hire type)",
-      "Hitting mat: 1.5m × 1.5m, left and right-handed",
-      "Protective equipment: launch monitor casing and golf enclosure (4m × 3m × 3m)",
-      "Installation: setup and take-down of all equipment",
-      "Member of staff: 1 or 2 depending on booking size",
+      "Launch Monitor: 1x Skytrak Plus & Software",
+      "Games: Over 7 playing modes and games to enjoy!",
+      "Clubs: 1x Cobra Fly XL 11 Piece Set (Junior clubs available - please request on booking)",
+      "Projector: 1x Optoma short throw with floor mounted case and impact screen",
+      "Golf balls: Callaway (Various different models depending on type of hire)",
+      "Hitting Mat: 1x 1.5m x 1.5m (Supporting left and right hand swings)",
+      "Protective equipment: 1x Launch monitor casing, golf enclosure (4m (L) x 3m (W) x 3m (H))",
+      "Installation: Setup and take down of all equipment",
+      "Member of Staff: 1 or 2 depending on size of booking",
     ],
   },
   {
@@ -227,17 +240,23 @@ const packages: EventPackage[] = [
     shortName: "Dream golf",
     slug: "build-your-own",
     subtitle: "A custom simulator",
+    heroImage: photos.buildYourOwn,
     summary:
-      "A personalised setup for your home, office or venue. We design around your space, style and budget — and stay with you every step of the way.",
+      "At Swingsmart, we believe that every golfer deserves a personalised, immersive experience. That’s why we offer the opportunity to build your own dream golf simulator setup — a custom solution designed to bring world-class golf to your home, office, or business space.",
+    description: [
+      block(
+        "Whether you're looking to practice your swing in your own private space, create a high-end entertainment setup, or insert a professional-grade simulator for your venue, our team is here to help you design a setup that meets your needs, style, and budget.",
+      ),
+    ],
     priceLabel: "Price on application",
-    featured: false,
+    featured: true,
     includes: [
-      "That’s completely up to you. We will be there every step of the way to make sure your dream becomes a reality.",
+      "That’s completely up to you! (We will be there every step of the way to make sure your dream becomes a reality)!",
     ],
   },
 ];
 
-function packagePage(pkg: EventPackage, imageUrl: string): PageDoc {
+function packagePage(pkg: EventPackage): PageDoc {
   return {
     title: pkg.title,
     slug: `packages/${pkg.slug}`,
@@ -245,49 +264,7 @@ function packagePage(pkg: EventPackage, imageUrl: string): PageDoc {
       title: `${pkg.title} | SwingSmart UK`,
       description: pkg.summary,
     },
-    sections: [
-      {
-        _type: "hero",
-        _key: `${pkg.slug}-hero`,
-        eyebrow: pkg.subtitle,
-        heading: pkg.title,
-        subheading: `${pkg.priceLabel}${pkg.durationLabel ? ` · ${pkg.durationLabel}` : ""}`,
-        image: { url: imageUrl, alt: `${pkg.title} golf simulator experience` },
-        primaryCta: { label: "Enquire", href: "/contact", style: "primary" },
-        secondaryCta: {
-          label: "All packages",
-          href: "/packages",
-          style: "secondary",
-        },
-      },
-      {
-        _type: "richText",
-        _key: `${pkg.slug}-intro`,
-        heading: "What’s included",
-        body: [block(pkg.summary), ...pkg.includes.map((item, i) => block(item, "normal", `${pkg.slug}-inc-${i}`))],
-      },
-      ...(pkg.extras?.length
-        ? [
-            {
-              _type: "featureGrid" as const,
-              _key: `${pkg.slug}-extras`,
-              heading: "Optional extras (POA)",
-              items: pkg.extras.map((text, i) => ({
-                _key: `${pkg.slug}-ex-${i}`,
-                title: text.split("—")[0] || text,
-                text: text,
-              })),
-            },
-          ]
-        : []),
-      {
-        _type: "cta",
-        _key: `${pkg.slug}-cta`,
-        heading: "Ready to grip it and rip it?",
-        text: "Tell us the date, the venue and how many people. We’ll build the right setup.",
-        button: { label: "Get in touch", href: "/contact", style: "primary" },
-      },
-    ],
+    sections: [],
   };
 }
 
@@ -296,9 +273,9 @@ const pages: Record<string, PageDoc> = {
     title: "Home",
     slug: "home",
     seo: {
-      title: "SwingSmart UK. Beyond Golf. | Book today",
+      title: "SwingSmart UK. Beyond Golf. | Experience Golf Convenience - Book Today",
       description:
-        "Experience golf simulation like never before. We bring the course to you — rain or shine.",
+        "Explore SwingSmart UK for immersive golf simulation experiences, events, and packages. Convenient, flexible golf options for all skill levels and occasions.",
     },
     sections: [
       {
@@ -307,8 +284,9 @@ const pages: Record<string, PageDoc> = {
         eyebrow: "Beyond Golf",
         heading: "We bring the course to you",
         subheading:
-          "Professional golf simulation for corporate days, weddings, hotels, exhibitions and private events. Set the tee time — we’ll be there.",
-        image: photos.hero,
+          "Experience golf simulation like never before. Set the tee time and we’ll be there. Tee off any time. Seriously. We don’t even close for rain. Or Mondays…",
+        image: photos.homeHero,
+        overlay: "medium",
         primaryCta: { label: "Plan an event", href: "/contact", style: "primary" },
         secondaryCta: {
           label: "View packages",
@@ -317,56 +295,110 @@ const pages: Record<string, PageDoc> = {
         },
       },
       {
+        _type: "packageGrid",
+        _key: "home-packages",
+        heading: "Packages",
+        intro:
+          "From a private four-hour session to a full tournament bay. Choose a starting point — or build your own.",
+      },
+      {
         _type: "featureGrid",
         _key: "home-offer",
-        heading: "Built for the occasion",
+        heading: "What we offer",
         items: [
           {
             _key: "f1",
-            title: "Corporate events",
-            text: "Client entertainment and team days with a clubhouse feel, wherever you host.",
+            title: "Corporate Events",
+            text: "Elevate your next corporate gathering with a premium golf simulation experience. Whether you're hosting a team-building event, entertaining clients, or organising a company retreat, our state-of-the-art golf simulators provide a fun and engaging way to connect, compete, and create lasting memories.",
           },
           {
             _key: "f2",
             title: "Weddings",
-            text: "Get everyone on the tee on the same day — guests, wedding party, bride and groom.",
+            text: "Make your special day even more memorable by adding a unique and interactive golf experience. Whether for the bride and groom, wedding party, or guests, our golf simulators offer an exciting entertainment option that keeps everyone engaged while adding a touch of elegance and fun to your celebration. When are you going to have a tee time with all of your friends and family on the same day!",
           },
           {
             _key: "f3",
-            title: "Hotels & holiday parks",
-            text: "A managed bay that earns its keep, without a permanent install.",
+            title: "Golf Clubs",
+            text: "Enhance your golf club’s offerings with cutting-edge simulation technology. Whether you’re looking to provide members with an all-weather practise option, host virtual tournaments, or attract new players, our simulators bring a new level of excitement and versatility to your venue.",
           },
           {
             _key: "f4",
-            title: "Exhibitions",
-            text: "A stand people stop at, stay at, and talk about after the show.",
+            title: "Short/Long Term Rental",
+            text: "Looking for an extended golf simulation setup? Our flexible long-term rental options are perfect for businesses, clubs, or individuals who want to enjoy the thrill of golf over an extended period. Whether for ongoing training, seasonal events, or private entertainment, we provide hassle-free solutions tailored to your needs.",
           },
           {
             _key: "f5",
-            title: "Private events",
-            text: "Birthdays, clubs and competitions. Rain or Mondays — we still turn up.",
+            title: "Competitions (All Weather)",
+            text: "Never let the weather dictate your game again! Our advanced golf simulators allow you to host exciting competitions and tournaments year-round, no matter the conditions outside. From friendly matches to high-stakes challenges, players of all skill levels can compete on world-class courses without worrying about rain, wind, or extreme temperatures.",
           },
           {
             _key: "f6",
-            title: "Long-term hire",
-            text: "Venues and clubs who want year-round golf without buying the kit outright.",
+            title: "Individual Hire",
+            text: "Whether you're looking to practise your swing, enjoy a round of golf from the comfort of your home, or host a private golf night, this package is perfect for solo players or small groups. Includes a high-quality simulator setup, a variety of world-famous courses, and customisable gameplay settings.",
+          },
+          {
+            _key: "f7",
+            title: "Junior Hire",
+            text: "Is project Tiger well and truly in place? Can you hear the crowds of Augusta chanting the name of your mini McIlroy? Unlock the world of golf right from the outset with our Junior Golfer package! Designed for junior players looking to practise or show off their swing to friends and family whatever the weather! This package includes everything needed to create an immersive and fun virtual golfing experience. Perfect for ages 6-14, the package combines a user-friendly simulator with junior-sized clubs (regular also included), a comfortable setup, and engaging features that make the experience top class for all!",
+          },
+          {
+            _key: "f8",
+            title: "Sports Bar/Pub Competition",
+            text: "We really are bringing golf to anyone, anywhere! If you think your locals need a change from the traditional pool, darts or GK Quiz, let us know! Or are you a local that’s want to bring golf to your boozer, let us know!",
           },
         ],
       },
       {
         _type: "textAndImage",
         _key: "home-mission",
-        heading: "Photography first. Equipment included.",
+        heading: "Beyond golf",
         imagePosition: "right",
-        image: photos.indoor,
+        image: photos.offer,
         body: [
           block(
-            "We bring the enclosure, the launch monitor, the clubs and the staff. You bring the people.",
+            "At SwingsmartUK, we make golf accessible to anyone, no matter your experience, location, or skill.",
           ),
           block(
-            "Based in Cornwall. Available across the UK.",
+            "Whether you are looking to play the postage stamp at Royal Troon, or hold a Long Drive contest with your friends, we bring everything you need, and you don’t have to worry about anything!",
+          ),
+          block(
+            "Our mission is simple: bring golf to everyone.",
           ),
         ],
+      },
+      {
+        _type: "statistics",
+        _key: "home-stats",
+        heading: "Built around the booking",
+        items: [
+          {
+            _key: "s1",
+            value: "4 hours",
+            label: "Typical minimum hire — long enough for a proper round of laughs.",
+          },
+          {
+            _key: "s2",
+            value: "4m × 3m × 3m",
+            label: "The bay most packages need. Tell us if the room is tighter.",
+          },
+          {
+            _key: "s3",
+            value: "UK-wide",
+            label: "Based in Cornwall. We turn up wherever the event is.",
+          },
+        ],
+      },
+      {
+        _type: "testimonials",
+        _key: "home-quotes",
+        heading: "Here’s what our customers say",
+        limit: 3,
+      },
+      {
+        _type: "partnerGrid",
+        _key: "home-partners",
+        heading: "Partners",
+        intro: "Schools, racecourses, exhibitors and venues who have teed it up with us.",
       },
       {
         _type: "cta",
@@ -393,7 +425,7 @@ const pages: Record<string, PageDoc> = {
         heading: "Our packages",
         subheading:
           "Every package includes professional equipment, installation, and a setup built around your event.",
-        image: photos.range,
+        image: photos.packagesIndex,
         primaryCta: { label: "Talk to us", href: "/contact", style: "primary" },
       },
       {
@@ -405,43 +437,7 @@ const pages: Record<string, PageDoc> = {
         _type: "faq",
         _key: "pkg-faq",
         heading: "The usual questions",
-        items: [
-          {
-            _key: "q1",
-            question: "How much space is required?",
-            answer:
-              "It depends on the booking. The majority of packages need a minimum of 4m × 3m × 3m (W × L × H).",
-          },
-          {
-            _key: "q2",
-            question: "How long does setup and take-down take?",
-            answer:
-              "Setup typically takes 60–90 minutes. Take-down is around 45–60 minutes. We schedule around your event to minimise disruption.",
-          },
-          {
-            _key: "q3",
-            question: "Is it waterproof for outdoor events?",
-            answer: "Yes. We offer a fully waterproof enclosure.",
-          },
-          {
-            _key: "q4",
-            question: "Can branding or customisation be added?",
-            answer:
-              "Absolutely. We can run through options during your booking consultation.",
-          },
-          {
-            _key: "q5",
-            question: "What are the payment terms?",
-            answer:
-              "50% of the total is payable on booking confirmation (via BACS). The remaining balance is due 7 days before the booking date.",
-          },
-          {
-            _key: "q6",
-            question: "What is the cancellation policy?",
-            answer:
-              "Cancel up to 10 days before your booking and we return all monies paid. After that we keep the 50% paid at confirmation.",
-          },
-        ],
+        items: publicFaqs,
       },
     ],
   },
@@ -449,7 +445,7 @@ const pages: Record<string, PageDoc> = {
     title: "Gallery",
     slug: "gallery",
     seo: {
-      title: "Gallery | SwingSmart UK",
+      title: "Gallery & Reviews — SwingSmart UK. Beyond Golf.",
       description: "Event photography from SwingSmart golf simulator hires, weddings, corporates and clubs.",
     },
     sections: [
@@ -458,13 +454,19 @@ const pages: Record<string, PageDoc> = {
         _key: "gal-hero",
         eyebrow: "The course, wherever you are",
         heading: "Gallery",
-        subheading: "From the bay — SwingSmart events, venues and hire.",
-        image: photos.event,
+        subheading:
+          "Here’s what our customers say about us with some cool pics we’ve taken along the way. Please note, everyone in these photos are happy to be in them and no golf balls were lost in the making (maybe 1 or 2)…",
+        image: photos.galleryBay,
       },
       {
         _type: "gallery",
         _key: "gal-grid",
         heading: "Recent setups",
+      },
+      {
+        _type: "testimonials",
+        _key: "gal-quotes",
+        heading: "Reviews",
       },
     ],
   },
@@ -484,7 +486,7 @@ const pages: Record<string, PageDoc> = {
         heading: "Partnerships",
         subheading:
           "Activate unused space, draw a crowd to a stand, or give members an all-weather game. We bring the bay.",
-        image: photos.corporate,
+        image: photos.ryderCup,
         primaryCta: { label: "Start a conversation", href: "/contact", style: "primary" },
       },
       {
@@ -518,9 +520,9 @@ const pages: Record<string, PageDoc> = {
     title: "About",
     slug: "about",
     seo: {
-      title: "About | SwingSmart UK",
+      title: "Who Are We? | Experience Golf Today - Book Your Game — SwingSmart UK. Beyond Golf.",
       description:
-        "Meet Chris and Ryan, the founding duo behind SwingSmart UK — bringing golf to everyone from Cornwall.",
+        "Discover golf experiences for all skill levels with SwingSmart UK. We bring the course to you, rain or shine, for memorable, inclusive golf events.",
     },
     sections: [
       {
@@ -529,25 +531,41 @@ const pages: Record<string, PageDoc> = {
         eyebrow: "Who we are",
         heading: "The brains behind the bays",
         subheading: "SwingSmart’s founding duo.",
-        image: photos.club,
+        image: photos.about,
       },
       {
         _type: "richText",
         _key: "ab-copy",
         body: [
-          block("Hey, Chris and Ryan here."),
+          block("Hey, Chris and Ryan here!"),
           block(
-            "We had a simple idea: tee up and make golf a game for everyone. We saw how the sport could feel a bit out of bounds — especially in the UK, where rain checks are more common than birdies. We would know: we are based in Cornwall.",
+            "We had a simple idea: tee up and make golf a game for everyone! We saw how the sport could feel a bit out of bounds—especially in the UK, where rain checks are more common than birdies - we would know we are based in Cornwall! But with our love for the game (even though we are not great - we try) and a dream bigger than a 350-yard drive, we decided to change it.",
           ),
           block(
-            "With our love for the game (even though we are not great — we try) and a dream bigger than a 350-yard drive, we decided to change it.",
-          ),
-          block(
-            "Why should the pros have all the fun? We want everyone to have the chance of feeling that buzz of a perfect drive, the joy of a cheeky chip-in, and the laughs shared over a round — no dodgy weather, no pressure. Just good times, great swings, and golf for all.",
+            "Why should the pros have all the fun? We want everyone to have the chance of feeling that buzz of a perfect drive, the joy of a cheeky chip-in, and the laughs shared over a round— no dodgy weather, no pressure. Just good times, great swings, and golf for all.",
           ),
           block(
             "So… clubs in hand, we bring the course to you. Rain or shine. Beginner or seasoned slicer. Game on.",
           ),
+        ],
+      },
+      {
+        _type: "textAndImage",
+        _key: "ab-mission",
+        heading: "Beyond golf",
+        imagePosition: "right",
+        image: photos.mission,
+        body: [
+          block(
+            "At SwingsmartUK, we make golf accessible to anyone, no matter your experience, location, or skill.",
+          ),
+          block(
+            "Whether you are looking to play the postage stamp at Royal Troon, or hold a Long Drive contest with your friends, we bring everything you need, and you don’t have to worry about anything!",
+          ),
+          block(
+            "Our cutting-edge realism creates a fun, inclusive experience, perfect for pros, beginners, and casual players alike. Special occasions, team building or just a friendly competition, we bring the ultimate golf experience to you — anytime, anywhere.",
+          ),
+          block("Our mission is simple: bring golf to everyone!"),
         ],
       },
       {
@@ -562,9 +580,9 @@ const pages: Record<string, PageDoc> = {
     title: "Contact",
     slug: "contact",
     seo: {
-      title: "Contact | SwingSmart UK",
+      title: "Contact | Get in Touch Today — SwingSmart UK. Beyond Golf.",
       description:
-        "Get in touch with SwingSmart UK. Email hello@swingsmart.co.uk or call to book a golf simulator experience.",
+        "Contact SwingSmart UK for inquiries, bookings, or more information about our golf events and services. Reach out today to start your golf experience.",
     },
     sections: [
       {
@@ -574,31 +592,84 @@ const pages: Record<string, PageDoc> = {
         heading: "Contact us",
         subheading:
           "Ready to team up? Jot down your details and we’ll chat soon. Can’t wait to catch up.",
-        image: photos.green,
+        image: photos.offer,
       },
       {
         _type: "contactBlock",
         _key: "ct-form",
         heading: "Send an enquiry",
-        text: "Charity bookings and anything else — phone or email and we’ll answer.",
+        text: "Jot down your details and we’ll chat soon. Can’t wait to catch up.",
       },
     ],
   },
-  ...Object.fromEntries(
-    packages.map((pkg) => {
-      const images: Record<string, string> = {
-        golfer: photos.hero.url,
-        "country-club": photos.indoor.url,
-        "ryder-cup": photos.corporate.url,
-        championship: photos.club.url,
-        "st-andrews": photos.night.url,
-        "phoenix-open": photos.wedding.url,
-        "junior-open": photos.junior.url,
-        "build-your-own": photos.range.url,
-      };
-      return [`packages/${pkg.slug}`, packagePage(pkg, images[pkg.slug] || photos.hero.url)];
-    }),
-  ),
+  charity: {
+    title: "Charity Days",
+    slug: "charity",
+    seo: {
+      title: "Charity Days — SwingSmart UK. Beyond Golf.",
+      description:
+        "SwingSmart Charity Day options help organisations raise funds and create memorable golf simulation experiences.",
+    },
+    sections: [
+      {
+        _type: "hero",
+        _key: "ch-hero",
+        eyebrow: "We are Beyond Golf",
+        heading: "Golf for a Cause — Make Every Swing Count",
+        subheading:
+          "Please get in touch via phone or email for all charity enquiries. We look forward to partnering with you!",
+        image: photos.charity,
+        primaryCta: { label: "Get in touch", href: "/contact", style: "primary" },
+      },
+      {
+        _type: "richText",
+        _key: "ch-copy",
+        body: [
+          block(
+            "At Swingsmart, we believe golf is more than a game—it’s a powerful way to bring people together and make a difference. Our Charity Day options are designed to help organisations raise funds, increase awareness, and create memorable experiences through the immersive world of golf simulation.",
+          ),
+          block(
+            "Whether you're planning a charity golf day, gala fundraiser, or corporate giving initiative, our flexible simulator setups can be tailored to suit your event's goals.",
+          ),
+          block("Let’s bring golf to everyone!"),
+        ],
+      },
+      {
+        _type: "cta",
+        _key: "ch-cta",
+        heading: "Let’s bring golf to everyone",
+        text: "Please get in touch via phone or email for all charity enquiries.",
+        button: { label: "Contact us", href: "/contact", style: "primary" },
+      },
+    ],
+  },
+  faq: {
+    title: "FAQs",
+    slug: "faq",
+    seo: {
+      title: "FAQ’s — SwingSmart UK. Beyond Golf.",
+      description:
+        "Space, setup times, waterproof enclosures, branding, payment terms and cancellation policy for SwingSmart golf simulator hire.",
+    },
+    sections: [
+      {
+        _type: "hero",
+        _key: "faq-hero",
+        eyebrow: "FAQs",
+        heading: "FAQ’s",
+        subheading: "Anything else? Get in touch and we will answer your questions!",
+        image: photos.packagesIndex,
+        primaryCta: { label: "Contact us", href: "/contact", style: "primary" },
+      },
+      {
+        _type: "faq",
+        _key: "faq-list",
+        heading: "FAQ’s",
+        items: publicFaqs,
+      },
+    ],
+  },
+  ...Object.fromEntries(packages.map((pkg) => [`packages/${pkg.slug}`, packagePage(pkg)])),
 };
 
 export const fallbackContent: SiteContent = {
@@ -613,12 +684,18 @@ export const fallbackContent: SiteContent = {
     { title: "Clubs", slug: "clubs" },
   ],
   gallery: [
-    { title: "Dusk tee shot", image: photos.hero, categories: ["events"] },
-    { title: "Fairway light", image: photos.indoor, categories: ["clubs"] },
-    { title: "Night competition", image: photos.night, categories: ["events", "corporate"] },
-    { title: "Wedding bay", image: photos.wedding, categories: ["weddings"] },
-    { title: "Range bays", image: photos.range, categories: ["clubs"] },
-    { title: "Team day", image: photos.corporate, categories: ["corporate"] },
+    { title: "On the course", image: photos.galleryCourse, categories: ["events"], featured: true },
+    { title: "Event bay", image: photos.galleryBay, categories: ["events"] },
+    { title: "Enclosure", image: photos.galleryEnclosure, categories: ["clubs"] },
+    { title: "Tee time", image: photos.galleryTee, categories: ["events"], featured: true },
+    { title: "Evening hire", image: photos.galleryEvening, categories: ["events", "corporate"] },
+    { title: "Summer event", image: photos.gallerySummer, categories: ["events"] },
+    { title: "Outdoor crowd", image: photos.galleryCrowd, categories: ["corporate"] },
+    { title: "On-course bay", image: photos.galleryHero49, categories: ["events"], featured: true },
+    { title: "Outdoor gathering", image: photos.galleryHero52, categories: ["events"] },
+    { title: "Course setup", image: photos.galleryHero02, categories: ["events"] },
+    { title: "Classic hire", image: photos.galleryCountryClub2, categories: ["clubs"] },
+    { title: "Wedding bay", image: photos.phoenixOpen, categories: ["weddings"] },
   ],
   partners: [
     {
@@ -644,21 +721,62 @@ export const fallbackContent: SiteContent = {
   testimonials: [
     {
       quote:
-        "Everyone ended up on the tee — including people who had never held a club. It was the unexpected highlight of the day.",
-      attribution: "Wedding hire",
-      role: "Cornwall",
+        "Guys, it was our honour and absolute pleasure to have you there as our summer party entertainment!!",
+      attribution: "Ildiko Sealey",
+      featured: true,
     },
     {
       quote:
-        "Setup was slick, the bay looked the part, and our clients actually talked to each other instead of staring at their phones.",
-      attribution: "Corporate event",
-      role: "Team day",
+        "Thank you again for being part of the night, we loved working with you and hope to do it again very soon. If anyone’s looking to level up their event, these guys are the ones to call!",
+      attribution: "Jennifer Jane Law",
+      featured: true,
     },
     {
       quote:
-        "An all-weather option our members have been asking for, without turning the clubhouse into a building site.",
-      attribution: "Golf club",
-      role: "Long-term hire",
+        "Was a great evening, it really is quite addictive - I kept thinking \"I'll do better next time!\" Great setup you've built, really impressed",
+      attribution: "Dan Sealey",
+      featured: true,
+    },
+    {
+      quote:
+        "Great idea for The South West Business Show, the 'stand' created a good athmosphere ... Ideal for business or social events",
+      attribution: "Rory Woolridge",
+      featured: true,
+    },
+    {
+      quote:
+        "The guys were really engaging and I thought the whole set up was professional and friendly.",
+      attribution: "Emma Smith",
+      featured: true,
+    },
+    {
+      quote:
+        "We really enjoyed using the golf sim at a recent event. The guys who ran it were really engaging and great with the kids. I highly reccomend them and what they can offer.",
+      attribution: "Lauren Phipps",
+      featured: true,
+    },
+    {
+      quote:
+        "Chris and Ryan were great. Interacted with everyone really well. I hope they return as it's a fun bit of competition with great prizes",
+      attribution: "David Wilkey",
+      featured: true,
+    },
+    {
+      quote:
+        "Super fun simulator that would work for both business and pleasure activities. We had great fun at the TUFC fan zone, enjoying some healthy competition amongst friends and family. Chris and Ryan were very helpful, supportive and just fun to be around. The entire experience was great and would highly recommend to anyone hosting a party or networking event. Great idea to help get conversations flowing.",
+      attribution: "Luke Moss",
+      featured: true,
+    },
+    {
+      quote:
+        "Really enjoyed the Golf Sim experience with Ryan & Chris, If your simply looking for ways to improve your game then the simulator is a great way to do this. Also a fantastic opportunity for parties / offices / corporates to take advantage of a fantastic team building session - Ryan & Chris will be at your side for any guidance & support; Highly recommended and looking forward to our next meet up !",
+      attribution: "David Spark",
+      featured: true,
+    },
+    {
+      quote: "Great simulator experience for any event, much better than one I trialled elsewhere",
+      attribution: "Phil Murphy",
+      featured: true,
     },
   ],
 };

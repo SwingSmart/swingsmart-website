@@ -1,0 +1,22 @@
+current_url,current_title,new_url,content_type,migration_status,redirect_required
+https://www.swingsmart.co.uk/,SwingSmart UK. Beyond Golf. | Experience Golf Convenience - Book Today,/,page,migrated,no
+https://www.swingsmart.co.uk/home,Home,/,page,migrated,yes
+https://www.swingsmart.co.uk/about,Who Are We?,/about,page,migrated,no
+https://www.swingsmart.co.uk/contact,Contact,/contact,page,migrated,no
+https://www.swingsmart.co.uk/our-mission,Beyond Golf,/about,page,merged-into-about,yes
+https://www.swingsmart.co.uk/our-mission-1,What We Offer,/,page,merged-into-homepage,yes
+https://www.swingsmart.co.uk/our-mission-1-1,Packages,/packages,page,migrated,yes
+https://www.swingsmart.co.uk/our-mission-2,THE GOLFER (INDIVIDUAL PACKAGE),/packages/golfer,package,migrated,yes
+https://www.swingsmart.co.uk/our-mission-2-1,THE COUNTRY CLUB (THE CLASSIC),/packages/country-club,package,migrated,yes
+https://www.swingsmart.co.uk/our-mission-2-2,THE RYDER CUP (CORPORATE PACKAGE),/packages/ryder-cup,package,migrated,yes
+https://www.swingsmart.co.uk/our-mission-2-2-1,THE PHOENIX OPEN (THE WEDDING EXPERIENCE),/packages/phoenix-open,package,migrated,yes
+https://www.swingsmart.co.uk/our-mission-2-2-2,THE CHAMPIONSHIP (LONG TERM HIRE),/packages/championship,package,migrated,yes
+https://www.swingsmart.co.uk/our-mission-2-2-3,THE ST ANDREWS (THE ULTIMATE PACKAGE),/packages/st-andrews,package,migrated,yes
+https://www.swingsmart.co.uk/our-mission-2-2-2-1,THE JUNIOR OPEN (WHERE IT ALL BEGINS),/packages/junior-open,package,migrated,yes
+https://www.swingsmart.co.uk/our-mission-2-2-3-1,DREAM PACKAGE,/packages/build-your-own,package,migrated,yes
+https://www.swingsmart.co.uk/our-mission-3,Charity Days,/charity,page,migrated,yes
+https://www.swingsmart.co.uk/our-mission-3-1,FAQ's,/faq,page,migrated,yes
+https://www.swingsmart.co.uk/gallery-reviews,Gallery & Reviews,/gallery,page,migrated,yes
+https://www.swingsmart.co.uk/config,Squarespace config (blocked by robots.txt),,system,skipped-not-public,no
+https://www.swingsmart.co.uk/search,Squarespace search (blocked by robots.txt),,system,skipped-not-public,no
+https://www.swingsmart.co.uk/partnerships,(not on live Squarespace),/partnerships,page,kept-new-design-not-on-live-site,no

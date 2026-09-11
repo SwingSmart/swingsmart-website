@@ -31,6 +31,10 @@ if (!projectId || !token) {
   process.exit(1);
 }
 
+console.warn(
+  "seed-sanity.mjs writes starter documents. For live Squarespace copy, run node scripts/migrate-from-squarespace.mjs instead.",
+);
+
 const client = createClient({
   projectId,
   dataset,
@@ -130,6 +134,13 @@ const docs = [
           href: "/packages",
           style: "secondary",
         },
+      },
+      {
+        _type: "packageGrid",
+        _key: "home-packages",
+        heading: "Packages",
+        intro:
+          "From a private four-hour session to a full tournament bay. Choose a starting point — or build your own.",
       },
       {
         _type: "richText",

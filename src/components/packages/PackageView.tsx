@@ -1,43 +1,58 @@
 import { ButtonLink } from "@/components/ui/ButtonLink";
-import { CmsPhoto } from "@/components/ui/CmsPhoto";
+import { CmsPhoto, PhotoFrame } from "@/components/ui/CmsPhoto";
 import { Container, DisplayHeading, Eyebrow, Section } from "@/components/ui/Layout";
 import { RichBody } from "@/components/portable-text/RichBody";
+import { photos } from "@/lib/content-helpers";
 import type { EventPackage } from "@/lib/types";
+import { hasCmsImage } from "@/sanity/image";
 
 export function PackageView({ pkg }: { pkg: EventPackage }) {
   const ctaHref = pkg.cta?.href || "/contact";
   const ctaLabel = pkg.cta?.label || "Enquire";
+  const heroImage = hasCmsImage(pkg.heroImage) ? pkg.heroImage : photos.golfer;
 
   return (
     <>
-      <section className="relative min-h-[62vh] overflow-hidden bg-bg">
-        {pkg.heroImage ? (
+      <section className="relative min-h-[88svh] overflow-hidden bg-bg">
+        {hasCmsImage(heroImage) ? (
           <div className="absolute inset-0">
             <CmsPhoto
-              image={pkg.heroImage}
+              image={heroImage}
+              fill
               priority
-              className="h-full w-full object-cover"
+              className="hero-media"
               sizes="100vw"
+              width={2400}
             />
-            <div className="absolute inset-0 bg-bg/40" />
+            <div className="absolute inset-0 bg-gradient-to-t from-bg via-bg/45 to-bg/20" />
+            <div className="absolute inset-0 bg-gradient-to-r from-bg/50 to-transparent" />
           </div>
-        ) : null}
-        <Container className="relative flex min-h-[62vh] flex-col justify-end pb-16 pt-12 sm:pb-20">
+        ) : (
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_rgba(11,110,22,0.28),_transparent_55%)]" />
+        )}
+        <Container className="relative flex min-h-[88svh] flex-col justify-end pb-16 pt-28 sm:pb-24">
           {pkg.shortName ? <Eyebrow>{pkg.shortName}</Eyebrow> : null}
-          <DisplayHeading as="h1" className="max-w-3xl text-5xl sm:text-6xl">
+          <DisplayHeading as="h1" className="max-w-3xl text-[2.6rem] sm:text-6xl">
             {pkg.title}
           </DisplayHeading>
           {pkg.subtitle ? (
             <p className="mt-4 max-w-xl text-lg text-cream/90">{pkg.subtitle}</p>
           ) : null}
-          <p className="mt-6 text-sm font-medium text-cream">
-            {pkg.priceLabel}
-            {pkg.durationLabel ? (
-              <span className="ml-2 font-normal text-muted">{pkg.durationLabel}</span>
-            ) : null}
-          </p>
-          <div className="mt-8">
-            <ButtonLink href={ctaHref}>{ctaLabel}</ButtonLink>
+          {pkg.priceLabel ? (
+            <p className="mt-6 text-sm font-medium text-cream">
+              {pkg.priceLabel}
+              {pkg.durationLabel ? (
+                <span className="ml-2 font-normal text-muted">{pkg.durationLabel}</span>
+              ) : null}
+            </p>
+          ) : null}
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <ButtonLink href={ctaHref} className="w-full sm:w-auto">
+              {ctaLabel}
+            </ButtonLink>
+            <ButtonLink href="/packages" style="secondary" className="w-full sm:w-auto">
+              All packages
+            </ButtonLink>
           </div>
         </Container>
       </section>
@@ -61,9 +76,9 @@ export function PackageView({ pkg }: { pkg: EventPackage }) {
             {pkg.includes?.length ? (
               <div>
                 <DisplayHeading className="mb-6 text-3xl">What’s included</DisplayHeading>
-                <ul className="space-y-3 text-sm leading-6 text-muted">
+                <ul className="space-y-0 text-sm leading-6 text-muted">
                   {pkg.includes.map((item) => (
-                    <li key={item} className="border-b border-rule pb-3">
+                    <li key={item} className="border-b border-rule py-3 first:pt-0">
                       {item}
                     </li>
                   ))}
@@ -72,10 +87,10 @@ export function PackageView({ pkg }: { pkg: EventPackage }) {
             ) : null}
             {pkg.extras?.length ? (
               <div>
-                <DisplayHeading className="mb-6 text-3xl">Optional extras</DisplayHeading>
-                <ul className="space-y-3 text-sm leading-6 text-muted">
+                <DisplayHeading className="mb-6 text-3xl">Optional extras (POA)</DisplayHeading>
+                <ul className="space-y-0 text-sm leading-6 text-muted">
                   {pkg.extras.map((item) => (
-                    <li key={item} className="border-b border-rule pb-3">
+                    <li key={item} className="border-b border-rule py-3 first:pt-0">
                       {item}
                     </li>
                   ))}
@@ -89,13 +104,15 @@ export function PackageView({ pkg }: { pkg: EventPackage }) {
       {pkg.gallery?.length ? (
         <Section>
           <Container>
-            <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {pkg.gallery.map((image, index) => (
-                <li key={image.asset?._ref || image.url || index} className="overflow-hidden rounded-card">
-                  <CmsPhoto
+                <li key={image.asset?._ref || image.url || index}>
+                  <PhotoFrame
                     image={image}
-                    className="aspect-[4/3] w-full object-cover"
+                    zoom
+                    className="aspect-[4/3] w-full"
                     sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                    width={1100}
                   />
                 </li>
               ))}

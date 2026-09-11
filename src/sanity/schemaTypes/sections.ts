@@ -55,6 +55,7 @@ export const hero = defineType({
       title: "Background photo",
       type: "image",
       options: { hotspot: true },
+      description: "Full-bleed background for the hero. Optional video fields below can sit on top of it.",
       fields: [
         defineField({
           name: "alt",
@@ -62,6 +63,23 @@ export const hero = defineType({
           type: "string",
         }),
       ],
+    }),
+    defineField({
+      name: "video",
+      title: "Background video",
+      type: "file",
+      options: { accept: "video/mp4,video/webm,video/quicktime" },
+      description:
+        "Optional. A short, silent MP4 that loops behind the heading. Keep it under about 20MB if you can.",
+    }),
+    defineField({
+      name: "videoUrl",
+      title: "Or paste a video link",
+      type: "text",
+      rows: 3,
+      description:
+        "Optional. A YouTube link, a YouTube embed, or a direct .mp4 / .webm file. Leave empty if you uploaded a video above.",
+      hidden: ({ parent }) => Boolean(parent?.video),
     }),
     defineField({
       name: "primaryCta",

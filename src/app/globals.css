@@ -50,3 +50,96 @@ body {
   height: 100%;
   object-fit: cover;
 }
+
+.photo-zoom {
+  overflow: hidden;
+}
+
+.photo-zoom img {
+  transition: transform 700ms ease;
+}
+
+.photo-zoom:hover img {
+  transform: scale(1.045);
+}
+
+.hero-youtube iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100vw;
+  height: 56.25vw;
+  min-height: 100%;
+  min-width: 177.78vh;
+  border: 0;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.logo-well {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 5.75rem;
+  padding: 0.85rem 1.1rem;
+}
+
+.logo-well img {
+  max-height: 4.5rem;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+details.faq-item > summary {
+  list-style: none;
+}
+
+details.faq-item > summary::-webkit-details-marker {
+  display: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(0.85rem);
+    transition:
+      opacity 700ms ease,
+      transform 700ms ease;
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  .hero-media {
+    animation: hero-drift 32s ease-out forwards;
+    transform-origin: center;
+    will-change: transform;
+  }
+
+  @keyframes hero-drift {
+    from {
+      transform: scale(1);
+    }
+    to {
+      transform: scale(1.06);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal,
+  .hero-media,
+  .photo-zoom img {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}

@@ -9,6 +9,10 @@ export type CmsImage = {
   alt?: string;
   url?: string;
   hotspot?: { x: number; y: number };
+  crop?: { top: number; bottom: number; left: number; right: number };
+  lqip?: string;
+  width?: number;
+  height?: number;
 };
 
 export type NavItem = {
@@ -94,6 +98,7 @@ export type HeroSection = {
   subheading?: string;
   overlay?: "light" | "medium" | "dark";
   image?: CmsImage;
+  videoUrl?: string;
   primaryCta?: CtaButton;
   secondaryCta?: CtaButton;
 };

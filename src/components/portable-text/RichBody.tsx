@@ -10,7 +10,9 @@ const components: PortableTextComponents = {
       <h3 className="mt-8 mb-3 text-xl font-semibold text-cream">{children}</h3>
     ),
     normal: ({ children }) => (
-      <p className="mb-4 text-base leading-7 text-muted last:mb-0">{children}</p>
+      <p className="mb-5 text-base leading-7 text-muted last:mb-0 sm:text-[1.05rem] sm:leading-8">
+        {children}
+      </p>
     ),
   },
   marks: {
