@@ -9,7 +9,7 @@ export function CtaView({ section }: { section: CtaSection }) {
       <Container>
         <Reveal>
           <div className="relative overflow-hidden border-y border-green bg-bg-raised px-6 py-12 sm:px-12 sm:py-16 lg:px-16">
-            <Eyebrow>Enquire</Eyebrow>
+            <Eyebrow>{section.eyebrow || "Enquire"}</Eyebrow>
             <h2 className="font-display max-w-3xl text-4xl text-cream sm:text-5xl lg:text-6xl">
               {section.heading}
             </h2>

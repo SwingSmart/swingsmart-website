@@ -50,6 +50,12 @@ export const resolve: PresentationPluginOptions["resolve"] = {
         locations: [{ title: doc?.title || "Gallery", href: "/gallery" }],
       }),
     }),
+    galleryCategory: defineLocations({
+      select: { title: "title" },
+      resolve: (doc) => ({
+        locations: [{ title: doc?.title || "Gallery category", href: "/gallery" }],
+      }),
+    }),
     partner: defineLocations({
       select: { title: "name" },
       resolve: () => ({

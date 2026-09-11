@@ -23,6 +23,9 @@ const sectionProjection = groq`{
   overlay,
   imagePosition,
   featuredOnly,
+  showFilters,
+  showDescriptions,
+  layout,
   limit,
   showForm,
   showDetails,
@@ -111,7 +114,7 @@ export const packageBySlugQuery = groq`*[_type == "eventPackage" && slug.current
   sections[] ${sectionProjection}
 }`;
 
-export const galleryQuery = groq`*[_type == "galleryItem"] | order(featured desc, date desc, title asc){
+export const galleryQuery = groq`*[_type == "galleryItem"] | order(featured desc, sortOrder asc, date desc, title asc){
   _id,
   title,
   alt,
@@ -119,6 +122,7 @@ export const galleryQuery = groq`*[_type == "galleryItem"] | order(featured desc
   venue,
   date,
   featured,
+  sortOrder,
   "categories": categories[]->slug.current,
   image{
     asset,
@@ -132,9 +136,10 @@ export const galleryQuery = groq`*[_type == "galleryItem"] | order(featured desc
   }
 }`;
 
-export const galleryCategoriesQuery = groq`*[_type == "galleryCategory"] | order(title asc){
+export const galleryCategoriesQuery = groq`*[_type == "galleryCategory"] | order(sortOrder asc, title asc){
   _id,
   title,
+  sortOrder,
   "slug": slug.current
 }`;
 

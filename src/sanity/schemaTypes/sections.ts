@@ -214,13 +214,20 @@ export const gallery = defineType({
       title: "Show only this category",
       type: "reference",
       to: [{ type: "galleryCategory" }],
-      description: "Leave empty to show every photo.",
+      description: "Leave empty to show every photo. Categories themselves are managed under Gallery → Categories.",
     }),
     defineField({
       name: "featuredOnly",
       title: "Show featured photos only",
       type: "boolean",
       initialValue: false,
+    }),
+    defineField({
+      name: "showFilters",
+      title: "Show category filters",
+      type: "boolean",
+      initialValue: true,
+      description: "Lets visitors filter this block. Ignored if you pick a single category above.",
     }),
     defineField({
       name: "limit",
@@ -246,10 +253,32 @@ export const partnerGrid = defineType({
       rows: 2,
     }),
     defineField({
+      name: "layout",
+      title: "Layout",
+      type: "string",
+      initialValue: "cards",
+      options: {
+        layout: "radio",
+        list: [
+          { title: "Cards with names", value: "cards" },
+          { title: "Featured partners", value: "featured" },
+          { title: "Logo grid", value: "logos" },
+        ],
+      },
+      description: "Featured is a larger write-up. Logo grid is compact marks only.",
+    }),
+    defineField({
       name: "featuredOnly",
       title: "Show featured partners only",
       type: "boolean",
       initialValue: false,
+    }),
+    defineField({
+      name: "showDescriptions",
+      title: "Show descriptions",
+      type: "boolean",
+      initialValue: true,
+      description: "Turn off to show logos and names only.",
     }),
   ],
   preview: sectionPreview("Partner grid", EarthGlobeIcon),
@@ -419,6 +448,12 @@ export const cta = defineType({
   type: "object",
   icon: BoltIcon,
   fields: [
+    defineField({
+      name: "eyebrow",
+      title: "Eyebrow",
+      type: "string",
+      description: "Small label above the heading. Leave empty to use “Enquire”.",
+    }),
     defineField({
       name: "heading",
       title: "Heading",
