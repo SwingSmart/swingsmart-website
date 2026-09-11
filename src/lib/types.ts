@@ -134,8 +134,11 @@ export type GallerySection = {
   intro?: string;
   categorySlug?: string;
   featuredOnly?: boolean;
+  showFilters?: boolean;
   limit?: number;
 };
+
+export type PartnerGridLayout = "cards" | "featured" | "logos";
 
 export type PartnerGridSection = {
   _type: "partnerGrid";
@@ -143,6 +146,8 @@ export type PartnerGridSection = {
   heading?: string;
   intro?: string;
   featuredOnly?: boolean;
+  showDescriptions?: boolean;
+  layout?: PartnerGridLayout;
 };
 
 export type PackageGridSection = {
@@ -248,8 +253,10 @@ export type EventPackage = {
 };
 
 export type GalleryCategory = {
+  _id?: string;
   title: string;
   slug: string;
+  sortOrder?: number;
 };
 
 export type GalleryItem = {
@@ -260,6 +267,7 @@ export type GalleryItem = {
   venue?: string;
   date?: string;
   featured?: boolean;
+  sortOrder?: number;
   image: CmsImage;
   categories: string[];
 };
@@ -268,6 +276,7 @@ export type Partner = {
   _id?: string;
   name: string;
   summary?: string;
+  description?: PortableBlock[];
   url?: string;
   featured?: boolean;
   sortOrder?: number;

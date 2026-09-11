@@ -238,7 +238,7 @@ export const galleryCategory = defineType({
       name: "title",
       title: "Name",
       type: "string",
-      description: "For example: Weddings",
+      description: "Shown on the gallery filter buttons. For example: Weddings, Corporate, Golf Events.",
       validation: (rule) => rule.required(),
     }),
     defineField({
@@ -248,9 +248,25 @@ export const galleryCategory = defineType({
       options: { source: "title" },
       validation: (rule) => rule.required(),
     }),
+    defineField({
+      name: "sortOrder",
+      title: "Filter order",
+      type: "number",
+      description: "Lower numbers appear first on the gallery filters.",
+    }),
+  ],
+  orderings: [
+    {
+      title: "Filter order",
+      name: "sortOrderAsc",
+      by: [
+        { field: "sortOrder", direction: "asc" },
+        { field: "title", direction: "asc" },
+      ],
+    },
   ],
   preview: {
-    select: { title: "title" },
+    select: { title: "title", subtitle: "sortOrder" },
   },
 });
 
@@ -272,6 +288,7 @@ export const galleryItem = defineType({
       type: "image",
       options: { hotspot: true },
       validation: (rule) => rule.required(),
+      description: "Upload the photograph here. No developer needed — publish and it appears on the site.",
       fields: [
         defineField({
           name: "alt",
@@ -298,7 +315,13 @@ export const galleryItem = defineType({
       title: "Categories",
       type: "array",
       of: [{ type: "reference", to: [{ type: "galleryCategory" }] }],
-      description: "Used to filter the gallery.",
+      description: "A photo can belong to more than one category. Add or rename categories under Gallery → Categories.",
+    }),
+    defineField({
+      name: "sortOrder",
+      title: "List order",
+      type: "number",
+      description: "Lower numbers appear first. Featured photos still float to the top.",
     }),
     defineField({
       name: "venue",
@@ -318,6 +341,17 @@ export const galleryItem = defineType({
       type: "boolean",
       initialValue: false,
     }),
+  ],
+  orderings: [
+    {
+      title: "List order",
+      name: "sortOrderAsc",
+      by: [
+        { field: "featured", direction: "desc" },
+        { field: "sortOrder", direction: "asc" },
+        { field: "date", direction: "desc" },
+      ],
+    },
   ],
   preview: {
     select: { title: "title", subtitle: "venue", media: "image" },
@@ -340,6 +374,8 @@ export const partner = defineType({
       name: "logo",
       title: "Logo",
       type: "image",
+      options: { hotspot: false },
+      description: "A transparent PNG or SVG-style logo works best on the cream well.",
       fields: [
         defineField({ name: "alt", title: "Describe the logo", type: "string" }),
       ],

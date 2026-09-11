@@ -465,10 +465,13 @@ reviews.forEach(([quote, person], index) => {
 });
 
 const galleryCats = [
-  { _id: "gallery-cat-events", title: "Events", slug: "events" },
-  { _id: "gallery-cat-weddings", title: "Weddings", slug: "weddings" },
-  { _id: "gallery-cat-corporate", title: "Corporate", slug: "corporate" },
-  { _id: "gallery-cat-clubs", title: "Clubs", slug: "clubs" },
+  { _id: "gallery-cat-corporate", title: "Corporate", slug: "corporate", sortOrder: 1 },
+  { _id: "gallery-cat-weddings", title: "Weddings", slug: "weddings", sortOrder: 2 },
+  { _id: "gallery-cat-hotels", title: "Hotels & Holiday Parks", slug: "hotels-holiday-parks", sortOrder: 3 },
+  { _id: "gallery-cat-exhibitions", title: "Exhibitions", slug: "exhibitions", sortOrder: 4 },
+  { _id: "gallery-cat-private", title: "Private Events", slug: "private-events", sortOrder: 5 },
+  { _id: "gallery-cat-installations", title: "Long-Term Installations", slug: "long-term-installations", sortOrder: 6 },
+  { _id: "gallery-cat-golf-events", title: "Golf Events", slug: "golf-events", sortOrder: 7 },
 ];
 for (const cat of galleryCats) {
   transaction.createOrReplace({
@@ -476,32 +479,79 @@ for (const cat of galleryCats) {
     _type: "galleryCategory",
     title: cat.title,
     slug: { _type: "slug", current: cat.slug },
+    sortOrder: cat.sortOrder,
   });
 }
 
 const galleryItems = [
-  ["gallery-course", "On the course", assets.galleryCourse, "SwingSmart event photography on the golf course", "gallery-cat-events", true],
-  ["gallery-bay", "Event bay", assets.galleryBay, "Guests at a SwingSmart golf simulator event", "gallery-cat-events", false],
-  ["gallery-enclosure", "Enclosure", assets.galleryEnclosure, "SwingSmart simulator enclosure at an event", "gallery-cat-clubs", false],
-  ["gallery-tee", "Tee time", assets.galleryTee, "Players teeing off on a SwingSmart bay", "gallery-cat-events", true],
-  ["gallery-evening", "Evening hire", assets.galleryEvening, "Evening SwingSmart golf event", "gallery-cat-corporate", false],
-  ["gallery-summer", "Summer event", assets.gallerySummer, "Summer event with a SwingSmart golf simulator", "gallery-cat-events", false],
-  ["gallery-crowd", "Outdoor crowd", assets.galleryCrowd, "Crowd around a SwingSmart outdoor bay", "gallery-cat-corporate", false],
-  ["gallery-hero-49", "On-course bay", assets.galleryHero49, "SwingSmart golf simulator on a course during an event", "gallery-cat-events", true],
-  ["gallery-hero-52", "Outdoor gathering", assets.galleryHero52, "Guests gathered around a SwingSmart outdoor bay", "gallery-cat-events", false],
-  ["gallery-hero-02", "Course setup", assets.galleryHero02, "SwingSmart simulator setup on the golf course", "gallery-cat-events", false],
-  ["gallery-country-club-2", "Classic hire", assets.galleryCountryClub2, "Country Club golf simulator at a venue", "gallery-cat-clubs", false],
-  ["gallery-wedding", "Wedding bay", assets.phoenixOpen, "Wedding guests using a SwingSmart golf simulator", "gallery-cat-weddings", false],
+  ["gallery-course", "On the course", "SwingSmart on the golf course", assets.galleryCourse, "SwingSmart event photography on the golf course", ["gallery-cat-golf-events"], true],
+  ["gallery-bay", "Event bay", "Guests around the bay", assets.galleryBay, "Guests at a SwingSmart golf simulator event", ["gallery-cat-private", "gallery-cat-golf-events"], false],
+  ["gallery-enclosure", "Enclosure", "A fully managed enclosure", assets.galleryEnclosure, "SwingSmart simulator enclosure at an event", ["gallery-cat-installations", "gallery-cat-golf-events"], false],
+  ["gallery-tee", "Tee time", "Players on the tee", assets.galleryTee, "Players teeing off on a SwingSmart bay", ["gallery-cat-golf-events", "gallery-cat-private"], true],
+  ["gallery-evening", "Evening hire", "Evening corporate hire", assets.galleryEvening, "Evening SwingSmart golf event", ["gallery-cat-corporate", "gallery-cat-private"], false],
+  ["gallery-summer", "Summer event", "Summer gathering", assets.gallerySummer, "Summer event with a SwingSmart golf simulator", ["gallery-cat-private", "gallery-cat-golf-events"], false],
+  ["gallery-crowd", "Outdoor crowd", "A crowd around an outdoor bay", assets.galleryCrowd, "Crowd around a SwingSmart outdoor bay", ["gallery-cat-corporate", "gallery-cat-exhibitions"], false],
+  ["gallery-hero-49", "On-course bay", "Simulator on the course", assets.galleryHero49, "SwingSmart golf simulator on a course during an event", ["gallery-cat-golf-events"], true],
+  ["gallery-hero-52", "Outdoor gathering", "Guests at an outdoor setup", assets.galleryHero52, "Guests gathered around a SwingSmart outdoor bay", ["gallery-cat-golf-events", "gallery-cat-private"], false],
+  ["gallery-hero-02", "Course setup", "Bay on the fairway", assets.galleryHero02, "SwingSmart simulator setup on the golf course", ["gallery-cat-golf-events"], false],
+  ["gallery-country-club-2", "Classic hire", "A longer-term venue setup", assets.galleryCountryClub2, "Country Club golf simulator at a venue", ["gallery-cat-installations", "gallery-cat-hotels"], false],
+  ["gallery-wedding", "Wedding bay", "Wedding guests on the simulator", assets.phoenixOpen, "Wedding guests using a SwingSmart golf simulator", ["gallery-cat-weddings", "gallery-cat-private"], false],
 ];
-for (const [id, title, assetId, alt, catId, featured] of galleryItems) {
+for (const [id, title, caption, assetId, alt, catIds, featured] of galleryItems) {
   transaction.createOrReplace({
     _id: id,
     _type: "galleryItem",
     title,
+    caption,
     featured,
     alt,
-    categories: [{ _type: "reference", _ref: catId, _key: catId }],
+    categories: catIds.map((catId) => ({ _type: "reference", _ref: catId, _key: catId })),
     image: imageRef(assetId, alt),
+  });
+}
+
+const partners = [
+  {
+    _id: "partner-wellington",
+    name: "Wellington School",
+    summary: "Official supplier — heritage, excellence and an all-weather game for pupils.",
+    website: "https://www.wellington-school.org.uk",
+    featured: true,
+    sortOrder: 1,
+  },
+  {
+    _id: "partner-newton-abbot",
+    name: "Newton Abbot Races",
+    summary: "Family Day partner — a simulator on site for visitors of every age.",
+    website: "https://www.newtonabbotracing.com",
+    featured: false,
+    sortOrder: 2,
+  },
+  {
+    _id: "partner-graphic-mill",
+    name: "Graphic Mill",
+    summary: "Exhibition partners — high-impact stands with a full-scale SwingSmart bay.",
+    website: "https://www.graphicmill.co.uk",
+    featured: true,
+    sortOrder: 3,
+  },
+  {
+    _id: "partner-sauermann",
+    name: "Sauermann UK",
+    summary: "InstallerSHOW at the NEC — an interactive stand that gets the conversation started.",
+    featured: true,
+    sortOrder: 4,
+  },
+];
+for (const partner of partners) {
+  transaction.createOrReplace({
+    _id: partner._id,
+    _type: "partner",
+    name: partner.name,
+    summary: partner.summary,
+    website: partner.website,
+    featured: partner.featured,
+    sortOrder: partner.sortOrder,
   });
 }
 
@@ -654,6 +704,99 @@ transaction.createOrReplace({
       image: imageRef(assets.packagesIndex, "SwingSmart outdoor golf simulator on the course"),
     },
     { _type: "faq", _key: "faq-list", heading: "FAQ’s", items: faqs },
+  ],
+});
+
+transaction.createOrReplace({
+  _id: "page-gallery",
+  _type: "page",
+  title: "Gallery",
+  slug: { _type: "slug", current: "gallery" },
+  seo: {
+    _type: "seo",
+    title: "Gallery & Reviews — SwingSmart UK. Beyond Golf.",
+    description: "Event photography from SwingSmart golf simulator hires, weddings, corporates and clubs.",
+  },
+  sections: [
+    {
+      _type: "hero",
+      _key: "gal-hero",
+      eyebrow: "The course, wherever you are",
+      heading: "Gallery",
+      subheading:
+        "Here’s what our customers say about us with some cool pics we’ve taken along the way. Please note, everyone in these photos are happy to be in them and no golf balls were lost in the making (maybe 1 or 2)…",
+      overlay: "medium",
+      image: imageRef(assets.galleryBay, "Guests at a SwingSmart golf simulator event"),
+    },
+    {
+      _type: "gallery",
+      _key: "gal-grid",
+      heading: "Photographs",
+      intro: "Filter by category, or open a picture to view it larger.",
+      showFilters: true,
+    },
+    { _type: "testimonials", _key: "gal-quotes", heading: "Reviews" },
+  ],
+});
+
+transaction.createOrReplace({
+  _id: "page-partnerships",
+  _type: "page",
+  title: "Partnerships",
+  slug: { _type: "slug", current: "partnerships" },
+  seo: {
+    _type: "seo",
+    title: "Partnerships | SwingSmart UK",
+    description:
+      "Partner with SwingSmart for schools, venues, exhibitions and events. Fully managed golf simulation.",
+  },
+  sections: [
+    {
+      _type: "hero",
+      _key: "pt-hero",
+      eyebrow: "Work with us",
+      heading: "Partnerships",
+      subheading:
+        "Activate unused space, draw a crowd to a stand, or give members an all-weather game. We bring the bay.",
+      overlay: "medium",
+      image: imageRef(assets.ryderCup, "Corporate guests around a SwingSmart bay"),
+      primaryCta: { _type: "ctaButton", label: "Start a conversation", href: "/contact", style: "primary" },
+    },
+    {
+      _type: "richText",
+      _key: "pt-intro",
+      heading: "A new revenue stream, without a permanent install",
+      body: [
+        block("Got under-used space? Inside or outside, we can use it. Rent doesn’t reduce in winter — an empty room still costs money."),
+        block(
+          "We provide a fully managed, semi-permanent golf simulator with minimal upfront investment: a new attraction, a new revenue stream, and no structural risk to the venue.",
+        ),
+      ],
+    },
+    {
+      _type: "partnerGrid",
+      _key: "pt-featured",
+      heading: "Featured partners",
+      intro: "A few of the organisations already teeing it up with SwingSmart.",
+      layout: "featured",
+      featuredOnly: true,
+      showDescriptions: true,
+    },
+    {
+      _type: "partnerGrid",
+      _key: "pt-logos",
+      heading: "Who we’ve teed up with",
+      intro: "Logos and names are added in the Studio. Click through to their sites.",
+      layout: "logos",
+      showDescriptions: false,
+    },
+    {
+      _type: "cta",
+      _key: "pt-cta",
+      heading: "Want to partner with SwingSmart?",
+      text: "Schools, venues, hotels, exhibitions and clubs — if you have the space, we’ll bring the course. Chris and Ryan are ready to talk.",
+      button: { _type: "ctaButton", label: "Become a partner", href: "/contact", style: "primary" },
+    },
   ],
 });
 

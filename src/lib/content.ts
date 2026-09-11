@@ -172,7 +172,11 @@ export async function getPackage(slug: string): Promise<EventPackage | undefined
 
 export async function getGallery(): Promise<GalleryItem[]> {
   const data = await fetchQuery<GalleryItem[]>(galleryQuery);
-  return data?.length ? data : fallbackContent.gallery;
+  const items = data?.length ? data : fallbackContent.gallery;
+  return items.map((item) => ({
+    ...item,
+    categories: (item.categories || []).filter(Boolean),
+  }));
 }
 
 export async function getGalleryCategories(): Promise<GalleryCategory[]> {
