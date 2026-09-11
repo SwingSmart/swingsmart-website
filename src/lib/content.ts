@@ -108,6 +108,11 @@ export async function getPage(slug: string): Promise<PageDoc | undefined> {
   return fallbackContent.pages[slug];
 }
 
+function isPlaceholderHero(section: Extract<PageSection, { _type: "hero" }>) {
+  const blob = `${section.eyebrow || ""} ${section.heading || ""}`.toLowerCase();
+  return /cms preview|golf from the cms/.test(blob);
+}
+
 function restoreHomeLayout(page: PageDoc): PageDoc {
   const fallbackSections = fallbackContent.pages.home.sections;
   const fallbackHero = fallbackSections.find((section) => section._type === "hero");
@@ -117,8 +122,20 @@ function restoreHomeLayout(page: PageDoc): PageDoc {
     fallbackHero?._type === "hero" ? fallbackHero.image : photos.homeHero;
   const next: PageSection[] = current.map((section) => {
     if (section._type !== "hero") return section;
+    const fromFallback =
+      isPlaceholderHero(section) && fallbackHero?._type === "hero" ? fallbackHero : null;
     return {
       ...section,
+      ...(fromFallback
+        ? {
+            eyebrow: fromFallback.eyebrow,
+            heading: fromFallback.heading,
+            subheading: fromFallback.subheading,
+            overlay: fromFallback.overlay,
+            primaryCta: fromFallback.primaryCta,
+            secondaryCta: fromFallback.secondaryCta,
+          }
+        : {}),
       videoUrl: undefined,
       image: hasCmsImage(section.image) ? section.image : fallbackHeroImage,
     };
@@ -135,7 +152,11 @@ function restoreHomeLayout(page: PageDoc): PageDoc {
     types.add(section._type);
   }
 
-  return { ...page, sections: next };
+  return {
+    ...page,
+    seo: page.seo?.title ? page.seo : fallbackContent.pages.home.seo,
+    sections: next,
+  };
 }
 
 export async function getPackages(): Promise<EventPackage[]> {

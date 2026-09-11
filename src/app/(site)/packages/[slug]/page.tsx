@@ -49,9 +49,8 @@ export default async function PackageDetailPage({ params }: Props) {
 
   if (!pkg && !page) notFound();
 
-  const fromCms = Boolean(pkg?._id);
-  const extraSections = fromCms ? pkg?.sections || [] : [];
-  const fallbackSections = !fromCms && page?.sections?.length ? page.sections : [];
+  const extraSections = pkg?._id ? pkg.sections || [] : [];
+  const fallbackSections = !pkg && page?.sections?.length ? page.sections : [];
   const sections = extraSections.length ? extraSections : fallbackSections;
   const sectionDocumentId = extraSections.length ? pkg?._id : page?._id;
   const sectionDocumentType = extraSections.length ? pkg?._type || "eventPackage" : "page";
@@ -64,7 +63,7 @@ export default async function PackageDetailPage({ params }: Props) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(packageJsonLd(pkg)) }}
         />
       ) : null}
-      {fromCms && pkg ? <PackageView pkg={pkg} /> : null}
+      {pkg ? <PackageView pkg={pkg} /> : null}
       {sections.length ? (
         <PageSections
           documentId={sectionDocumentId}

@@ -9,7 +9,7 @@ import { hasCmsImage } from "@/sanity/image";
 export function PackageView({ pkg }: { pkg: EventPackage }) {
   const ctaHref = pkg.cta?.href || "/contact";
   const ctaLabel = pkg.cta?.label || "Enquire";
-  const heroImage = hasCmsImage(pkg.heroImage) ? pkg.heroImage : photos.hero;
+  const heroImage = hasCmsImage(pkg.heroImage) ? pkg.heroImage : photos.golfer;
 
   return (
     <>
@@ -87,7 +87,7 @@ export function PackageView({ pkg }: { pkg: EventPackage }) {
             ) : null}
             {pkg.extras?.length ? (
               <div>
-                <DisplayHeading className="mb-6 text-3xl">Optional extras</DisplayHeading>
+                <DisplayHeading className="mb-6 text-3xl">Optional extras (POA)</DisplayHeading>
                 <ul className="space-y-0 text-sm leading-6 text-muted">
                   {pkg.extras.map((item) => (
                     <li key={item} className="border-b border-rule py-3 first:pt-0">
