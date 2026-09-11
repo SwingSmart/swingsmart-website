@@ -91,7 +91,7 @@ export function GalleryGrid({
               }}
               aria-pressed={active === filter.slug}
               onClick={() => setActive(filter.slug)}
-              className={`shrink-0 rounded-tight px-4 py-2 text-sm transition-colors ${
+              className={`shrink-0 whitespace-nowrap rounded-tight px-4 py-2 text-sm transition-colors ${
                 active === filter.slug
                   ? "bg-green text-on-green"
                   : "border border-rule text-muted hover:text-cream"

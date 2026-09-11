@@ -79,8 +79,8 @@ function FeaturedPartners({
             delay={index * 50}
             className="flex h-full flex-col border border-rule bg-bg-raised p-7 sm:p-10"
           >
-            <PartnerLogo partner={partner} />
-            <DisplayHeading as="h3" className="mt-8 text-3xl sm:text-4xl">
+            {hasCmsImage(partner.logo) ? <PartnerLogo partner={partner} /> : null}
+            <DisplayHeading as="h3" className={`${hasCmsImage(partner.logo) ? "mt-8" : "mt-0"} text-3xl sm:text-4xl`}>
               {partner.name}
             </DisplayHeading>
             {showDescriptions && partner.summary ? (
@@ -115,7 +115,9 @@ function LogoGrid({ partners }: { partners: Partner[] }) {
         const inner = (
           <>
             <PartnerLogo partner={partner} compact />
-            <p className="mt-4 text-center text-sm text-cream">{partner.name}</p>
+            {hasCmsImage(partner.logo) ? (
+              <p className="mt-4 text-center text-sm text-cream">{partner.name}</p>
+            ) : null}
           </>
         );
         return (
