@@ -68,7 +68,7 @@ export function GalleryGrid({
           role="toolbar"
           aria-label="Filter photographs"
           aria-controls={statusId}
-          className="mb-4 flex gap-2 overflow-x-auto overscroll-x-contain pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          className="mb-4 flex flex-wrap gap-2"
           onKeyDown={(event) => {
             const keys = ["ArrowRight", "ArrowLeft", "Home", "End"];
             if (!keys.includes(event.key)) return;
