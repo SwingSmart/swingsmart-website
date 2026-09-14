@@ -17,10 +17,10 @@ export function FeatureGridView({ section }: { section: FeatureGridSection }) {
             {items.map((item, index) => (
               <li key={item._key} className="bg-bg-raised">
                 <Reveal delay={index * 40} className="flex h-full flex-col p-7 sm:p-8">
-                  <p className="text-[0.7rem] uppercase tracking-[0.18em] text-green-soft">
+                  <p className="text-[0.68rem] uppercase tracking-[0.22em] text-cream/40">
                     {String(index + 1).padStart(2, "0")}
                   </p>
-                  <h3 className="mt-4 font-display text-2xl text-cream sm:text-3xl">
+                  <h3 className="mt-5 font-display text-2xl font-medium tracking-[-0.02em] text-cream sm:text-3xl">
                     {item.title}
                   </h3>
                   {item.text ? (

@@ -10,27 +10,32 @@ import { hasCmsImage, imageSrc } from "@/sanity/image";
 export function Hero({
   section,
   priority = true,
+  fullHeight = true,
 }: {
   section: HeroSection;
   priority?: boolean;
+  fullHeight?: boolean;
 }) {
   const image = hasCmsImage(section.image) ? section.image : photos.homeHero;
   const poster = imageSrc(image, 2400);
   const videoSrc = section.videoUrl;
   const overlayClass = videoSrc
     ? section.overlay === "light"
-      ? "from-bg/75 via-bg/30 to-bg/15"
+      ? "from-bg/70 via-bg/25 to-bg/10"
       : section.overlay === "dark"
-        ? "from-bg via-bg/70 to-bg/35"
-        : "from-bg/90 via-bg/45 to-bg/20"
+        ? "from-bg/90 via-bg/55 to-bg/25"
+        : "from-bg/85 via-bg/35 to-bg/15"
     : section.overlay === "light"
-      ? "from-bg/80 via-bg/20 to-transparent"
+      ? "from-bg/55 via-bg/10 to-transparent"
       : section.overlay === "dark"
-        ? "from-bg via-bg/45 to-bg/10"
-        : "from-bg via-bg/25 to-transparent";
+        ? "from-bg/90 via-bg/35 to-bg/10"
+        : "from-bg/80 via-bg/15 to-transparent";
+  const height = fullHeight
+    ? "min-h-[100svh]"
+    : "min-h-[72svh] sm:min-h-[78svh] lg:min-h-[82svh]";
 
   return (
-    <section className="relative isolate min-h-[100svh] overflow-hidden bg-bg">
+    <section className={`relative isolate overflow-hidden bg-bg ${height}`}>
       <div className="absolute inset-0">
         <CmsPhoto
           image={image}
@@ -42,29 +47,25 @@ export function Hero({
         />
         {videoSrc ? <HeroVideo src={videoSrc} poster={poster} /> : null}
         <div className={`absolute inset-0 bg-gradient-to-t ${overlayClass}`} />
-        {videoSrc ? (
-          <div className="absolute inset-0 bg-gradient-to-r from-bg/55 via-bg/15 to-transparent" />
-        ) : (
-          <div className="absolute inset-0 bg-gradient-to-b from-bg/45 via-transparent to-transparent" />
-        )}
+        <div className="absolute inset-0 bg-gradient-to-b from-bg/35 via-transparent to-transparent" />
       </div>
 
-      <Container className="relative flex min-h-[100svh] flex-col justify-end pb-16 pt-28 sm:pb-24">
+      <Container className={`relative flex ${height} flex-col justify-end pb-16 pt-28 sm:pb-24 lg:pb-28`}>
         <Reveal>
           {section.eyebrow ? <Eyebrow>{section.eyebrow}</Eyebrow> : null}
           <DisplayHeading
             as="h1"
-            className="max-w-4xl text-[2.6rem] sm:text-6xl lg:text-[4.85rem]"
+            className="max-w-5xl text-[2.7rem] sm:text-6xl lg:text-7xl xl:text-[4.85rem] xl:leading-[0.98]"
           >
             {section.heading}
           </DisplayHeading>
           {section.subheading ? (
-            <p className="mt-5 max-w-xl text-base leading-7 text-cream/88 sm:text-lg sm:leading-8">
+            <p className="mt-6 max-w-xl text-base leading-7 text-cream/82 sm:text-lg sm:leading-8">
               {section.subheading}
             </p>
           ) : null}
           {section.primaryCta?.href || section.secondaryCta?.href ? (
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               {section.primaryCta?.href ? (
                 <ButtonLink
                   href={section.primaryCta.href}

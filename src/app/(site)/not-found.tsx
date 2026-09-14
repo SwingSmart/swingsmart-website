@@ -5,10 +5,10 @@ export default function NotFound() {
   return (
     <div className="flex min-h-[70vh] items-end pb-24 pt-32">
       <Container>
-        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-green">
+        <p className="text-[0.68rem] font-medium uppercase tracking-[0.28em] text-cream/50">
           404
         </p>
-        <h1 className="font-display mt-4 text-5xl text-cream">That hole doesn’t exist.</h1>
+        <h1 className="font-display mt-5 text-5xl font-medium tracking-[-0.02em] text-cream sm:text-6xl">That hole doesn’t exist.</h1>
         <p className="mt-4 max-w-md text-muted">
           The page you’re looking for has been moved or never made the cut.
         </p>

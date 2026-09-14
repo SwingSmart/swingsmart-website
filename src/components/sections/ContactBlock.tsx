@@ -30,7 +30,7 @@ export function ContactBlockView({
               {settings.contact.email ? (
                 <li>
                   <a
-                    className="text-green-soft hover:underline"
+                    className="text-cream hover:text-cream/80"
                     href={`mailto:${settings.contact.email}`}
                   >
                     {settings.contact.email}
@@ -39,7 +39,7 @@ export function ContactBlockView({
               ) : null}
               {(settings.contact.phones || []).map((phone) => (
                 <li key={phone}>
-                  <a className="hover:text-green" href={`tel:${phone.replace(/\s/g, "")}`}>
+                  <a className="hover:text-cream" href={`tel:${phone.replace(/\s/g, "")}`}>
                     {phone}
                   </a>
                 </li>

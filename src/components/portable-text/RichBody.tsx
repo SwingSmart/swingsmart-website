@@ -23,7 +23,7 @@ const components: PortableTextComponents = {
     link: ({ children, value }) => (
       <a
         href={value?.href}
-        className="text-green underline-offset-4 hover:underline"
+        className="text-cream underline-offset-4 hover:underline"
       >
         {children}
       </a>

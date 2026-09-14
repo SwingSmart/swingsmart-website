@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import { PinMark } from "@/components/brand/PinMark";
 
 export function Container({
   children,
@@ -12,7 +11,7 @@ export function Container({
 }) {
   return (
     <div
-      className={`mx-auto w-full px-5 sm:px-8 ${narrow ? "max-w-copy" : "max-w-shell"} ${className}`}
+      className={`mx-auto w-full px-5 sm:px-8 lg:px-10 xl:px-12 ${narrow ? "max-w-copy" : "max-w-shell"} ${className}`}
     >
       {children}
     </div>
@@ -29,7 +28,7 @@ export function Section({
   id?: string;
 }) {
   return (
-    <section id={id} className={`py-16 sm:py-24 lg:py-28 ${className}`}>
+    <section id={id} className={`py-20 sm:py-28 lg:py-32 ${className}`}>
       {children}
     </section>
   );
@@ -37,8 +36,7 @@ export function Section({
 
 export function Eyebrow({ children }: { children: ReactNode }) {
   return (
-    <p className="mb-3 inline-flex items-center gap-2 text-[0.7rem] font-medium uppercase tracking-[0.22em] text-green-soft">
-      <PinMark className="h-3.5 w-2.5 text-green-mid" />
+    <p className="mb-4 text-[0.68rem] font-medium uppercase tracking-[0.28em] text-cream/55">
       {children}
     </p>
   );
@@ -55,7 +53,7 @@ export function DisplayHeading({
 }) {
   return (
     <Tag
-      className={`font-display text-4xl leading-[1.06] tracking-tight text-cream sm:text-5xl ${className}`}
+      className={`font-display font-medium leading-[1.08] tracking-[-0.02em] text-cream text-[2.15rem] sm:text-5xl lg:text-[3.25rem] ${className}`}
     >
       {children}
     </Tag>
@@ -75,11 +73,11 @@ export function SectionIntro({
 }) {
   if (!heading && !intro && !eyebrow) return null;
   return (
-    <div className={`mb-10 max-w-2xl sm:mb-14 ${className}`}>
+    <div className={`mb-12 max-w-2xl sm:mb-16 ${className}`}>
       {eyebrow ? <Eyebrow>{eyebrow}</Eyebrow> : null}
       {heading ? <DisplayHeading>{heading}</DisplayHeading> : null}
       {intro ? (
-        <p className={`max-w-xl text-base leading-7 text-muted sm:text-lg ${heading ? "mt-4" : ""}`}>
+        <p className={`max-w-xl text-base leading-7 text-muted sm:text-lg sm:leading-8 ${heading ? "mt-5" : ""}`}>
           {intro}
         </p>
       ) : null}

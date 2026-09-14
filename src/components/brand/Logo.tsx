@@ -15,11 +15,11 @@ export function Logo({
       aria-label="SwingSmart UK home"
     >
       <Image
-        src="/brand/logo.png"
+        src="/brand/wordmark.png"
         alt="SwingSmart — Beyond Golf"
-        width={180}
-        height={180}
-        className="h-[3.7rem] w-[3.7rem] object-contain object-left sm:h-[4.4rem] sm:w-[4.4rem]"
+        width={1378}
+        height={466}
+        className="h-8 w-auto sm:h-9 xl:h-10"
         priority={priority}
       />
     </Link>

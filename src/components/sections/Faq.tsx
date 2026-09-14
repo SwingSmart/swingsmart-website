@@ -18,11 +18,11 @@ export function FaqView({ section }: { section: FaqSection }) {
           <div className="border-y border-rule">
             {items.map((item) => (
               <details key={item._key} className="faq-item group border-b border-rule last:border-b-0">
-                <summary className="flex cursor-pointer items-start justify-between gap-6 py-5 text-left text-lg font-semibold text-cream sm:py-6">
+                <summary className="flex cursor-pointer items-start justify-between gap-6 py-6 text-left text-lg font-medium text-cream sm:py-7 sm:text-xl">
                   <span>{item.question}</span>
                   <span
                     aria-hidden
-                    className="mt-1 inline-flex h-6 w-6 shrink-0 items-center justify-center text-green-soft transition-transform duration-200 group-open:rotate-45"
+                    className="mt-1 inline-flex h-6 w-6 shrink-0 items-center justify-center text-cream/50 transition-transform duration-200 group-open:rotate-45"
                   >
                     +
                   </span>

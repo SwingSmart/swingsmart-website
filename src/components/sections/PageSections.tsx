@@ -36,6 +36,7 @@ export function PageSections({
   galleryCategories,
   partners,
   testimonials,
+  isHome = false,
 }: {
   documentId?: string;
   documentType?: string;
@@ -46,6 +47,7 @@ export function PageSections({
   galleryCategories: GalleryCategory[];
   partners: Partner[];
   testimonials: Testimonial[];
+  isHome?: boolean;
 }) {
   const liveSections = useOptimistic<PageSection[], { sections?: PageSection[] }>(
     sections,
@@ -108,6 +110,7 @@ export function PageSections({
               partners,
               testimonials,
               heroPriority: index === 0,
+              isHome,
             })}
           </div>
         );
@@ -126,11 +129,18 @@ function renderSection(
     partners: Partner[];
     testimonials: Testimonial[];
     heroPriority: boolean;
+    isHome: boolean;
   },
 ) {
   switch (section._type) {
     case "hero":
-      return <Hero section={section} priority={context.heroPriority} />;
+      return (
+        <Hero
+          section={section}
+          priority={context.heroPriority}
+          fullHeight={context.isHome}
+        />
+      );
     case "richText":
       return <RichTextSectionView section={section} />;
     case "textAndImage":

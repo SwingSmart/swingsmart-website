@@ -4,12 +4,12 @@ import type { ButtonHTMLAttributes, ReactNode } from "react";
 type Variant = "primary" | "secondary";
 
 const base =
-  "inline-flex min-h-11 items-center justify-center rounded-tight px-5 text-sm font-medium tracking-[0.04em] transition-colors";
+  "inline-flex min-h-12 items-center justify-center px-7 text-[0.8rem] font-medium tracking-[0.14em] transition-colors duration-300";
 
 const variants: Record<Variant, string> = {
   primary: "bg-green text-on-green hover:bg-green-mid",
   secondary:
-    "border border-cream/35 bg-transparent text-cream hover:border-green-soft hover:text-green-soft",
+    "border border-cream/40 bg-transparent text-cream hover:border-cream hover:bg-cream/5",
 };
 
 export function ButtonLink({

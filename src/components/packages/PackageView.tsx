@@ -13,7 +13,7 @@ export function PackageView({ pkg }: { pkg: EventPackage }) {
 
   return (
     <>
-      <section className="relative min-h-[88svh] overflow-hidden bg-bg">
+      <section className="relative min-h-[76svh] overflow-hidden bg-bg sm:min-h-[82svh]">
         {hasCmsImage(heroImage) ? (
           <div className="absolute inset-0">
             <CmsPhoto
@@ -24,15 +24,15 @@ export function PackageView({ pkg }: { pkg: EventPackage }) {
               sizes="100vw"
               width={2400}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-bg via-bg/45 to-bg/20" />
-            <div className="absolute inset-0 bg-gradient-to-r from-bg/50 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-bg via-bg/30 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-b from-bg/30 via-transparent to-transparent" />
           </div>
         ) : (
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_rgba(11,110,22,0.28),_transparent_55%)]" />
         )}
-        <Container className="relative flex min-h-[88svh] flex-col justify-end pb-16 pt-28 sm:pb-24">
+        <Container className="relative flex min-h-[76svh] flex-col justify-end pb-16 pt-28 sm:min-h-[82svh] sm:pb-24">
           {pkg.shortName ? <Eyebrow>{pkg.shortName}</Eyebrow> : null}
-          <DisplayHeading as="h1" className="max-w-3xl text-[2.6rem] sm:text-6xl">
+          <DisplayHeading as="h1" className="max-w-3xl text-[2.7rem] sm:text-6xl lg:text-7xl">
             {pkg.title}
           </DisplayHeading>
           {pkg.subtitle ? (

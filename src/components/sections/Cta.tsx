@@ -8,9 +8,11 @@ export function CtaView({ section }: { section: CtaSection }) {
     <Section>
       <Container>
         <Reveal>
-          <div className="relative overflow-hidden border-y border-green bg-bg-raised px-6 py-12 sm:px-12 sm:py-16 lg:px-16">
+          <div className="relative overflow-hidden px-6 py-14 sm:px-12 sm:py-20 lg:px-20 lg:py-24">
+            <div className="absolute inset-x-0 top-0 h-px bg-green" />
+            <div className="absolute inset-x-0 bottom-0 h-px bg-rule" />
             <Eyebrow>{section.eyebrow || "Enquire"}</Eyebrow>
-            <h2 className="font-display max-w-3xl text-4xl text-cream sm:text-5xl lg:text-6xl">
+            <h2 className="font-display max-w-3xl text-4xl font-medium tracking-[-0.02em] text-cream sm:text-5xl lg:text-6xl">
               {section.heading}
             </h2>
             {section.text ? (

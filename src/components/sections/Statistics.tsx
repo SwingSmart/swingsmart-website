@@ -7,7 +7,7 @@ export function StatisticsView({ section }: { section: StatisticsSection }) {
   const items = section.items ?? [];
 
   return (
-    <Section className="py-12 sm:py-16 lg:py-20">
+    <Section className="py-16 sm:py-20 lg:py-24">
       <Container>
         <Reveal>
           <SectionIntro heading={section.heading} intro={section.intro} />
@@ -22,7 +22,7 @@ export function StatisticsView({ section }: { section: StatisticsSection }) {
                 }`}
               >
                 <Reveal delay={index * 70}>
-                  <p className="font-display text-4xl leading-none text-green sm:text-5xl">
+                  <p className="font-display text-4xl font-medium leading-none text-green sm:text-5xl lg:text-6xl">
                     {item.value}
                   </p>
                   {item.label ? (
