@@ -105,7 +105,7 @@ function FeaturedPartners({
         <li key={partner._id || partner.name}>
           <Reveal
             delay={index * 50}
-            className="flex h-full flex-col border border-rule bg-bg-raised p-7 sm:p-10"
+            className="flex h-full flex-col py-4 sm:py-6 lg:py-2"
           >
             {hasCmsImage(partner.logo) ? <PartnerLogo partner={partner} /> : null}
             <DisplayHeading as="h3" className={`${hasCmsImage(partner.logo) ? "mt-8" : "mt-0"} text-3xl sm:text-4xl`}>

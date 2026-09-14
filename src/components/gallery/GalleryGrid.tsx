@@ -55,12 +55,6 @@ export function GalleryGrid({
     [filtered.length],
   );
 
-  useEffect(() => {
-    if (openIndex !== null && openIndex >= filtered.length) {
-      setOpenIndex(null);
-    }
-  }, [filtered.length, openIndex]);
-
   return (
     <div>
       {showFilters && filters.length > 1 ? (
@@ -68,7 +62,7 @@ export function GalleryGrid({
           role="toolbar"
           aria-label="Filter photographs"
           aria-controls={statusId}
-          className="mb-4 flex flex-wrap gap-2"
+          className="mb-4 flex flex-wrap gap-x-5 gap-y-1"
           onKeyDown={(event) => {
             const keys = ["ArrowRight", "ArrowLeft", "Home", "End"];
             if (!keys.includes(event.key)) return;
@@ -84,7 +78,10 @@ export function GalleryGrid({
             if (event.key === "End") next = last;
             filterRefs.current[next]?.focus();
             const slug = filters[next]?.slug;
-            if (slug) setActive(slug);
+            if (slug) {
+              setActive(slug);
+              setOpenIndex(null);
+            }
           }}
         >
           {filters.map((filter, index) => (
@@ -96,11 +93,14 @@ export function GalleryGrid({
               }}
               tabIndex={active === filter.slug ? 0 : -1}
               aria-pressed={active === filter.slug}
-              onClick={() => setActive(filter.slug)}
-              className={`shrink-0 whitespace-nowrap rounded-tight px-4 py-2 text-sm transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green ${
+              onClick={() => {
+                setActive(filter.slug);
+                setOpenIndex(null);
+              }}
+              className={`shrink-0 whitespace-nowrap border-b px-1 py-2 text-[0.8rem] tracking-[0.08em] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green ${
                 active === filter.slug
-                  ? "bg-green text-on-green"
-                  : "border border-rule text-muted hover:text-cream"
+                  ? "border-cream text-cream"
+                  : "border-transparent text-cream/45 hover:text-cream"
               }`}
             >
               {filter.title}
@@ -115,7 +115,7 @@ export function GalleryGrid({
       </p>
 
       {filtered.length ? (
-        <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-12 lg:gap-4">
+        <ul className="grid grid-cols-1 gap-2 sm:grid-cols-2 sm:gap-3 lg:grid-cols-12 lg:gap-3">
           {filtered.map((item, index) => {
             const portrait =
               Boolean(item.image?.width && item.image?.height) &&
@@ -146,7 +146,7 @@ export function GalleryGrid({
                       zoom
                       className={
                         wide
-                          ? "aspect-[16/10] w-full lg:aspect-[16/9] lg:min-h-[22rem]"
+                          ? "aspect-[16/10] w-full lg:aspect-[16/9] lg:min-h-[26rem] xl:min-h-[30rem]"
                           : portrait
                             ? "aspect-[3/4] w-full"
                             : "aspect-[4/3] w-full"
@@ -320,7 +320,7 @@ function Lightbox({
               <>
                 <button
                   type="button"
-                  className="min-h-11 border border-rule px-4 text-cream hover:text-green-soft"
+                  className="min-h-11 border border-rule px-4 text-cream hover:border-cream"
                   onClick={onPrev}
                   aria-label="Previous photograph"
                 >
@@ -328,7 +328,7 @@ function Lightbox({
                 </button>
                 <button
                   type="button"
-                  className="min-h-11 border border-rule px-4 text-cream hover:text-green-soft"
+                  className="min-h-11 border border-rule px-4 text-cream hover:border-cream"
                   onClick={onNext}
                   aria-label="Next photograph"
                 >

@@ -15,6 +15,7 @@ const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
   display: "swap",
   weight: ["500", "600", "700"],
+  style: ["normal", "italic"],
 });
 
 export async function generateMetadata(): Promise<Metadata> {

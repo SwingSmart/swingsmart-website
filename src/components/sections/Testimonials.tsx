@@ -35,14 +35,14 @@ export function TestimonialsView({
                 >
                   <Reveal delay={index * 60} className="h-full">
                     <figure
-                      className={`flex h-full flex-col border-l-2 border-green px-6 py-2 ${
-                        featured ? "lg:px-10 lg:py-4" : ""
+                      className={`flex h-full flex-col border-l border-cream/25 pl-6 py-1 ${
+                        featured ? "lg:pl-10 lg:py-2" : ""
                       }`}
                     >
                       <blockquote
-                        className={`font-display leading-snug text-cream ${
+                        className={`font-display font-medium italic leading-[1.2] text-cream ${
                           featured
-                            ? "text-3xl sm:text-4xl lg:text-5xl"
+                            ? "text-3xl sm:text-4xl lg:text-[2.75rem]"
                             : "text-xl sm:text-2xl"
                         }`}
                       >

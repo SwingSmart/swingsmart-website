@@ -31,7 +31,7 @@ export function TextAndImageView({ section }: { section: TextAndImageSection }) 
           <PhotoFrame
             image={section.image}
             zoom
-            className="aspect-[4/5] w-full sm:aspect-[5/6] lg:min-h-[36rem] lg:aspect-auto"
+            className="lg:aspect-auto lg:min-h-[40rem] xl:min-h-[44rem] aspect-[4/5] w-full sm:aspect-[5/6]"
             sizes="(min-width: 1024px) 50vw, 100vw"
             width={1400}
           />

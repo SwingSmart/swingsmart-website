@@ -1,32 +1,35 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-bg: #070807;
-  --color-bg-raised: #0e100e;
-  --color-surface: #141614;
+  --color-bg: #060706;
+  --color-bg-raised: #0b0d0b;
+  --color-surface: #111411;
   --color-green: #0b6e16;
   --color-green-mid: #2f8f38;
   --color-green-soft: #8fbf8c;
-  --color-cream: #f3f0e6;
-  --color-muted: #9a9589;
-  --color-rule: #2c302c;
-  --color-on-green: #f3f0e6;
+  --color-cream: #f4f1e8;
+  --color-muted: #9c978c;
+  --color-rule: #242824;
+  --color-on-green: #f4f1e8;
   --font-sans: var(--font-source-sans), "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-cormorant), "Cormorant Garamond", ui-serif, Georgia, serif;
-  --radius-tight: 2px;
-  --radius-card: 4px;
-  --max-width-shell: 80rem;
-  --max-width-copy: 40rem;
+  --radius-tight: 1px;
+  --radius-card: 0px;
+  --max-width-shell: 90rem;
+  --max-width-copy: 38rem;
 }
 
 html {
+  color-scheme: dark;
   scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
 }
 
 body {
   background: var(--color-bg);
   color: var(--color-cream);
   font-family: var(--font-sans);
+  font-feature-settings: "ss01" on, "kern" on;
 }
 
 ::selection {
@@ -41,7 +44,6 @@ body {
 
 .img-frame {
   overflow: hidden;
-  border-radius: var(--radius-card);
   background: var(--color-surface);
 }
 
@@ -56,11 +58,12 @@ body {
 }
 
 .photo-zoom img {
-  transition: transform 700ms ease;
+  transition: transform 1200ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.photo-zoom:hover img {
-  transform: scale(1.045);
+.photo-zoom:hover img,
+.photo-zoom:focus-within img {
+  transform: scale(1.035);
 }
 
 .hero-youtube iframe {
@@ -99,13 +102,42 @@ details.faq-item > summary::-webkit-details-marker {
   display: none;
 }
 
+select option {
+  background: var(--color-bg);
+  color: var(--color-cream);
+}
+
 @media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+
+  ::view-transition-old(root) {
+    animation: 220ms ease-out both page-fade-out;
+  }
+
+  ::view-transition-new(root) {
+    animation: 380ms ease-out both page-fade-in;
+  }
+
+  @keyframes page-fade-out {
+    to {
+      opacity: 0;
+    }
+  }
+
+  @keyframes page-fade-in {
+    from {
+      opacity: 0;
+    }
+  }
+
   .reveal {
     opacity: 0;
-    transform: translateY(0.85rem);
+    transform: translateY(1.1rem);
     transition:
-      opacity 700ms ease,
-      transform 700ms ease;
+      opacity 800ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 800ms cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .reveal.is-visible {
@@ -114,7 +146,7 @@ details.faq-item > summary::-webkit-details-marker {
   }
 
   .hero-media {
-    animation: hero-drift 32s ease-out forwards;
+    animation: hero-drift 36s ease-out forwards;
     transform-origin: center;
     will-change: transform;
   }
@@ -124,7 +156,7 @@ details.faq-item > summary::-webkit-details-marker {
       transform: scale(1);
     }
     to {
-      transform: scale(1.06);
+      transform: scale(1.05);
     }
   }
 }

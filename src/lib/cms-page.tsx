@@ -39,6 +39,7 @@ export async function CmsPage({ slug }: { slug: string }) {
       galleryCategories={galleryCategories}
       partners={partners}
       testimonials={testimonials}
+      isHome={slug === "home"}
     />
   );
 }
