@@ -1,8 +1,14 @@
 import { isSanityConfigured } from "@/sanity/env";
 import { Container } from "@/components/ui/Layout";
 import { StudioApp } from "./studio-app";
+import { metadata as studioMetadata, viewport } from "next-sanity/studio";
 
-export { metadata, viewport } from "next-sanity/studio";
+export { viewport };
+
+export const metadata = {
+  ...studioMetadata,
+  robots: { index: false, follow: false },
+};
 
 export const dynamic = "force-dynamic";
 

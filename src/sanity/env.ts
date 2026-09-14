@@ -9,6 +9,16 @@ export const projectId =
 
 export const isSanityConfigured = Boolean(projectId);
 
-export const siteUrl = (
-  process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
-).replace(/\/$/, "");
+function resolveSiteUrl() {
+  const fromEnv = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "");
+  if (fromEnv) return fromEnv;
+  if (process.env.VERCEL_ENV === "production") {
+    return "https://www.swingsmart.co.uk";
+  }
+  if (process.env.VERCEL_URL) {
+    return `https://${process.env.VERCEL_URL}`;
+  }
+  return "http://localhost:3000";
+}
+
+export const siteUrl = resolveSiteUrl();

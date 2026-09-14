@@ -92,6 +92,10 @@ export function ContactForm({ packages }: { packages: EventPackage[] }) {
         </label>
         <textarea id="message" name="message" required rows={5} className={field} />
       </div>
+      <div aria-hidden="true" className="hidden">
+        <label htmlFor="company">Company</label>
+        <input id="company" name="company" tabIndex={-1} autoComplete="off" />
+      </div>
       <Button type="submit" disabled={status === "sending"}>
         {status === "sending" ? "Sending…" : "Send enquiry"}
       </Button>

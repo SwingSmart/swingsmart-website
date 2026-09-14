@@ -1,5 +1,11 @@
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { Container } from "@/components/ui/Layout";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: { absolute: "Page not found | SwingSmart UK" },
+  robots: { index: false, follow: true },
+};
 
 export default function NotFound() {
   return (

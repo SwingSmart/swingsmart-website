@@ -212,5 +212,5 @@ export async function getSiteUrlMap() {
     "/packages",
     ...packages.map((item) => `/packages/${item.slug}`),
     ...pagePaths,
-  ];
+  ].filter((path, index, all) => all.indexOf(path) === index);
 }

@@ -24,7 +24,7 @@ export function CmsPhoto({
   mode?: "cover" | "contain";
 }) {
   const built = buildImage(image, { width, height, mode });
-  const label = alt || image?.alt || "";
+  const label = alt || image?.alt || (hasCmsImage(image) ? "SwingSmart golf simulator hire" : "");
   const fit = mode === "contain" ? "object-contain" : "object-cover";
 
   if (!built) {

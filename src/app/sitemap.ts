@@ -2,6 +2,8 @@ import type { MetadataRoute } from "next";
 import { getSiteUrlMap } from "@/lib/content";
 import { siteUrl } from "@/sanity/env";
 
+export const dynamic = "force-dynamic";
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const paths = await getSiteUrlMap();
   const now = new Date();
