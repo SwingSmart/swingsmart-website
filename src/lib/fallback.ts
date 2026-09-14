@@ -25,6 +25,7 @@ const settings: SiteContent["settings"] = {
     title: "SwingSmart UK. Beyond Golf. | Experience Golf Convenience - Book Today",
     description:
       "Explore SwingSmart UK for immersive golf simulation experiences, events, and packages. Convenient, flexible golf options for all skill levels and occasions.",
+    ogImage: photos.homeHero,
   },
   primaryCta: { label: "Plan an event", href: "/contact", style: "primary" },
   secondaryCta: { label: "View packages", href: "/packages", style: "secondary" },

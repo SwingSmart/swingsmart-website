@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { photos } from "@/lib/content-helpers";
 import { siteUrl } from "@/sanity/env";
 import { imageSrc } from "@/sanity/image";
 import type { SeoFields, SiteSettings } from "@/lib/types";
@@ -12,11 +13,14 @@ export function buildMetadata(
   const description =
     seo?.description || settings.defaultSeo.description || settings.tagline;
   const canonical = `${siteUrl}${path === "/" ? "" : path}`;
-  const og = imageSrc(seo?.ogImage || settings.defaultSeo.ogImage, 1200);
+  const og =
+    imageSrc(seo?.ogImage || settings.defaultSeo.ogImage || photos.homeHero, 1200) ||
+    `${siteUrl}/brand/hero.jpg`;
 
   return {
     title: { absolute: title },
     description,
+    robots: { index: true, follow: true },
     alternates: { canonical },
     openGraph: {
       title,
@@ -25,13 +29,13 @@ export function buildMetadata(
       siteName: settings.siteName,
       locale: "en_GB",
       type: "website",
-      images: og ? [{ url: og }] : undefined,
+      images: [{ url: og, width: 1200, alt: title }],
     },
     twitter: {
-      card: og ? "summary_large_image" : "summary",
+      card: "summary_large_image",
       title,
       description,
-      images: og ? [og] : undefined,
+      images: [og],
     },
   };
 }

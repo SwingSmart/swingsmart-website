@@ -1,50 +1,34 @@
 import type { NextConfig } from "next";
+import { extraPermanentRedirects, squarespaceRedirects } from "./legacy-redirects";
+
+function permanentRedirects() {
+  return [...squarespaceRedirects, ...extraPermanentRedirects].flatMap(
+    ({ source, destination }) => [
+      { source, destination, statusCode: 301 as const },
+      { source: `${source}/`, destination, statusCode: 301 as const },
+    ],
+  );
+}
 
 const nextConfig: NextConfig = {
+  poweredByHeader: false,
   images: {
     remotePatterns: [{ protocol: "https", hostname: "cdn.sanity.io" }],
+    formats: ["image/avif", "image/webp"],
   },
   async redirects() {
+    return permanentRedirects();
+  },
+  async headers() {
     return [
-      { source: "/home", destination: "/", permanent: true },
-      { source: "/our-mission", destination: "/about", permanent: true },
-      { source: "/our-mission-1", destination: "/", permanent: true },
-      { source: "/our-mission-1-1", destination: "/packages", permanent: true },
-      { source: "/our-mission-2", destination: "/packages/golfer", permanent: true },
       {
-        source: "/our-mission-2-1",
-        destination: "/packages/country-club",
-        permanent: true,
-      },
-      { source: "/our-mission-2-2", destination: "/packages/ryder-cup", permanent: true },
-      {
-        source: "/our-mission-2-2-1",
-        destination: "/packages/phoenix-open",
-        permanent: true,
+        source: "/studio/:path*",
+        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
       },
       {
-        source: "/our-mission-2-2-2",
-        destination: "/packages/championship",
-        permanent: true,
+        source: "/api/:path*",
+        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
       },
-      {
-        source: "/our-mission-2-2-3",
-        destination: "/packages/st-andrews",
-        permanent: true,
-      },
-      {
-        source: "/our-mission-2-2-2-1",
-        destination: "/packages/junior-open",
-        permanent: true,
-      },
-      {
-        source: "/our-mission-2-2-3-1",
-        destination: "/packages/build-your-own",
-        permanent: true,
-      },
-      { source: "/our-mission-3", destination: "/charity", permanent: true },
-      { source: "/our-mission-3-1", destination: "/faq", permanent: true },
-      { source: "/gallery-reviews", destination: "/gallery", permanent: true },
     ];
   },
 };

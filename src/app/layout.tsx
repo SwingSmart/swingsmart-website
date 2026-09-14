@@ -27,6 +27,7 @@ export async function generateMetadata(): Promise<Metadata> {
       template: `%s | ${settings.siteName}`,
     },
     description: settings.defaultSeo.description,
+    robots: { index: true, follow: true },
   };
 }
 
@@ -40,6 +41,9 @@ export default function RootLayout({
       lang="en-GB"
       className={`${sourceSans.variable} ${cormorant.variable} h-full antialiased`}
     >
+      <head>
+        <link rel="preconnect" href="https://cdn.sanity.io" crossOrigin="" />
+      </head>
       <body className="flex min-h-full flex-col bg-bg font-sans text-cream">
         {children}
       </body>

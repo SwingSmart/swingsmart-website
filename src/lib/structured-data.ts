@@ -4,10 +4,11 @@ import { siteUrl } from "@/sanity/env";
 export function localBusinessJsonLd(settings: SiteSettings) {
   return {
     "@context": "https://schema.org",
-    "@type": "LocalBusiness",
+    "@type": "SportsActivityLocation",
     name: settings.siteName,
     description: settings.defaultSeo.description,
     url: siteUrl,
+    image: `${siteUrl}/brand/hero.jpg`,
     email: settings.contact.email,
     telephone: settings.contact.phones[0],
     areaServed: "GB",
@@ -16,6 +17,7 @@ export function localBusinessJsonLd(settings: SiteSettings) {
       addressRegion: "Cornwall",
       addressCountry: "GB",
     },
+    sameAs: settings.socials.map((social) => social.url).filter(Boolean),
   };
 }
 
@@ -27,6 +29,7 @@ export function packageJsonLd(pkg: EventPackage) {
     description: pkg.summary,
     url: `${siteUrl}/packages/${pkg.slug}`,
     availability: "https://schema.org/InStock",
+    areaServed: "GB",
   };
 }
 
