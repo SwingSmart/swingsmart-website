@@ -55,12 +55,6 @@ export function GalleryGrid({
     [filtered.length],
   );
 
-  useEffect(() => {
-    if (openIndex !== null && openIndex >= filtered.length) {
-      setOpenIndex(null);
-    }
-  }, [filtered.length, openIndex]);
-
   return (
     <div>
       {showFilters && filters.length > 1 ? (
@@ -84,7 +78,10 @@ export function GalleryGrid({
             if (event.key === "End") next = last;
             filterRefs.current[next]?.focus();
             const slug = filters[next]?.slug;
-            if (slug) setActive(slug);
+            if (slug) {
+              setActive(slug);
+              setOpenIndex(null);
+            }
           }}
         >
           {filters.map((filter, index) => (
@@ -96,7 +93,10 @@ export function GalleryGrid({
               }}
               tabIndex={active === filter.slug ? 0 : -1}
               aria-pressed={active === filter.slug}
-              onClick={() => setActive(filter.slug)}
+              onClick={() => {
+                setActive(filter.slug);
+                setOpenIndex(null);
+              }}
               className={`shrink-0 whitespace-nowrap border-b px-1 py-2 text-[0.8rem] tracking-[0.08em] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green ${
                 active === filter.slug
                   ? "border-cream text-cream"

@@ -68,7 +68,7 @@ export function Header({
             ? "border-rule bg-bg"
             : scrolled
               ? "border-rule/80 bg-bg/90 backdrop-blur-md"
-              : "border-transparent bg-gradient-to-b from-bg/80 to-transparent"
+              : "border-transparent bg-gradient-to-b from-bg/40 via-bg/15 to-transparent"
         }`}
       >
         <Container className="flex h-[4.5rem] items-stretch justify-between gap-6 sm:h-[5rem] xl:h-[5.25rem]">
