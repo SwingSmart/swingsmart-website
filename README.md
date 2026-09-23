@@ -1,8 +1,8 @@
 # SwingSmart UK website
 
-Premium headless website for [SwingSmart UK](https://www.swingsmart.co.uk): Next.js, Tailwind CSS and Sanity, hosted on Vercel.
+Premium headless website for [SwingSmart UK](https://www.swingsmart.co.uk): Next.js on Vercel, content in Sanity, and a standalone Studio on `*.sanity.studio`.
 
-Non-technical editors manage pages, packages, gallery, partners, testimonials, navigation and contact details in Sanity Studio at `/studio`.
+Non-technical editors manage pages, packages, gallery, partners, testimonials, navigation and contact details in the **standalone Studio** (`studio/`). That Studio talks to the existing Sanity project `3sbwydux` / dataset `production`. It does not create a new project.
 
 ## Local development
 
@@ -14,18 +14,31 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000). The site renders SwingSmart copy from a built-in fallback until Sanity has published pages.
 
+### Standalone Studio (recommended editor)
+
+```bash
+cd studio
+cp .env.example .env.local
+npm install
+npm run dev
+```
+
+Open [http://localhost:3333](http://localhost:3333) and sign in. See `studio/README.md`.
+
+The Next app still has an embedded Studio at `/studio` for local convenience. Day-to-day editing should use the standalone app.
+
 ## Connect Sanity (when you are ready)
 
-1. The Sanity project is `3sbwydux` (organisation `oemaxe8vm`).
+1. The Sanity project already exists: **SwingSmart UK**, ID `3sbwydux`, organisation `oemaxe8vm`, dataset `production`.
 2. Put the project ID and dataset in `.env.local` (see `.env.example`; the project ID is already filled in).
 3. Create a viewer token (`SANITY_API_READ_TOKEN`) for live preview.
 4. Create an editor token (`SANITY_API_WRITE_TOKEN`) so the contact form can save enquiries.
-5. CORS should include `http://localhost:3000` with **Allow credentials**.
+5. CORS should include `http://localhost:3000`, `http://localhost:3333`, the live website, and `https://swingsmart.sanity.studio` with **Allow credentials**.
    Open [project API settings](https://www.sanity.io/manage/project/3sbwydux/api) if you need to check.
-6. Restart `npm run dev` and open [http://localhost:3000/studio](http://localhost:3000/studio).
-7. Optional: `npm run seed` copies starter pages, packages and settings into the Studio.
+6. Restart the Studio (`npm run studio` from the repo root) or the website (`npm run dev`) as needed.
+7. Optional: `npm run seed` copies starter pages, packages and settings into the same dataset.
 
-Until those values are set, `/studio` shows a short setup message and the public site still works.
+Until those website tokens are set, `/studio` shows a short setup message and the public site still works. The standalone Studio still opens and can edit published content after you sign in.
 
 ## Scripts
 
@@ -38,9 +51,20 @@ Until those values are set, `/studio` shows a short setup message and the public
 | `npm run typecheck` | TypeScript |
 | `npm run seed` | Copy starter content into a connected Sanity project |
 | `npm run sanity:setup` | Add CORS and create preview/editor tokens (needs `SANITY_AUTH_TOKEN`) |
+| `npm run studio` | Standalone Studio at http://localhost:3333 |
+| `npm run studio:build` | Production build of the standalone Studio |
+| `npm run studio:deploy` | Publish the Studio to https://swingsmart.sanity.studio |
 
 ## Deploy
 
 Connect this GitHub repository to Vercel. Add the same environment variables in the Vercel project settings. Point `swingsmart.co.uk` at Vercel when you are ready to go live.
+
+The content editor is deployed separately with Sanity hosting, from `studio/`:
+
+```bash
+cd studio && npm run deploy
+```
+
+Do not run that until the project ID and dataset have been confirmed. See `studio/README.md`.
 
 See `PROJECT_BRIEF.md` and `IMPLEMENTATION_ROADMAP.md` for the full requirements.

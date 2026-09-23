@@ -40,3 +40,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# standalone Sanity Studio
+/studio/node_modules
+/studio/dist
+/studio/.sanity
+/studio/schema.json
