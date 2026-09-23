@@ -13,7 +13,7 @@
     "start": "sanity start",
     "build": "sanity build",
     "deploy": "sanity deploy",
-    "extract-schema": "sanity schema extract --enforce-required-fields --path ./schema.json"
+    "extract-schema": "NODE_PATH=./node_modules sanity schema extract --enforce-required-fields --path ./schema.json"
   },
   "dependencies": {
     "@sanity/icons": "^5.2.2",

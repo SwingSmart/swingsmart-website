@@ -12,11 +12,25 @@ export default defineCliConfig({
     dataset,
   },
   studioHost,
-  autoUpdates: true,
+  deployment: {
+    autoUpdates: true,
+  },
   vite: (config) => {
     const existingAllow = config.server?.fs?.allow;
+    const existingDedupe = config.resolve?.dedupe ?? [];
     return {
       ...config,
+      resolve: {
+        ...config.resolve,
+        dedupe: [
+          ...existingDedupe,
+          "react",
+          "react-dom",
+          "sanity",
+          "styled-components",
+          "@sanity/icons",
+        ],
+      },
       server: {
         ...config.server,
         fs: {
