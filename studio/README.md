@@ -44,21 +44,29 @@ Run the Next.js site in another terminal (`npm run dev` from the repo root) if y
 
 ## Deploy to Sanity hosting
 
+Do **not** use sanity.io/manage → Add studio. That form registers an *external* URL. A `*.sanity.studio` host has to be created by the CLI as **internal**. Using the form (or `sanity deploy --external`) causes:
+
+`sanity.studio domains must be created as "internal"`
+
+1. Close any “Add studio” page in the browser.
+2. Open [Studios](https://www.sanity.io/manage/project/3sbwydux/studios) and delete any failed/external SwingSmart studio row.
+3. In a terminal, from this `studio` folder (the one in the website repo, not a separate `create-sanity` folder):
+
 ```bash
 cd studio
 npx sanity@latest login
-npm run deploy
+npx sanity@latest deploy --url swingsmart --yes
 ```
 
-That publishes to **https://swingsmart.sanity.studio** (not `.internal`). The deploy script already answers the hostname as `swingsmart`.
+Or `npm run deploy` — same flags. Open **https://swingsmart.sanity.studio** when it finishes.
 
-If the command asks for a studio host anyway, type only:
+If `swingsmart` is taken, use:
 
-```text
-swingsmart
+```bash
+npx sanity@latest deploy --url swingsmart-uk --yes
 ```
 
-Do not type `https://…`, `.sanity.studio`, or `.internal`.
+Never add `--external`. Never type `.internal` or a full `https://…` URL.
 
 Before deploying, add these CORS origins (Allow credentials) in
 [project API settings](https://www.sanity.io/manage/project/3sbwydux/api):

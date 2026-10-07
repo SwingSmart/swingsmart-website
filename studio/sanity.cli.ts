@@ -1,7 +1,7 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { defineCliConfig } from "sanity/cli";
-import { dataset, projectId, studioHost } from "./src/env";
+import { dataset, projectId } from "./src/env";
 
 const studioRoot = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(studioRoot, "..");
@@ -11,7 +11,10 @@ export default defineCliConfig({
     projectId,
     dataset,
   },
-  studioHost,
+  // Hostname only. Never a full URL and never --external — those make
+  // Sanity treat *.sanity.studio as an external site and fail with
+  // "sanity.studio domains must be created as internal".
+  studioHost: "swingsmart",
   deployment: {
     autoUpdates: true,
   },
