@@ -44,14 +44,21 @@ Run the Next.js site in another terminal (`npm run dev` from the repo root) if y
 
 ## Deploy to Sanity hosting
 
-Do this only after the project ID and dataset have been confirmed:
-
 ```bash
 cd studio
+npx sanity@latest login
 npm run deploy
 ```
 
-That publishes the Studio to `https://swingsmart.sanity.studio`. The first deploy may ask you to confirm the hostname.
+That publishes to **https://swingsmart.sanity.studio** (not `.internal`). The deploy script already answers the hostname as `swingsmart`.
+
+If the command asks for a studio host anyway, type only:
+
+```text
+swingsmart
+```
+
+Do not type `https://…`, `.sanity.studio`, or `.internal`.
 
 Before deploying, add these CORS origins (Allow credentials) in
 [project API settings](https://www.sanity.io/manage/project/3sbwydux/api):

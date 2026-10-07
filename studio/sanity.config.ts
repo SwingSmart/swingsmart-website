@@ -3,17 +3,17 @@ import { defineConfig } from "sanity";
 import { presentationTool } from "sanity/presentation";
 import { structureTool } from "sanity/structure";
 import { resolve } from "../src/sanity/presentation/resolve";
-import { schemaTypes } from "../src/sanity/schemaTypes";
 import { structure } from "../src/sanity/structure";
-import { apiVersion, dataset, previewOrigin, projectId } from "./src/env";
+import { schemaTypes } from "./schemaTypes";
+import { apiVersion, previewOrigin } from "./src/env";
 
 const singletonTypes = new Set(["siteSettings", "navigation"]);
 
 export default defineConfig({
-  name: "swingsmart",
-  title: "SwingSmart UK",
-  projectId,
-  dataset,
+  name: "default",
+  title: "SwingSmart",
+  projectId: "3sbwydux",
+  dataset: "production",
   plugins: [
     structureTool({
       title: "Content",
@@ -29,9 +29,7 @@ export default defineConfig({
         },
       },
     }),
-    ...(process.env.SANITY_STUDIO_SHOW_VISION === "true"
-      ? [visionTool({ defaultApiVersion: apiVersion, title: "Developer tools" })]
-      : []),
+    visionTool({ defaultApiVersion: apiVersion }),
   ],
   schema: {
     types: schemaTypes,
