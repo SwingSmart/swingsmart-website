@@ -9,7 +9,10 @@
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "seed": "node scripts/seed-sanity.mjs",
-    "sanity:setup": "node scripts/setup-sanity.mjs"
+    "sanity:setup": "node scripts/setup-sanity.mjs",
+    "studio": "npm run dev --prefix studio",
+    "studio:build": "npm run build --prefix studio",
+    "studio:deploy": "npm run deploy --prefix studio"
   },
   "dependencies": {
     "@portabletext/react": "^8.0.1",
