@@ -11,10 +11,8 @@ export default defineCliConfig({
     projectId,
     dataset,
   },
-  // Hostname only. Never a full URL and never --external — those make
-  // Sanity treat *.sanity.studio as an external site and fail with
-  // "sanity.studio domains must be created as internal".
-  studioHost: "swingsmart",
+  // Internal Sanity hosting only. Hostname, not a URL, and never --external.
+  studioHost: "swingsmart-cms",
   deployment: {
     autoUpdates: true,
   },

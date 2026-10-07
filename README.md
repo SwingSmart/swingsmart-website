@@ -33,7 +33,7 @@ The Next app still has an embedded Studio at `/studio` for local convenience. Da
 2. Put the project ID and dataset in `.env.local` (see `.env.example`; the project ID is already filled in).
 3. Create a viewer token (`SANITY_API_READ_TOKEN`) for live preview.
 4. Create an editor token (`SANITY_API_WRITE_TOKEN`) so the contact form can save enquiries.
-5. CORS should include `http://localhost:3000`, `http://localhost:3333`, the live website, and `https://swingsmart.sanity.studio` with **Allow credentials**.
+5. CORS should include `http://localhost:3000`, `http://localhost:3333`, the live website, and `https://swingsmart-cms.sanity.studio` with **Allow credentials**.
    Open [project API settings](https://www.sanity.io/manage/project/3sbwydux/api) if you need to check.
 6. Restart the Studio (`npm run studio` from the repo root) or the website (`npm run dev`) as needed.
 7. Optional: `npm run seed` copies starter pages, packages and settings into the same dataset.
@@ -53,7 +53,7 @@ Until those website tokens are set, `/studio` shows a short setup message and th
 | `npm run sanity:setup` | Add CORS and create preview/editor tokens (needs `SANITY_AUTH_TOKEN`) |
 | `npm run studio` | Standalone Studio at http://localhost:3333 |
 | `npm run studio:build` | Production build of the standalone Studio |
-| `npm run studio:deploy` | Publish the Studio to https://swingsmart.sanity.studio |
+| `npm run studio:deploy` | Publish the Studio to https://swingsmart-cms.sanity.studio |
 
 ## Deploy
 
@@ -62,7 +62,7 @@ Connect this GitHub repository to Vercel. Add the same environment variables in 
 The content editor is deployed separately with Sanity hosting, from `studio/`:
 
 ```bash
-cd studio && npm run deploy
+cd studio && npx sanity@latest deploy
 ```
 
 Do not run that until the project ID and dataset have been confirmed. See `studio/README.md`.

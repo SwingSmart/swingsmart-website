@@ -13,7 +13,7 @@ export const projectId =
   process.env.SANITY_STUDIO_PROJECT_ID || DEFAULT_PROJECT_ID;
 
 export const studioHost =
-  process.env.SANITY_STUDIO_HOSTNAME || "swingsmart";
+  process.env.SANITY_STUDIO_HOSTNAME || "swingsmart-cms";
 
 function withoutTrailingSlash(value: string) {
   return value.replace(/\/$/, "");
