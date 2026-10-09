@@ -14,6 +14,7 @@ export default defineCliConfig({
   // Internal Sanity hosting only. Hostname, not a URL, and never --external.
   studioHost: "swingsmart-cms",
   deployment: {
+    appId: "yjj3dnvy5scj3zfwbx70ut20",
     autoUpdates: true,
   },
   vite: (config) => {
