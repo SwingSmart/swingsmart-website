@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["DOM", "DOM.Iterable", "ES2022"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "module": "Preserve",
+    "moduleDetection": "force",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "noEmit": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": [
+    "./**/*.ts",
+    "./**/*.tsx",
+    "../src/sanity/**/*.ts",
+    "../src/sanity/**/*.tsx"
+  ],
+  "exclude": ["node_modules", "dist"]
+}
