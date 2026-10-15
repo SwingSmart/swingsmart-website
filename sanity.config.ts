@@ -3,30 +3,33 @@ import { defineConfig } from "sanity";
 import { presentationTool } from "sanity/presentation";
 import { structureTool } from "sanity/structure";
 import { resolve } from "./src/sanity/presentation/resolve";
-import { apiVersion, dataset, projectId } from "./src/sanity/env";
+import { apiVersion, dataset, previewOrigin, projectId } from "./src/sanity/env";
 import { schemaTypes } from "./src/sanity/schemaTypes";
 import { structure } from "./src/sanity/structure";
 
 const singletonTypes = new Set(["siteSettings", "navigation"]);
 
 export default defineConfig({
-  name: "swingsmart",
+  name: "default",
   title: "SwingSmart UK",
   projectId,
   dataset,
-  basePath: "/studio",
   plugins: [
     structureTool({
       title: "Content",
+      // Desk: Pages, Packages, Gallery, Gallery Categories, Partners,
+      // Testimonials, Navigation, Site Settings, Enquiries.
       structure,
     }),
     presentationTool({
       title: "Website preview",
       resolve,
+      allowOrigins: [previewOrigin, "http://localhost:3000"],
       previewUrl: {
-        initial: "/",
+        initial: previewOrigin,
         previewMode: {
           enable: "/api/draft-mode/enable",
+          shareAccess: true,
         },
       },
     }),

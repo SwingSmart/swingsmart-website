@@ -102,7 +102,7 @@ export async function getPage(slug: string): Promise<PageDoc | undefined> {
   const data = await fetchQuery<PageDoc>(pageBySlugQuery, { slug });
   if (data?._id) {
     const page = { ...data, sections: data.sections || [] };
-    if (page.slug === "home") return restoreHomeLayout(page);
+    if (page.slug === "home" && isStubHome(page)) return restoreHomeLayout(page);
     return page;
   }
   return fallbackContent.pages[slug];
@@ -111,6 +111,11 @@ export async function getPage(slug: string): Promise<PageDoc | undefined> {
 function isPlaceholderHero(section: Extract<PageSection, { _type: "hero" }>) {
   const blob = `${section.eyebrow || ""} ${section.heading || ""}`.toLowerCase();
   return /cms preview|golf from the cms/.test(blob);
+}
+
+function isStubHome(page: PageDoc) {
+  const hero = page.sections?.find((section) => section._type === "hero");
+  return hero?._type === "hero" && isPlaceholderHero(hero);
 }
 
 function restoreHomeLayout(page: PageDoc): PageDoc {

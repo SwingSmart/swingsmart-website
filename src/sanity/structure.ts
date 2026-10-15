@@ -22,25 +22,14 @@ export const structure: StructureResolver = (S) =>
         .title("Packages")
         .icon(StarIcon)
         .child(S.documentTypeList("eventPackage").title("Packages")),
-      S.divider(),
       S.listItem()
         .title("Gallery")
         .icon(ImagesIcon)
-        .child(
-          S.list()
-            .title("Gallery")
-            .items([
-              S.listItem()
-                .title("Photos")
-                .icon(ImagesIcon)
-                .child(S.documentTypeList("galleryItem").title("Photos")),
-              S.listItem()
-                .title("Categories")
-                .icon(CaseIcon)
-                .child(S.documentTypeList("galleryCategory").title("Categories")),
-            ]),
-        ),
-      S.divider(),
+        .child(S.documentTypeList("galleryItem").title("Gallery")),
+      S.listItem()
+        .title("Gallery Categories")
+        .icon(CaseIcon)
+        .child(S.documentTypeList("galleryCategory").title("Gallery Categories")),
       S.listItem()
         .title("Partners")
         .icon(UsersIcon)
@@ -56,11 +45,14 @@ export const structure: StructureResolver = (S) =>
         .id("navigation")
         .child(S.document().schemaType("navigation").documentId("navigation").title("Navigation")),
       S.listItem()
-        .title("Site settings")
+        .title("Site Settings")
         .icon(CogIcon)
         .id("siteSettings")
         .child(
-          S.document().schemaType("siteSettings").documentId("siteSettings").title("Site settings"),
+          S.document()
+            .schemaType("siteSettings")
+            .documentId("siteSettings")
+            .title("Site Settings"),
         ),
       S.divider(),
       S.listItem()

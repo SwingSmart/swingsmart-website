@@ -486,7 +486,7 @@ export const navigation = defineType({
 
 export const siteSettings = defineType({
   name: "siteSettings",
-  title: "Site settings",
+  title: "Site Settings",
   type: "document",
   icon: CogIcon,
   groups: [
@@ -569,7 +569,7 @@ export const siteSettings = defineType({
   preview: {
     select: { title: "businessName" },
     prepare({ title }) {
-      return { title: title || "Site settings" };
+      return { title: title || "Site Settings" };
     },
   },
 });
