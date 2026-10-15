@@ -3,7 +3,7 @@ import { defineConfig } from "sanity";
 import { presentationTool } from "sanity/presentation";
 import { structureTool } from "sanity/structure";
 import { resolve } from "./src/sanity/presentation/resolve";
-import { apiVersion, dataset, projectId } from "./src/sanity/env";
+import { apiVersion, dataset, previewOrigin, projectId } from "./src/sanity/env";
 import { schemaTypes } from "./src/sanity/schemaTypes";
 import { structure } from "./src/sanity/structure";
 
@@ -24,10 +24,12 @@ export default defineConfig({
     presentationTool({
       title: "Website preview",
       resolve,
+      allowOrigins: [previewOrigin, "http://localhost:3000"],
       previewUrl: {
-        initial: "/",
+        initial: previewOrigin,
         previewMode: {
           enable: "/api/draft-mode/enable",
+          shareAccess: true,
         },
       },
     }),
