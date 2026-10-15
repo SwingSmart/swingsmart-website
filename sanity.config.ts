@@ -10,11 +10,10 @@ import { structure } from "./src/sanity/structure";
 const singletonTypes = new Set(["siteSettings", "navigation"]);
 
 export default defineConfig({
-  name: "swingsmart",
+  name: "default",
   title: "SwingSmart UK",
   projectId,
   dataset,
-  basePath: "/studio",
   plugins: [
     structureTool({
       title: "Content",
