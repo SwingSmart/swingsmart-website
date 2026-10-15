@@ -18,6 +18,8 @@ export default defineConfig({
   plugins: [
     structureTool({
       title: "Content",
+      // Desk: Pages, Packages, Gallery, Gallery Categories, Partners,
+      // Testimonials, Navigation, Site Settings, Enquiries.
       structure,
     }),
     presentationTool({

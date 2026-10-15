@@ -112,7 +112,7 @@ export const hero = defineType({
 
 export const richText = defineType({
   name: "richText",
-  title: "Rich text",
+  title: "Text section",
   type: "object",
   icon: DocumentTextIcon,
   fields: [
@@ -128,7 +128,7 @@ export const richText = defineType({
       type: "portableBody",
     }),
   ],
-  preview: sectionPreview("Rich text", DocumentTextIcon),
+  preview: sectionPreview("Text section", DocumentTextIcon),
 });
 
 export const textAndImage = defineType({
@@ -173,7 +173,7 @@ export const textAndImage = defineType({
 
 export const imageBlock = defineType({
   name: "imageBlock",
-  title: "Standalone image",
+  title: "Image",
   type: "object",
   icon: ImageIcon,
   fields: [

@@ -9,6 +9,7 @@
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "seed": "node scripts/seed-sanity.mjs",
+    "migrate:content": "node scripts/migrate-website-content.mjs",
     "sanity:setup": "node scripts/setup-sanity.mjs"
   },
   "dependencies": {
