@@ -3,7 +3,7 @@
  * dataset production.
  *
  * Default is a dry-run. Nothing is written until you pass --write and set
- * SANITY_API_WRITE_TOKEN (Editor, create). Existing documents are never
+ * SANITY_AUTH_TOKEN (Editor, create). Existing documents are never
  * overwritten or deleted. Missing documents are created with createIfNotExists.
  *
  * If Home or Site Settings already exist, a draft of the full website copy is
@@ -35,7 +35,7 @@ loadEnvFile(".env");
 const WRITE = process.argv.includes("--write");
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "3sbwydux";
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || "production";
-const token = process.env.SANITY_API_WRITE_TOKEN;
+const token = process.env.SANITY_AUTH_TOKEN;
 const apiVersion = process.env.NEXT_PUBLIC_SANITY_API_VERSION || "2025-02-19";
 
 const apiBase = `https://${projectId}.api.sanity.io/v${apiVersion}`;
@@ -1367,11 +1367,11 @@ async function writeDocuments(rows, assets) {
 
 async function main() {
   if (WRITE && !token) {
-    console.error("Write mode needs SANITY_API_WRITE_TOKEN in .env.local.");
+    console.error("Write mode needs SANITY_AUTH_TOKEN in the environment or .env.local.");
     console.error(
       "Create an Editor token with create permission at https://www.sanity.io/manage/project/3sbwydux/api#tokens",
     );
-    console.error("The token must not be used to delete or overwrite existing documents.");
+    console.error("The token is read from the environment. It is never hard-coded.");
     process.exit(1);
   }
 
@@ -1386,7 +1386,7 @@ async function main() {
   if (!WRITE) {
     console.log("\nNo content was written. To create the missing documents:\n");
     console.log("  1. Create an Editor token (create permission) for project 3sbwydux");
-    console.log("  2. Add SANITY_API_WRITE_TOKEN to .env.local");
+    console.log("  2. Add SANITY_AUTH_TOKEN to .env.local, or export it in the shell");
     console.log("  3. Run:  npm run migrate:content -- --write\n");
     return;
   }
