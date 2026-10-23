@@ -15,6 +15,7 @@ import { RichTextSectionView } from "@/components/sections/RichText";
 import { StatisticsView } from "@/components/sections/Statistics";
 import { TestimonialsView } from "@/components/sections/Testimonials";
 import { TextAndImageView } from "@/components/sections/TextAndImage";
+import { VideoSectionView } from "@/components/sections/VideoSection";
 import type {
   EventPackage,
   GalleryCategory,
@@ -137,6 +138,8 @@ function renderSection(
       return <TextAndImageView section={section} />;
     case "imageBlock":
       return <ImageBlockView section={section} />;
+    case "video":
+      return <VideoSectionView section={section} />;
     case "gallery":
       return (
         <GallerySectionView

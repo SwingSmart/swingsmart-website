@@ -9,6 +9,7 @@ import {
   ImagesIcon,
   InlineElementIcon,
   NumberIcon,
+  PlayIcon,
   StarIcon,
   UsersIcon,
 } from "../studioIcons";
@@ -431,6 +432,142 @@ export const cta = defineType({
   preview: sectionPreview("Call to action", BoltIcon),
 });
 
+export const video = defineType({
+  name: "video",
+  title: "Video",
+  type: "object",
+  icon: PlayIcon,
+  fields: [
+    defineField({
+      name: "title",
+      title: "Title",
+      type: "string",
+      description: "Optional heading above the video.",
+    }),
+    defineField({
+      name: "subtitle",
+      title: "Subtitle",
+      type: "text",
+      rows: 2,
+      description: "Optional line under the title.",
+    }),
+    defineField({
+      name: "sourceType",
+      title: "Video source",
+      type: "string",
+      options: {
+        list: [
+          { title: "Upload a video", value: "upload" },
+          { title: "Paste a link", value: "url" },
+        ],
+        layout: "radio",
+      },
+      initialValue: "upload",
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "video",
+      title: "Video file",
+      type: "file",
+      options: { accept: "video/mp4,video/webm,video/quicktime" },
+      description: "MP4 works best. Keep it as small as you reasonably can.",
+      hidden: ({ parent }) => parent?.sourceType === "url",
+      validation: (rule) =>
+        rule.custom((value, context) => {
+          const parent = context.parent as { sourceType?: string } | undefined;
+          if (parent?.sourceType === "upload" && !value) {
+            return "Upload a video file, or switch to Paste a link.";
+          }
+          return true;
+        }),
+    }),
+    defineField({
+      name: "videoUrl",
+      title: "Video link",
+      type: "url",
+      description:
+        "A direct .mp4 / .webm file, or a YouTube or Vimeo link. The video will not start until someone presses play.",
+      hidden: ({ parent }) => parent?.sourceType !== "url",
+      validation: (rule) =>
+        rule.uri({ allowRelative: false, scheme: ["http", "https"] }).custom((value, context) => {
+          const parent = context.parent as { sourceType?: string } | undefined;
+          if (parent?.sourceType === "url" && !value) {
+            return "Paste a video link, or switch to Upload a video.";
+          }
+          return true;
+        }),
+    }),
+    defineField({
+      name: "image",
+      title: "Poster image",
+      type: "image",
+      options: { hotspot: true },
+      description: "Shown before play. Use a still from the video if you can.",
+      fields: [
+        defineField({
+          name: "alt",
+          title: "Describe the poster",
+          type: "string",
+          description: "For people who cannot see the picture.",
+        }),
+      ],
+    }),
+    defineField({
+      name: "caption",
+      title: "Caption",
+      type: "string",
+      description: "Optional line under the video.",
+    }),
+    defineField({
+      name: "aspectRatio",
+      title: "Shape",
+      type: "string",
+      options: {
+        list: [
+          { title: "Widescreen", value: "16/9" },
+          { title: "Standard", value: "4/3" },
+          { title: "Square", value: "1/1" },
+          { title: "Portrait", value: "9/16" },
+        ],
+        layout: "radio",
+      },
+      initialValue: "16/9",
+    }),
+    defineField({
+      name: "width",
+      title: "Width",
+      type: "string",
+      options: {
+        list: [
+          { title: "Full", value: "full" },
+          { title: "Wide", value: "wide" },
+          { title: "Medium", value: "medium" },
+        ],
+        layout: "radio",
+      },
+      initialValue: "full",
+    }),
+  ],
+  preview: {
+    select: { title: "title", media: "image", sourceType: "sourceType" },
+    prepare({
+      title,
+      media,
+      sourceType,
+    }: {
+      title?: string;
+      media?: unknown;
+      sourceType?: string;
+    }) {
+      return {
+        title: title || "Video",
+        subtitle: sourceType === "url" ? "Link" : "Uploaded file",
+        media: (media as ComponentType | undefined) || PlayIcon,
+      };
+    },
+  },
+});
+
 export const contactBlock = defineType({
   name: "contactBlock",
   title: "Contact",
@@ -471,6 +608,7 @@ export const pageBuilderField = defineField({
     defineArrayMember({ type: "richText" }),
     defineArrayMember({ type: "textAndImage" }),
     defineArrayMember({ type: "imageBlock" }),
+    defineArrayMember({ type: "video", title: "Video" }),
     defineArrayMember({ type: "gallery" }),
     defineArrayMember({ type: "partnerGrid" }),
     defineArrayMember({ type: "packageGrid" }),
@@ -487,11 +625,11 @@ export const pageBuilderField = defineField({
       filter: true,
       showIcons: true,
       groups: [
-        { name: "intro", title: "Top of page", of: ["hero"] },
+        { name: "intro", title: "Top of page", of: ["hero", "video"] },
         {
           name: "content",
           title: "Content",
-          of: ["richText", "textAndImage", "imageBlock"],
+          of: ["richText", "textAndImage", "imageBlock", "video"],
         },
         {
           name: "lists",
