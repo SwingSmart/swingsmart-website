@@ -203,7 +203,7 @@ export type ContactBlockSection = {
 };
 
 export type VideoSection = {
-  _type: "videoBlock";
+  _type: "video";
   _key: string;
   title?: string;
   subtitle?: string;

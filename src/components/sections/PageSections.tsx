@@ -138,7 +138,7 @@ function renderSection(
       return <TextAndImageView section={section} />;
     case "imageBlock":
       return <ImageBlockView section={section} />;
-    case "videoBlock":
+    case "video":
       return <VideoSectionView section={section} />;
     case "gallery":
       return (

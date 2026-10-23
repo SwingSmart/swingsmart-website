@@ -24,7 +24,7 @@ import {
   statistics,
   testimonials,
   textAndImage,
-  videoBlock,
+  video,
 } from "./sections";
 
 export const schemaTypes = [
@@ -55,5 +55,5 @@ export const schemaTypes = [
   faq,
   cta,
   contactBlock,
-  videoBlock,
+  video,
 ];

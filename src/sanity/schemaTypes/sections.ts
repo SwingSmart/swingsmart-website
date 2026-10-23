@@ -432,8 +432,8 @@ export const cta = defineType({
   preview: sectionPreview("Call to action", BoltIcon),
 });
 
-export const videoBlock = defineType({
-  name: "videoBlock",
+export const video = defineType({
+  name: "video",
   title: "Video",
   type: "object",
   icon: PlayIcon,
@@ -608,7 +608,7 @@ export const pageBuilderField = defineField({
     defineArrayMember({ type: "richText" }),
     defineArrayMember({ type: "textAndImage" }),
     defineArrayMember({ type: "imageBlock" }),
-    defineArrayMember({ type: "videoBlock" }),
+    defineArrayMember({ type: "video", title: "Video" }),
     defineArrayMember({ type: "gallery" }),
     defineArrayMember({ type: "partnerGrid" }),
     defineArrayMember({ type: "packageGrid" }),
@@ -625,11 +625,11 @@ export const pageBuilderField = defineField({
       filter: true,
       showIcons: true,
       groups: [
-        { name: "intro", title: "Top of page", of: ["hero"] },
+        { name: "intro", title: "Top of page", of: ["hero", "video"] },
         {
           name: "content",
           title: "Content",
-          of: ["richText", "textAndImage", "imageBlock", "videoBlock"],
+          of: ["richText", "textAndImage", "imageBlock", "video"],
         },
         {
           name: "lists",
