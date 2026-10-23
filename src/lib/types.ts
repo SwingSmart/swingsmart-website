@@ -202,11 +202,25 @@ export type ContactBlockSection = {
   showDetails?: boolean;
 };
 
+export type VideoSection = {
+  _type: "videoBlock";
+  _key: string;
+  title?: string;
+  subtitle?: string;
+  sourceType?: "upload" | "url";
+  videoUrl?: string;
+  image?: CmsImage;
+  caption?: string;
+  aspectRatio?: "16/9" | "4/3" | "1/1" | "9/16";
+  width?: "full" | "wide" | "medium";
+};
+
 export type PageSection =
   | HeroSection
   | RichTextSection
   | TextAndImageSection
   | ImageSection
+  | VideoSection
   | GallerySection
   | PartnerGridSection
   | PackageGridSection

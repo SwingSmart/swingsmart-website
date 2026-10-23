@@ -13,5 +13,6 @@ export { ImagesIcon } from "@sanity/icons/Images";
 export { InlineElementIcon } from "@sanity/icons/InlineElement";
 export { MenuIcon } from "@sanity/icons/Menu";
 export { NumberIcon } from "@sanity/icons/Number";
+export { PlayIcon } from "@sanity/icons/Play";
 export { StarIcon } from "@sanity/icons/Star";
 export { UsersIcon } from "@sanity/icons/Users";
