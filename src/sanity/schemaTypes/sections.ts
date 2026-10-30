@@ -9,6 +9,7 @@ import {
   ImagesIcon,
   InlineElementIcon,
   NumberIcon,
+  PlayIcon,
   StarIcon,
   UsersIcon,
 } from "../studioIcons";
@@ -112,7 +113,7 @@ export const hero = defineType({
 
 export const richText = defineType({
   name: "richText",
-  title: "Rich text",
+  title: "Text section",
   type: "object",
   icon: DocumentTextIcon,
   fields: [
@@ -128,7 +129,7 @@ export const richText = defineType({
       type: "portableBody",
     }),
   ],
-  preview: sectionPreview("Rich text", DocumentTextIcon),
+  preview: sectionPreview("Text section", DocumentTextIcon),
 });
 
 export const textAndImage = defineType({
@@ -173,7 +174,7 @@ export const textAndImage = defineType({
 
 export const imageBlock = defineType({
   name: "imageBlock",
-  title: "Standalone image",
+  title: "Image",
   type: "object",
   icon: ImageIcon,
   fields: [
@@ -431,6 +432,83 @@ export const cta = defineType({
   preview: sectionPreview("Call to action", BoltIcon),
 });
 
+export const videoSection = defineType({
+  name: "videoSection",
+  title: "Video",
+  type: "object",
+  icon: PlayIcon,
+  fields: [
+    defineField({
+      name: "title",
+      title: "Title",
+      type: "string",
+      description: "Optional heading above the video.",
+    }),
+    defineField({
+      name: "subtitle",
+      title: "Subtitle",
+      type: "text",
+      rows: 2,
+      description: "Optional line under the title.",
+    }),
+    defineField({
+      name: "video",
+      title: "Video file",
+      type: "file",
+      options: { accept: "video/mp4,video/webm,video/quicktime" },
+      description:
+        "Upload an MP4 or WebM. This is a playable video block, not a background. It will not start until someone presses play.",
+      validation: (rule) =>
+        rule.custom((value, context) => {
+          const parent = context.parent as { videoUrl?: string } | undefined;
+          if (!value && !parent?.videoUrl) {
+            return "Upload a video file, or paste a direct video URL below.";
+          }
+          return true;
+        }),
+    }),
+    defineField({
+      name: "videoUrl",
+      title: "Or paste a video URL",
+      type: "url",
+      description:
+        "Optional. A direct .mp4 / .webm file URL. Leave empty if you uploaded a video above. Do not paste a YouTube page.",
+      hidden: ({ parent }) => Boolean(parent?.video),
+      validation: (rule) =>
+        rule.uri({ allowRelative: false, scheme: ["http", "https"] }),
+    }),
+    defineField({
+      name: "poster",
+      title: "Poster image",
+      type: "image",
+      options: { hotspot: true },
+      description: "Shown before play. Use a still from the video if you can.",
+    }),
+    defineField({
+      name: "posterAlt",
+      title: "Poster alt text",
+      type: "string",
+      description: "Describe the poster image for people who cannot see it.",
+    }),
+    defineField({
+      name: "caption",
+      title: "Caption",
+      type: "string",
+      description: "Optional line under the video.",
+    }),
+  ],
+  preview: {
+    select: { title: "title", media: "poster" },
+    prepare({ title, media }: { title?: string; media?: unknown }) {
+      return {
+        title: title || "Video",
+        subtitle: "Video",
+        media: (media as ComponentType | undefined) || PlayIcon,
+      };
+    },
+  },
+});
+
 export const contactBlock = defineType({
   name: "contactBlock",
   title: "Contact",
@@ -471,6 +549,7 @@ export const pageBuilderField = defineField({
     defineArrayMember({ type: "richText" }),
     defineArrayMember({ type: "textAndImage" }),
     defineArrayMember({ type: "imageBlock" }),
+    defineArrayMember({ type: "videoSection", title: "Video" }),
     defineArrayMember({ type: "gallery" }),
     defineArrayMember({ type: "partnerGrid" }),
     defineArrayMember({ type: "packageGrid" }),
@@ -487,11 +566,11 @@ export const pageBuilderField = defineField({
       filter: true,
       showIcons: true,
       groups: [
-        { name: "intro", title: "Top of page", of: ["hero"] },
+        { name: "intro", title: "Top of page", of: ["hero", "videoSection"] },
         {
           name: "content",
           title: "Content",
-          of: ["richText", "textAndImage", "imageBlock"],
+          of: ["richText", "textAndImage", "imageBlock", "videoSection"],
         },
         {
           name: "lists",

@@ -4,5 +4,5 @@ import { NextStudio } from "next-sanity/studio";
 import config from "../../../../sanity.config";
 
 export function StudioApp() {
-  return <NextStudio config={config} />;
+  return <NextStudio config={{ ...config, basePath: "/studio" }} />;
 }

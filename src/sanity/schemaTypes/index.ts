@@ -24,6 +24,7 @@ import {
   statistics,
   testimonials,
   textAndImage,
+  videoSection,
 } from "./sections";
 
 export const schemaTypes = [
@@ -45,6 +46,7 @@ export const schemaTypes = [
   richText,
   textAndImage,
   imageBlock,
+  videoSection,
   gallery,
   partnerGrid,
   packageGrid,

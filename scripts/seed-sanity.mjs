@@ -32,7 +32,7 @@ if (!projectId || !token) {
 }
 
 console.warn(
-  "seed-sanity.mjs writes starter documents. For live Squarespace copy, run node scripts/migrate-from-squarespace.mjs instead.",
+  "seed-sanity.mjs overwrites documents with createOrReplace. Prefer npm run migrate:content, which is dry-run by default and never overwrites.",
 );
 
 const client = createClient({
