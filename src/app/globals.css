@@ -51,6 +51,11 @@ body {
   object-fit: cover;
 }
 
+.video-frame video {
+  border: 0;
+  background: #070807;
+}
+
 .photo-zoom {
   overflow: hidden;
 }
