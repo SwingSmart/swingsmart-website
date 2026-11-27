@@ -1,12 +1,15 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Button } from "@/components/ui/ButtonLink";
 import type { EventPackage } from "@/lib/types";
 
 export function ContactForm({ packages }: { packages: EventPackage[] }) {
+  const pathname = usePathname();
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [message, setMessage] = useState("");
+  const [startedAt] = useState(() => String(Date.now()));
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -36,8 +39,14 @@ export function ContactForm({ packages }: { packages: EventPackage[] }) {
   return (
     <form
       onSubmit={onSubmit}
-      className="space-y-5 border border-rule bg-surface p-6 sm:p-8"
+      className="relative space-y-5 border border-rule bg-surface p-6 sm:p-8"
     >
+      <input type="hidden" name="source" value={pathname || "/contact"} />
+      <input type="hidden" name="startedAt" value={startedAt} />
+      <div className="pointer-events-none absolute h-0 w-0 overflow-hidden opacity-0" aria-hidden="true">
+        <label htmlFor="website">Website</label>
+        <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+      </div>
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
           <label htmlFor="name" className="mb-1.5 block text-sm">

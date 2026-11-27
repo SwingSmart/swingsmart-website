@@ -75,7 +75,7 @@ Tokens live in `src/app/globals.css` (`bg`, `bg-raised`, `surface`, `green`, `gr
 - Social links
 - SEO per page/package
 - Calls to action
-- Contact form enquiries (received as Sanity documents)
+- Contact form enquiries (emailed to hello@swingsmart.co.uk; not stored in Sanity)
 
 ### Page sections (add, remove, reorder)
 

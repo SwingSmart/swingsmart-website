@@ -2,7 +2,6 @@ import {
   CaseIcon,
   CogIcon,
   DocumentsIcon,
-  EnvelopeIcon,
   ImagesIcon,
   MenuIcon,
   StarIcon,
@@ -62,9 +61,4 @@ export const structure: StructureResolver = (S) =>
         .child(
           S.document().schemaType("siteSettings").documentId("siteSettings").title("Site settings"),
         ),
-      S.divider(),
-      S.listItem()
-        .title("Enquiries")
-        .icon(EnvelopeIcon)
-        .child(S.documentTypeList("enquiry").title("Enquiries")),
     ]);
