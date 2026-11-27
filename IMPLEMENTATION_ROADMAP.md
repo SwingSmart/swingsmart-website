@@ -28,7 +28,7 @@ Ordered so the site can be built, previewed and handed over without backtracking
 3. All public routes in the brief.
 4. Package listing and package detail.
 5. Filterable gallery.
-6. Partnerships, about, contact (form posts enquiries to Sanity when a write token is set).
+6. Partnerships, about, contact (form emails enquiries to hello@swingsmart.co.uk via Resend).
 7. 404 page.
 
 ## Phase 3 — SEO and quality
@@ -51,4 +51,4 @@ Ordered so the site can be built, previewed and handed over without backtracking
 
 - Replace placeholder photography with SwingSmart event photos in the Gallery document type.
 - Add real partner logos.
-- Optional: Resend (or similar) so enquiry emails also land in the inbox, in addition to Sanity.
+- Enquiry emails are sent with Resend to hello@swingsmart.co.uk. Submissions are not stored in Sanity.

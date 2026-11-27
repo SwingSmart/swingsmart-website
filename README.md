@@ -19,11 +19,12 @@ Open [http://localhost:3000](http://localhost:3000). The site renders SwingSmart
 1. The Sanity project is `3sbwydux` (organisation `oemaxe8vm`).
 2. Put the project ID and dataset in `.env.local` (see `.env.example`; the project ID is already filled in).
 3. Create a viewer token (`SANITY_API_READ_TOKEN`) for live preview.
-4. Create an editor token (`SANITY_API_WRITE_TOKEN`) so the contact form can save enquiries.
-5. CORS should include `http://localhost:3000` with **Allow credentials**.
+4. Create an editor token (`SANITY_API_WRITE_TOKEN`) if you need to run `npm run seed`.
+5. Set `FORM_RECIPIENT_EMAIL=hello@swingsmart.co.uk` and `RESEND_API_KEY` so the contact form can send enquiries. The form does not store submissions in Sanity.
+6. CORS should include `http://localhost:3000` with **Allow credentials**.
    Open [project API settings](https://www.sanity.io/manage/project/3sbwydux/api) if you need to check.
-6. Restart `npm run dev` and open [http://localhost:3000/studio](http://localhost:3000/studio).
-7. Optional: `npm run seed` copies starter pages, packages and settings into the Studio.
+7. Restart `npm run dev` and open [http://localhost:3000/studio](http://localhost:3000/studio).
+8. Optional: `npm run seed` copies starter pages, packages and settings into the Studio.
 
 Until those values are set, `/studio` shows a short setup message and the public site still works.
 
@@ -41,6 +42,6 @@ Until those values are set, `/studio` shows a short setup message and the public
 
 ## Deploy
 
-Connect this GitHub repository to Vercel. Add the same environment variables in the Vercel project settings. Point `swingsmart.co.uk` at Vercel when you are ready to go live.
+Connect this GitHub repository to Vercel. Add the same environment variables in the Vercel project settings, including `FORM_RECIPIENT_EMAIL=hello@swingsmart.co.uk` and `RESEND_API_KEY`. Point `swingsmart.co.uk` at Vercel when you are ready to go live.
 
 See `PROJECT_BRIEF.md` and `IMPLEMENTATION_ROADMAP.md` for the full requirements.
